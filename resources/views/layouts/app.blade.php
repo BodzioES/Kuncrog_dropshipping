@@ -15,6 +15,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -77,5 +78,9 @@
             @yield('content')
         </main>
     </div>
+    <script type="text/javascript">
+        @yield('javascript')
+    </script>
+
 </body>
 </html>
