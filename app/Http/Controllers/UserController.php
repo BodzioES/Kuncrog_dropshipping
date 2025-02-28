@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -63,11 +64,12 @@ class UserController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @param User $user
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(User $user): \Illuminate\Http\JsonResponse
     {
-        $flight = User::find($id);
-        $flight->delete();
+        $user->delete();
         return response()->json([
             'status' => 'success'
         ]);
