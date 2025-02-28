@@ -33,30 +33,8 @@
         {{ $users->links() }}
     </div>
 @endsection
-@section('javascript')
-    $(function (){
-        $('.delete').click(function (){
-            Swal.fire({
-            title: "Czy na pewno chcesz usunąć rekord?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: 'Tak, usuń',
-            dangerMode: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        method: "DELETE",
-                        url: "kuncrog.test/users/" + $(this).data("id")
-                    })
-                    .done(function( response ) {
-                        window.location.reload();
-                    })
-                    .fail(function (response){
-                        Swal.fire("Oops!", "Something went wrong!", "error");
-                    });
-                }
-            });
-        });
-    });
-@endsection
+<script type="text/javascript" data-url="{{ url('users') }}">
+    @yield('javascript')
+</script>
+@vite('resources/js/delete.js')
 
