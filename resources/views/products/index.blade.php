@@ -33,7 +33,7 @@
                         <td>{{$product->stock_quantity}}</td>
                         <td>{{$product->price}}</td>
                         <td>
-                            <a href="{{route('$products.edit',$product->id)}}">
+                            <a href="{{route('products.edit',$product->id)}}">
                                 <button class="btn btn-warning">
                                     Edytuj
                                 </button>
