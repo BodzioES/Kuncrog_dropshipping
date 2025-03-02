@@ -33,14 +33,13 @@
                         <td>{{$product->stock_quantity}}</td>
                         <td>{{$product->price}}</td>
                         <td>
-                            <a href="{{route('products.edit',$product->id)}}">
-                                <button class="btn btn-warning">
-                                    Edytuj
-                                </button>
+                            <a href="{{route('products.show',$product->id)}}">
+                                <button class="btn btn-primary">Podgląd</button>
                             </a>
-                            <button class="btn btn-outline-danger btn-sm delete" data-id="{{$product->id}}">
-                                X
-                            </button>
+                            <a href="{{route('products.edit',$product->id)}}">
+                                <button class="btn btn-warning">Edytuj</button>
+                            </a>
+                            <button class="btn btn-outline-danger btn-sm delete" data-id="{{$product->id}}">X</button>
                         </td>
                     </tr>
                 @endforeach
