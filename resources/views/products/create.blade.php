@@ -15,7 +15,7 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-end">Nazwa</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required  autocomplete="name" autofocus>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
                                 <label for="description" class="col-md-4 col-form-label text-md-end">Opis</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description"  autofocus>{{old('description')}}</textarea>
+                                    <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required  autofocus>{{old('description')}}</textarea>
 
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                                 <label for="stock_quantity" class="col-md-4 col-form-label text-md-end">Ilość</label>
 
                                 <div class="col-md-6">
-                                    <input id="stock_quantity" type="number" min="0" class="form-control @error('stock_quantity') is-invalid @enderror" name="stock_quantity" value="{{ old('stock_quantity') }}" required autocomplete="stock_quantity" autofocus>
+                                    <input id="stock_quantity" type="number" min="0" class="form-control @error('stock_quantity') is-invalid @enderror" name="stock_quantity" value="{{ old('stock_quantity') }}"  required autocomplete="stock_quantity" autofocus>
 
                                     @error('stock_quantity')
                                     <span class="invalid-feedback" role="alert">
@@ -71,7 +71,13 @@
                                 <label for="image" class="col-md-4 col-form-label text-md-end">Grafika</label>
 
                                 <div class="col-md-6">
-                                    <input id="image" type="file"  class="form-control" name="image" >
+                                    <input id="image" type="file"  class="form-control @error('image') is-invalid @enderror" name="image">
+
+                                    @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 
