@@ -7,9 +7,6 @@ use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Session\Store;
-use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
