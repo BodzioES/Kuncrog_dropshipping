@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{__('shop.product.add.title')}}</div>
+                    <div class="card-header">{{__('shop.product.add_title')}}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
@@ -60,6 +60,25 @@
                                     <input id="price" type="number" step="0.01" min="0" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price">
 
                                     @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="category" class="col-md-4 col-form-label text-md-end">{{__('shop.product.fields.category')}}</label>
+
+                                <div class="col-md-6">
+                                    <select id="category" class="form-control @error('id_products_categories') is-invalid @enderror" name="id_products_categories"  required>
+                                        <option>Brak</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('id_products_categories')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

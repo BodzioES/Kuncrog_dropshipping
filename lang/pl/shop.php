@@ -22,6 +22,7 @@ return [
             'description' => 'Opis',
             'stock_quantity' => 'Ilość',
             'price' => 'Cena',
+            'category' => 'Kategoria',
             'image' => 'Grafika',
         ]
     ]
