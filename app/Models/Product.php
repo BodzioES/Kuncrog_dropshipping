@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -21,8 +22,18 @@ class Product extends Model
         'id_products_categories'
     ];
 
-    public function category(): BelongsToMany
+    public function category(): BelongsTo
     {
-        return $this->belongsToMany(ProductCategory::class);
+        return $this->belongsTo(ProductCategory::class,'id_products_categories');
+    }
+
+    public function isSelectedCategory(int $id_products_categories): bool
+    {
+        return $this->hasCategory() && $this->category->id == $id_products_categories;
+    }
+
+    public function hasCategory(): bool
+    {
+        return !is_null($this->category);
     }
 }

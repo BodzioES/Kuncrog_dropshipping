@@ -71,8 +71,8 @@
                                 <label for="category" class="col-md-4 col-form-label text-md-end">{{__('shop.product.fields.category')}}</label>
 
                                 <div class="col-md-6">
-                                    <select id="category" class="form-control @error('id_products_categories') is-invalid @enderror" name="id_products_categories"  required>
-                                        <option>Brak</option>
+                                    <select id="category" class="form-control @error('id_products_categories') is-invalid @enderror" name="id_products_categories">
+                                        <option value="">Brak</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach

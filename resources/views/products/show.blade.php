@@ -39,6 +39,20 @@
                             <input id="price" type="number" step="0.01" min="0" class="form-control"  name="price" value="{{ $product->price }}" disabled>
                         </div>
                     </div>
+
+                    <div class="row mb-3">
+                        <label for="category" class="col-md-4 col-form-label text-md-end">{{__('shop.product.fields.category')}}</label>
+
+                        <div class="col-md-6">
+                            <select id="category" class="form-control" name="id_products_categories" disabled>
+                                @if($product->hasCategory())
+                                    <option>{{$product->category->name}}</option>
+                                @else
+                                    <option>Brak</option>
+                                @endif
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

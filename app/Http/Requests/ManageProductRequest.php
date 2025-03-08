@@ -27,7 +27,7 @@ class ManageProductRequest extends FormRequest
             'stock_quantity' => 'required|integer|min:1',
             'price' => 'required|numeric|min:1',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'id_products_categories' => 'nullable|min:0',
+            'id_products_categories' => 'nullable|integer|min:0',
         ];
     }
 }
