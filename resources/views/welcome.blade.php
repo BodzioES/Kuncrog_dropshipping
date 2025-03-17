@@ -8,26 +8,13 @@
                     <div class="row   mb-5">
                         <div class="col-12">
                             <div class="dropdown text-md-left text-center float-md-left mb-3 mt-3 mt-md-0 mb-md-0">
-                                <label class="mr-2">Sort by:</label>
+                                <label class="mr-2 float-left">Sort by:</label>
                                 <a class="btn btn-lg btn-light dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relevance <span class="caret"></span></a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" x-placement="bottom-start" style="position: absolute; transform: translate3d(71px, 48px, 0px); top: 0px; left: 0px; will-change: transform;">
                                     <a class="dropdown-item" href="#">Relevance</a>
                                     <a class="dropdown-item" href="#">Price Descending</a>
                                     <a class="dropdown-item" href="#">Price Ascending</a>
                                     <a class="dropdown-item" href="#">Best Selling</a>
-                                </div>
-                            </div>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-lg btn-light"> <span class="fa fa-arrow-left"></span> </button>
-                                <button type="button" class="btn btn-lg btn-light"> <span class="fa fa-arrow-right"></span> </button>
-                            </div>
-                            <div class="dropdown float-right">
-                                <a class="btn btn-lg btn-light dropdown-toggle products-actual-count" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">5<span class="caret"></span></a>
-                                <div class="dropdown-menu dropdown-menu-right products-count" aria-labelledby="navbarDropdown" x-placement="bottom-end" style="will-change: transform; position: absolute; transform: translate3d(120px, 48px, 0px); top: 0px; left: 0px;">
-                                    <a class="dropdown-item" href="#">5</a>
-                                    <a class="dropdown-item" href="#">10</a>
-                                    <a class="dropdown-item" href="#">15</a>
-                                    <a class="dropdown-item" href="#">20</a>
                                 </div>
                             </div>
                         </div>
@@ -54,25 +41,6 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="row sorting mb-5 mt-5">
-                        <div class="col-12">
-                            <a class="btn btn-light">
-                                <i class="fas fa-arrow-up mr-2"></i> Back to top</a>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-lg btn-light"> <span class="fa fa-arrow-left"></span> </button>
-                                <button type="button" class="btn btn-lg btn-light"> <span class="fa fa-arrow-right"></span> </button>
-                            </div>
-                            <div class="dropdown float-md-right">
-                                <a class="btn btn-light btn-lg dropdown-toggle products-actual-count" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">5<span class="caret"></span></a>
-                                <div class="dropdown-menu products-count" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">5</a>
-                                    <a class="dropdown-item" href="#">10</a>
-                                    <a class="dropdown-item" href="#">15</a>
-                                    <a class="dropdown-item" href="#">20</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <form class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
@@ -94,8 +62,15 @@
                 </div>
                 <input id="ex2" type="text" class="slider " value="50,150" data-slider-min="10" data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]" data-value="50,150" style="display: none;">
                 <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
-                <a href="#" class="btn btn-lg btn-block btn-primary mt-5" id="filter-button"><i class="fas fa-search"></i>{{__('shop.welcome.filter')}}</a>
+                <a href="#" class="btn btn-lg btn-block btn-primary mt-5" id="filter-button">{{__('shop.welcome.filter')}}</a>
             </form>
         </div>
     </div>
+@endsection
+@section('javascript')
+    //const storagePath = 'tutaj bedzie trzeba zrobic magazyn na zdjecia produktow';
+    //const defaultImage = 'tutaj bedzie defaultImage odcinek cz.24';
+@endsection
+@section('js-files')
+    @vite(['resources/js/welcome.js'])
 @endsection
