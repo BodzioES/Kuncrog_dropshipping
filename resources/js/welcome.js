@@ -16,7 +16,7 @@ $(function (){
                     const html = '<div class="col-6 col-md-6 col-lg-4 mb-3">\n' +
                         '                                <div class="card h-100 border-0">\n' +
                         '                                    <div class="card-img-top">\n' +
-                        '                                        <img src="https://via.placeholder.com/240x240/5fa9f8/efefef" class="img-fluid" alt="photo">\n' +
+                        '                                        <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb" class="img-fluid" alt="photo">\n' +
                         '                                    </div>\n' +
                         '                                    <div class="card-body text-center">\n' +
                         '                                        <h4 class="card-title">\n' +

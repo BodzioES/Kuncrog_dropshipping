@@ -7,15 +7,17 @@
                 <div class="container-fluid">
                     <div class="row   mb-5">
                         <div class="col-12">
-                            <div class="dropdown text-md-left text-center float-md-left mb-3 mt-3 mt-md-0 mb-md-0">
+                            <div class="dropdown">
                                 <label class="mr-2 float-left">Sort by:</label>
-                                <a class="btn btn-lg btn-light dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relevance <span class="caret"></span></a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" x-placement="bottom-start" style="position: absolute; transform: translate3d(71px, 48px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                    <a class="dropdown-item" href="#">Relevance</a>
-                                    <a class="dropdown-item" href="#">Price Descending</a>
-                                    <a class="dropdown-item" href="#">Price Ascending</a>
-                                    <a class="dropdown-item" href="#">Best Selling</a>
-                                </div>
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Relevance
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">Cena rosnąco</a></li>
+                                    <li><a class="dropdown-item" href="#">Cena malejąco</a></li>
+                                    <li><a class="dropdown-item" href="#">Od A do Z</a></li>
+                                    <li><a class="dropdown-item" href="#">Od Z do A</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -24,7 +26,7 @@
                             <div class="col-6 col-md-6 col-lg-4 mb-3">
                                 <div class="card h-100 border-0">
                                     <div class="card-img-top">
-                                        <img src="https://via.placeholder.com/240x240/5fa9f8/efefef" class="img-fluid">
+                                        <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb" class="img-fluid" alt="photo">
                                     </div>
                                     <div class="card-body text-center">
                                         <h4 class="card-title">
