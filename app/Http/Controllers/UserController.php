@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -18,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         return view('users.index',[
-            'users' => User::paginate(1)
+            'users' => User::paginate(10)
         ]);
     }
 
@@ -70,6 +68,7 @@ class UserController extends Controller
     public function destroy(User $user): \Illuminate\Http\JsonResponse
     {
         $user->delete();
+        Session::flash('status',__('shop.user.delete.success'));
         return response()->json([
             'status' => 'success'
         ]);

@@ -17,11 +17,28 @@ return [
         'save' => 'Zapisz',
         'add' => 'Dodaj',
     ],
+    'user' => [
+        'delete' => [
+            'success' => 'Użytkownik usunięty!',
+        ],
+        'index_title'=> 'Lista użytkowników',
+    ],
     'product' => [
         'add_title' => 'Dodawanie produktu',
         'edit_title' => 'Edycja produktu',
         'show_title' => 'Podgląd produktu',
         'index_title' => 'Lista produktu',
+        'status' => [
+            'store' => [
+                'success' => 'Produkt dodany!',
+            ],
+            'update' => [
+                'success' => 'Produkt zaktualizowany!',
+            ],
+            'delete' => [
+                'success' => 'Produkt usunięty!',
+            ],
+        ],
         'fields' => [
             'title' => 'Dodawanie produktu',
             'name' => 'Nazwa',
