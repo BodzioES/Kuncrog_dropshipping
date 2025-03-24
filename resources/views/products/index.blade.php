@@ -42,7 +42,7 @@
                             <a href="{{route('products.edit',$product->id)}}">
                                 <button class="btn btn-warning">Edytuj</button>
                             </a>
-                            <button class="btn btn-outline-danger btn-sm delete" data-id="{{$product->id}}">X</button>
+                            <button class="btn btn-danger btn-sm delete" data-id="{{$product->id}}"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 @endforeach
