@@ -16,7 +16,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><!--ODPOWIADA MIEDZY INNYMI ZA USUWANIE PRODUKTOW-->
 </head>
 <body>
     <div id="app">

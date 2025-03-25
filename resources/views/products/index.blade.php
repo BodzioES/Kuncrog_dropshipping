@@ -4,12 +4,10 @@
     <div class="container">
         @include('helpers.flash-messages')
         <div class="row">
-            <div class="col-6">
-                <h1>{{__('shop.product.index_title')}}</h1>
-            </div>
-            <div class="col-6">
-                <a class="float-right" href="{{route('products.create')}}">
-                    <button type="button" class="btn btn-primary">{{__('shop.button.add')}}</button>
+            <div class="col-12 d-flex justify-content-between align-items-center">
+                <h1><i class="fa-solid fa-clipboard-list"></i> {{__('shop.product.index_title')}}</h1>
+                <a href="{{route('products.create')}}">
+                    <button type="button" class="btn btn-primary"><i class="fa-solid fa-plus"></i> {{__('shop.button.add')}}</button>
                 </a>
             </div>
         </div>
@@ -37,10 +35,10 @@
                         <td>@if($product->hasCategory()){{$product->category->name}}@endif</td>
                         <td>
                             <a href="{{route('products.show',$product->id)}}">
-                                <button class="btn btn-primary">Podgląd</button>
+                                <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </a>
                             <a href="{{route('products.edit',$product->id)}}">
-                                <button class="btn btn-warning">Edytuj</button>
+                                <button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
                             </a>
                             <button class="btn btn-danger btn-sm delete" data-id="{{$product->id}}"><i class="fa-solid fa-trash"></i></button>
                         </td>

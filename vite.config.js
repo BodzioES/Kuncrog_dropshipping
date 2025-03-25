@@ -16,7 +16,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            jquery: 'jquery/dist/jquery.min.js',
+            $: "jQuery",
             fontawesome: '@fortawesome/fontawesome-free'
         }
     }
