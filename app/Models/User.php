@@ -13,6 +13,8 @@ class User extends Authenticatable implements MustVerifyEmail
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    public mixed $role;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'surname',
         'login',
         'email',
+        'role',
         'password',
         'phone_number',
     ];
