@@ -20,7 +20,7 @@ $(function (){
                         '                                    </div>\n' +
                         '                                    <div class="card-body text-center">\n' +
                         '                                        <h4 class="card-title">\n' +
-                        product.name +
+                                                                    product.name +
                         '                                        </h4>\n' +
                         '                                        <h5 class="card-price small">\n' +
                         '                                            <i>PLN '+ product.price +'</i>\n' +

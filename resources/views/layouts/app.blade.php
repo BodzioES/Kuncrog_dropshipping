@@ -57,10 +57,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    @can('isAdmin')
+                                    @if(Auth::user()->role == 'admin') <!-- ogolnie to dziala ale trzeba ogarnac to i zamienic na can() w pozniejszym czasie -->
                                         <a class="dropdown-item" href="{{ route('users.index') }}">Użytkownicy</a>
                                         <a class="dropdown-item" href="{{ route('products.index') }}">Produkty</a>
-                                    @endcan
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
