@@ -12,7 +12,6 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware(['can:isAdmin'])->group(function () {
         Route::resource('products', ProductController::class);
