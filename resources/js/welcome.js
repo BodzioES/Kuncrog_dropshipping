@@ -1,5 +1,32 @@
 $(function (){
 
+    $('button.add-cart-button').click(function(WELCOME_DATA) {
+        $.ajax({
+            method: "POST",
+            url:  WELCOME_DATA.addToCart + $(this).data('id'),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+        })
+        .done(function (){
+            Swal.fire({
+                title: "Brawo!",
+                text: "Produkt został dodany do koszyka!",
+                icon: "success",
+                showCancelButton: true,
+                confirmButtonText: '<i class="fas fa-cart-plus"></i> Przejdź do koszyka',
+                cancelButtonText: '<i class="fas fa-shopping-bag"></i> Kontynuuj zakupy',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    alert('dziala');
+                }
+            })
+        })
+        .fail(function() {
+            Swal.fire("Oops!", "Coś poszło nie tak.", "error");
+        });
+    });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $('a#filter-button').click(function() {
         getProducts();
     });

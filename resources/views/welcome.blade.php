@@ -70,8 +70,12 @@
     </div>
 @endsection
 @section('javascript')
-    //const storagePath = 'tutaj bedzie trzeba zrobic magazyn na zdjecia produktow';
-    //const defaultImage = 'tutaj bedzie defaultImage odcinek cz.24';
+    const WELCOME_DATA = {
+    // storagePath: 'tutaj bedzie trzeba zrobic magazyn na zdjecia produktow';
+    // defaultImage: 'tutaj bedzie defaultImage odcinek cz.24';
+        addToCart: '{{ url('cart') }}/',
+    }
+
 @endsection
 @section('js-files')
     @vite(['resources/js/welcome.js'])

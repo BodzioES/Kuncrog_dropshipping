@@ -16,15 +16,15 @@ $(function () {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 })
-                    .done(function(response) {
-                        Swal.fire("Usunięto!", "Rekord został usunięty.", "success")
-                            .then(() => {
-                                window.location.reload(); // Przeładuj stronę po usunięciu
-                            });
-                    })
-                    .fail(function(response) {
-                        Swal.fire("Oops!", "Coś poszło nie tak.", "error");
-                    });
+                .done(function(response) {
+                    Swal.fire("Usunięto!", "Rekord został usunięty.", "success")
+                        .then(() => {
+                            window.location.reload(); // Przeładuj stronę po usunięciu
+                        });
+                })
+                .fail(function(response) {
+                    Swal.fire("Oops!", "Coś poszło nie tak.", "error");
+                });
             }
         });
     });
