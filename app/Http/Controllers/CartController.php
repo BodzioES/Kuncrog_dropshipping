@@ -18,19 +18,42 @@ class CartController extends Controller
      *
      * @return RedirectResponse|View
      */
-    public function index()
+
+    public function index(): View
     {
         if (Auth::check()) {
-            $user = Auth::user();
-            // Pobieramy produkty z koszyka użytkownika
-            $cartItems = Cart::where('id_user', $user->id)
-                ->with('product') // Dołączamy produkt do wyników
-                ->get();
-            return view('cart.index', compact('cartItems'));
-        }
+            $cartItems = Cart::with('product')
+                ->where('id_user', Auth::id())
+                ->get()
+                ->map(function ($item) {
+                    return (object)[
+                        'id' => $item->id,
+                        'name' => $item->product?->name,
+                        'price' => $item->product?->price,//edytowaf tabele aby byly w niej te rekordy z pytajnikiem
+                        'image' => $item->product?->image,
+                        'quantity' => $item->quantity
+                    ];
+                });
+        } else {
+            $cart = session()->get('cart', []);
+            $cartItems = collect();
 
-        return redirect()->route('welcome')->with('error', 'Musisz być zalogowany, aby zobaczyć koszyk');
+            foreach ($cart as $productId => $quantity) {
+                $product = Product::find($productId);
+                if ($product) {
+                    $cartItems->push((object)[
+                        'id' => $product->id,
+                        'name' => $product->name,
+                        'price' => $product->price,
+                        'image' => $product->image,
+                        'quantity' => $quantity
+                    ]);
+                }
+            }
+        }
+        return view('cart.index', compact('cartItems'));
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -39,51 +62,48 @@ class CartController extends Controller
      */
     public function store(Request $request, Product $product): JsonResponse
     {
-        if(Auth::check()){
-            $user = Auth::user();
+        if (Auth::check()) {
+            $cartItem = Cart::firstOrCreate(
+                ['id_user' => Auth::id(), 'id_product' => $product->id],
+                ['quantity' => 0]
+            );
+            $cartItem->quantity += 1;
+            $cartItem->save();
 
-            $cartItem = Cart::where('id_user',$user->id)
-            -> where('id_product',$product->id)
-            ->first();
-            if($cartItem){
-                $cartItem->quantity += 1;
-                $cartItem->save();
-            }else{
-                Cart::create([
-                    'id_user' => $user->id,
-                    'id_product' => $product->id,
-                    'quantity' => 1
-                ]);
+            return response()->json(['message' => 'Dodano do koszyka (konto).']);
+        } else {
+            $cart = session()->get('cart', []);
+            if (isset($cart[$product->id])) {
+                $cart[$product->id] += 1;
+            } else {
+                $cart[$product->id] = 1;
             }
-            return response()->json([
-                'message' => 'Produkt został dodany do koszyka!',
-                'status' => 'success'
-            ]);
+
+            session()->put('cart', $cart);
+            return response()->json(['message' => 'Dodano do koszyka (gość).']);
         }
-        return response()->json([
-            'message' => 'Musisz być zalogowany, aby dodać produkt do koszyka.',
-            'status' => 'error'
-        ], 401);
     }
 
     public function destroy($id): JsonResponse
     {
-        $cartItem = Cart::where('id', $id)
-            ->where('id_user', Auth::id())
-            ->first();
+        if (Auth::check()) {
+            $cartItem = Cart::where('id', $id)
+                ->where('id_user', Auth::id())
+                ->first();
 
-        if ($cartItem) {
-            $cartItem->delete();
-
-            return response()->json([
-                'message' => 'Produkt został usunięty z koszyka.',
-                'status' => 'success',
-            ]);
+            if ($cartItem) {
+                $cartItem->delete();
+                return response()->json(['message' => 'Usunięto z koszyka.']);
+            }
+        } else {
+            $cart = session()->get('cart', []);
+            if (isset($cart[$id])) {
+                unset($cart[$id]);
+                session()->put('cart', $cart);
+                return response()->json(['message' => 'Usunięto z koszyka (gość).']);
+            }
         }
 
-        return response()->json([
-            'message' => 'Nie znaleziono produktu w koszyku.',
-            'status' => 'error',
-        ], 404);
+        return response()->json(['message' => 'Nie znaleziono produktu.'], 404);
     }
 }
