@@ -28,10 +28,10 @@ class CartController extends Controller
                 ->map(function ($item) {
                     return (object)[
                         'id' => $item->id,
-                        'name' => $item->product?->name,
-                        'price' => $item->product?->price,//edytowaf tabele aby byly w niej te rekordy z pytajnikiem
+                        'name' => $item->product->name,
+                        'price' => $item->product->price,
+                        'quantity' => $item->quantity,
                         'image' => $item->product?->image,
-                        'quantity' => $item->quantity
                     ];
                 });
         } else {
@@ -45,8 +45,8 @@ class CartController extends Controller
                         'id' => $product->id,
                         'name' => $product->name,
                         'price' => $product->price,
-                        'image' => $product->image,
-                        'quantity' => $quantity
+                        'quantity' => $quantity,
+                        'image' => $product?->image,
                     ]);
                 }
             }
@@ -65,7 +65,11 @@ class CartController extends Controller
         if (Auth::check()) {
             $cartItem = Cart::firstOrCreate(
                 ['id_user' => Auth::id(), 'id_product' => $product->id],
-                ['quantity' => 0]
+                [
+                    'name' => $product->name,
+                    'price' => $product->price,
+                    'quantity' => 0
+                ]
             );
             $cartItem->quantity += 1;
             $cartItem->save();
@@ -76,7 +80,13 @@ class CartController extends Controller
             if (isset($cart[$product->id])) {
                 $cart[$product->id] += 1;
             } else {
-                $cart[$product->id] = 1;
+                $cart[$product->id] = [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'price' => $product->price,
+                    'image' => $product->image,
+                    'quantity' => 1,
+                ];
             }
 
             session()->put('cart', $cart);
