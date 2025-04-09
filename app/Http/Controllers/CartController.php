@@ -16,7 +16,7 @@ class CartController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return RedirectResponse|View
+     * @return View
      */
 
     public function index(): View
@@ -45,7 +45,7 @@ class CartController extends Controller
                         'id' => $product->id,
                         'name' => $product->name,
                         'price' => $product->price,
-                        'quantity' => $quantity,
+                        'quantity' => $product->quantity,
                         'image' => $product?->image,
                     ]);
                 }
@@ -62,13 +62,14 @@ class CartController extends Controller
      */
     public function store(Request $request, Product $product): JsonResponse
     {
+        $quantity = $request->input('quantity', 1);
         if (Auth::check()) {
             $cartItem = Cart::firstOrCreate(
                 ['id_user' => Auth::id(), 'id_product' => $product->id],
                 [
                     'name' => $product->name,
                     'price' => $product->price,
-                    'quantity' => 0
+                    'quantity' => 0,
                 ]
             );
             $cartItem->quantity += 1;
@@ -78,14 +79,14 @@ class CartController extends Controller
         } else {
             $cart = session()->get('cart', []);
             if (isset($cart[$product->id])) {
-                $cart[$product->id] += 1;
+                $cart[$product->id]->quantity += 1;
             } else {
-                $cart[$product->id] = [
+                $cart[$product->id] = (object)[
                     'id' => $product->id,
                     'name' => $product->name,
                     'price' => $product->price,
                     'image' => $product->image,
-                    'quantity' => 1,
+                    'quantity' => $quantity,
                 ];
             }
 

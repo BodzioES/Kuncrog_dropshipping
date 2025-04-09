@@ -16,10 +16,10 @@
             <tbody>
                 @foreach($cartItems as $item)
                      <tr>
-                         <td><img src="{{$item->image}}" alt="photo" width="50"></td>
-                         <td>{{$item->name}}</td>
-                         <td>{{$item->price}} zł</td>
-                         <td>{{$item->quantity}}</td>
+                         <td><img src="{{ $item->image }}" width="50" alt="photo"></td>
+                         <td>{{ $item->name }}</td>
+                         <td>{{ $item->price }} zł</td>
+                         <td>{{ $item->quantity }}</td>
                          <td>
                              <button class="btn btn-danger delete" data-id="{{$item->id}}">USUN</button>
                          </td>

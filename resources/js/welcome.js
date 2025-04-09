@@ -4,12 +4,14 @@ $(function (){
         event.preventDefault();
 
         var productId = $(this).data('id');
+        var quantity = $('#product-quantity-' + productId).text();
 
         $.ajax({
             url: '/cart/' + productId,
             type: 'POST',
             data: {
-                _token: $('meta[name="csrf-token"]').attr('content')
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                quantity: quantity
             },
             success: function(response) {
                 alert(response.message);
