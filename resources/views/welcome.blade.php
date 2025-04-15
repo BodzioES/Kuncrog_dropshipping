@@ -36,7 +36,7 @@
                                             <i>PLN {{ $product->price }}</i>
                                         </h5>
                                     </div>
-                                    <div style="display: none" id="product-quantity-{{$product->id}}">{{$product->quantity}}</div>
+                                    <div style="display: none" id="product-quantity-{{$product->id}}">{{$product->quantity}}</div> <!--TUTAJ TRZEBA Z TYM POGRZEBAC-->
                                     <button class="btn btn-success btn-sm add-cart-button" data-id="{{ $product->id }}">
                                         <i class="fas fa-cart-plus"></i> Dodaj do koszyka
                                     </button>

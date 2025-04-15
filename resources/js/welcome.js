@@ -4,7 +4,7 @@ $(function (){
         event.preventDefault();
 
         var productId = $(this).data('id');
-        var quantity = $('#product-quantity-' + productId).text();
+        var quantity = 1;
 
         $.ajax({
             url: '/cart/' + productId,

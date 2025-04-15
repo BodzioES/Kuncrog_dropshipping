@@ -34,24 +34,28 @@ class CartController extends Controller
                         'image' => $item->product?->image,
                     ];
                 });
+            $isGuest = false;
         } else {
             $cart = session()->get('cart', []);
-            $cartItems = collect();
+            $cartItems = [];
 
-            foreach ($cart as $productId => $quantity) {
+            foreach ($cart as $productId => $details) {
                 $product = Product::find($productId);
-                if ($product) {
-                    $cartItems->push((object)[
+                if ($product && is_array($details)) {
+                    $cartItems[] = [
                         'id' => $product->id,
                         'name' => $product->name,
                         'price' => $product->price,
-                        'quantity' => $product->quantity,
-                        'image' => $product?->image,
-                    ]);
+                        'quantity' => $details['quantity'] ?? 1,
+                        'image' => $product->image,
+                    ];
                 }
             }
+
+            $isGuest = true;
         }
-        return view('cart.index', compact('cartItems'));
+
+        return view('cart.index', compact('cartItems', 'isGuest'));
     }
 
     /**
@@ -62,7 +66,6 @@ class CartController extends Controller
      */
     public function store(Request $request, Product $product): JsonResponse
     {
-        $quantity = $request->input('quantity', 1);
         if (Auth::check()) {
             $cartItem = Cart::firstOrCreate(
                 ['id_user' => Auth::id(), 'id_product' => $product->id],
@@ -77,11 +80,19 @@ class CartController extends Controller
 
             return response()->json(['message' => 'Dodano do koszyka (konto).']);
         } else {
+            $quantity = $request->input('quantity', 1);
             $cart = session()->get('cart', []);
+
+            foreach ($cart as $key => $value) {
+                if (is_object($value)) {
+                    $cart[$key] = (array) $value;
+                }
+            }
+
             if (isset($cart[$product->id])) {
-                $cart[$product->id]->quantity += 1;
+                $cart[$product->id]['quantity'] += 1;
             } else {
-                $cart[$product->id] = (object)[
+                $cart[$product->id] = [
                     'id' => $product->id,
                     'name' => $product->name,
                     'price' => $product->price,
