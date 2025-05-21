@@ -32,6 +32,9 @@
             </tbody>
         </table>
     </div>
+    <a class="nav-link" href="{{ route('checkout.index') }}">
+        przejdz do podsumowania
+    </a>
 @endsection
 <script type="text/javascript" data-url="{{ url('/cart') }}">
     @yield('javascript')

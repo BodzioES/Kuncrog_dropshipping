@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -16,6 +17,8 @@ Route::get('/cart/list', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::middleware(['can:isAdmin'])->group(function () {
@@ -24,7 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/users/list', [UserController::class, 'index'])->name('users.index');
         Route::delete('/users/{user}', [UserController::class, 'destroy']);
     });
-    
+
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 

@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.left{
+    flex: 1;
+    background-color: #9ca3af;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.right{
+    flex: 1;
+    background-color: #9ca3af;
+    padding: 1rem;
+    border-radius: 8px;
+}

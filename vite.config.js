@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/delete.js',
                 'resources/js/welcome.js',
+                'resources/css/checkout.css',
             ],
             refresh: true,
         }),
