@@ -1,19 +1,24 @@
-.container{
+.checkout-container {
     display: flex;
+    justify-content: space-between;
     gap: 2rem;
     margin-top: 2rem;
 }
 
-.left{
-    flex: 1;
-    background-color: #9ca3af;
-    padding: 1rem;
+.checkout-left {
+    flex-basis: 60%;
+    background-color: whitesmoke;
+    padding: 2rem;
     border-radius: 8px;
 }
 
-.right{
-    flex: 1;
-    background-color: #9ca3af;
-    padding: 1rem;
+.checkout-right {
+    flex-basis: 40%;
+    background-color: whitesmoke;
+    padding: 2rem;
     border-radius: 8px;
+}
+
+.cart-item img {
+    border-radius: 6px;
 }

@@ -83,21 +83,6 @@
     </main>
 </div>
 
-<footer class="bg-body-tertiary text-center mt-auto">
-    <div class="container pt-4">
-        <section class="mb-4 ">
-            <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#"><i class="fab fa-facebook-f"></i></a>
-            <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#"><i class="fab fa-twitter"></i></a>
-            <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#"><i class="fab fa-google"></i></a>
-            <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#"><i class="fab fa-instagram"></i></a>
-            <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#"><i class="fab fa-github"></i></a>
-        </section>
-    </div>
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2025 Copyright:
-        <a class="text-body" href="#">Kuncrog</a>
-    </div>
-</footer>
 <script type="text/javascript">
     @yield('javascript')
 </script>
