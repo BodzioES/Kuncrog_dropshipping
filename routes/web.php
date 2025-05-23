@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\SummaryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -18,6 +19,7 @@ Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.sto
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::get('/summary', [SummaryController::class, 'index'])->name('checkout.summary');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 

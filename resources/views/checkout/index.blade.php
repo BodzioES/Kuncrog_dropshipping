@@ -116,7 +116,7 @@
                 <h2>Podsumowanie koszyka</h2>
 
                 <div class="cart-item d-flex align-items-center mb-3">
-                    <img src="/images/watch.png" alt="Product Image" style="width: 60px; height: 60px;">
+                    <img src="" alt="Product Image" style="width: 60px; height: 60px;">
                     <div class="ms-3">
                         <p class="mb-1">Smart Fitness Watch with Heart Rate Monitor & Activity Tracking</p>
                         <strong>$25.00 × 1</strong>
@@ -125,14 +125,51 @@
 
                 <hr>
 
-                <div class="d-flex justify-content-between">
-                    <h4>Metoda dostawy</h4>
+                <h4>Metoda dostawy</h4>
+
+                <div id="checkout-section" class="d-flex justify-content-between">
+                    <div class="option-group">
+                        <label class="option">
+                            <input type="radio" name="shipping_method" value="dpd" checked>
+                            <span class="option-title">DPD Kurier</span>
+                            <span class="option-description"> Dostawa w 1-2 dni robocze</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="shipping_method" value="inpost">
+                            <span class="option-title">InPost Paczkomat</span>
+                            <span class="option-description">Odbiór w paczkomacie</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="shipping_method" value="dhl">
+                            <span class="option-title">DHL Kurier</span>
+                            <span class="option-description">Dostawa w 1-3 dni robocze</span>
+                        </label>
+                    </div>
                 </div>
 
                 <hr>
 
-                <div class="d-flex justify-content-between">
-                    <h4>Metoda płatności</h4>
+                <h4>Metoda płatności</h4>
+
+                <div id="checkout-section" class="d-flex justify-content-between">
+
+                    <div class="option-group">
+                        <label class="option">
+                            <input type="radio" name="payment_method" value="cod" checked>
+                            <span class="option-title">Płatność przy odbiorze</span>
+                            <span class="option-description">Zapłać kurierowi przy dostawie</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="payment_method" value="blik">
+                            <span class="option-title">BLIK</span>
+                            <span class="option-description">Szybka płatność mobilna</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="payment_method" value="blik">
+                            <span class="option-title">Karta płatnizca</span>
+                            <span class="option-description">Podanie karty płatniczej</span>
+                        </label>
+                    </div>
                 </div>
 
                 <hr>
@@ -159,6 +196,13 @@
             </div>
         </div>
     </div>
+
+    <div class="button-wrapper">
+        <a class="checkout-button" href="{{ route('checkout.summary') }}">
+            Przejdź do podsumowania
+        </a>
+    </div>
+
 @endsection
 <script type="text/javascript" data-url="{{ url('/cart') }}">
     @yield('javascript')

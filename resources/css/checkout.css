@@ -1,15 +1,16 @@
 .checkout-container {
     display: flex;
-    justify-content: space-between;
+    height: 100vh;
     gap: 2rem;
-    margin-top: 2rem;
+    overflow: hidden;
 }
 
 .checkout-left {
-    flex-basis: 60%;
-    background-color: whitesmoke;
-    padding: 2rem;
-    border-radius: 8px;
+    flex: 0 0 60%;
+    background-color: #f3f4f6;
+    padding: 1rem;
+    max-height: 100vh;
+    overflow-y: auto
 }
 
 .checkout-right {
@@ -17,8 +18,77 @@
     background-color: whitesmoke;
     padding: 2rem;
     border-radius: 8px;
+
+    overflow-y: auto;
 }
 
 .cart-item img {
     border-radius: 6px;
+}
+.checkout-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.option {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.option input[type="radio"] {
+    margin-right: 1rem;
+    margin-top: 0.3rem;
+}
+
+.option-title {
+    font-weight: bold;
+    display: block;
+}
+
+.option-description {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.option:hover {
+    background-color: #f9f9f9;
+}
+.button-wrapper {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.checkout-button {
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.checkout-button:hover {
+    background-color: #d5d5d5;
+}
+
+.checkout-button:active {
+    background-color: #c0c0c0;
+    transform: scale(0.98);
 }
