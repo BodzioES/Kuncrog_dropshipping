@@ -16,3 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     checkbox.addEventListener('change', toggleShippingAdress);
 });
+
+document.addEventListener('DOMContentLoaded',function (){
+    const radios = document.querySelectorAll('input[name="shipping_method"]');
+
+});

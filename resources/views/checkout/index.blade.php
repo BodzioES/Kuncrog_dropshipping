@@ -30,24 +30,32 @@
 
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
-                                <label>Ulica *</label>
+                                <label>Ulica (ulica i numer) *</label>
                                 <input type="text" class="form-control" placeholder="Ulica">
                             </div>
 
                             <div class="form-group w-50">
-                                <label>Numer domu/Mieszkania *</label>
-                                <input type="text" class="form-control" placeholder="Numer domu/mieszkania">
+                                <label>Numer Mieszkania (opcjonalnie)</label>
+                                <input type="text" class="form-control" placeholder="Numer mieszkania">
+                            </div>
+                        </div>
+
+
+                        <div class="form-row d-flex gap-3 mt-3">
+                            <div class="form-group w-50">
+                                <label>Miasto *</label>
+                                <input type="text" class="form-control" placeholder="Miasto">
+                            </div>
+
+                            <div class="form-group w-50">
+                                <label>Kod pocztowy *</label>
+                                <input type="text" class="form-control" placeholder="Kod pocztowy">
                             </div>
                         </div>
 
                         <div class="form-group mt-3">
-                            <label>Kod pocztowy *</label>
-                            <input type="text" class="form-control" placeholder="Kod pocztowy">
-                        </div>
-
-                        <div class="form-group mt-3">
                             <label>Numer telefonu *</label>
-                            <input type="text" class="form-control" placeholder="Numer telefonu">
+                            <input type="number" class="form-control" placeholder="Numer telefonu">
                         </div>
                     </form>
                 </div>
@@ -86,14 +94,19 @@
 
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
-                                <label>Ulica *</label>
+                                <label>Ulica (pełna nazwa) *</label>
                                 <input type="text" class="form-control" placeholder="Ulica">
                             </div>
 
                             <div class="form-group w-50">
-                                <label>Numer domu/Mieszkania *</label>
-                                <input type="text" class="form-control" placeholder="Numer domu/mieszkania">
+                                <label>Numer Mieszkania (opcjonalnie)</label>
+                                <input type="text" class="form-control" placeholder="Numer mieszkania">
                             </div>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label>Miasto *</label>
+                            <input type="text" class="form-control" placeholder="Miasto">
                         </div>
 
                         <div class="form-group mt-3">
@@ -115,12 +128,31 @@
             <div class="checkout-right">
                 <h2>Podsumowanie koszyka</h2>
 
-                <div class="cart-item d-flex align-items-center mb-3">
-                    <img src="" alt="Product Image" style="width: 60px; height: 60px;">
-                    <div class="ms-3">
-                        <p class="mb-1">Smart Fitness Watch with Heart Rate Monitor & Activity Tracking</p>
-                        <strong>$25.00 × 1</strong>
-                    </div>
+                <div class="cart-item p-3">
+
+                    @foreach($cartItems as $item)
+                        <div class="product-item d-flex align-items-center mb-3">
+                            <img src="{{ $isGuest ? $item['image'] : $item->image }}"
+                                 class="product-img me-3"
+                                 alt="photo"
+                                 style="width: 80px; height: auto; object-fit: contain;">
+
+                            <div class="flex-grow-1">
+                                <div class="fw-bold fs-5">
+                                    {{$isGuest ? $item['name'] : $item->name }}
+                                </div>
+
+                                <div class="d-flex justify-content-between mt-1">
+                                    <div class="fw-bold text-muted">
+                                        {{$price =  $isGuest ? $item['price'] : $item->price }} zł
+                                    </div>
+                                    <div class="fw-bold">
+                                        x{{$quantity =  $isGuest ? $item['quantity'] : $item->quantity }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
 
                 <hr>
@@ -130,18 +162,18 @@
                 <div id="checkout-section" class="d-flex justify-content-between">
                     <div class="option-group">
                         <label class="option">
-                            <input type="radio" name="shipping_method" value="dpd" checked>
-                            <span class="option-title">DPD Kurier</span>
+                            <input type="radio" name="shipping_method" value="dpd" data-price="20.00" checked>
+                            <span class="option-title">DPD Kurier (20 zł)</span>
                             <span class="option-description"> Dostawa w 1-2 dni robocze</span>
                         </label>
                         <label class="option">
-                            <input type="radio" name="shipping_method" value="inpost">
-                            <span class="option-title">InPost Paczkomat</span>
+                            <input type="radio" name="shipping_method" data-price="10.00" value="inpost">
+                            <span class="option-title">InPost Paczkomat (10 zł)</span>
                             <span class="option-description">Odbiór w paczkomacie</span>
                         </label>
                         <label class="option">
-                            <input type="radio" name="shipping_method" value="dhl">
-                            <span class="option-title">DHL Kurier</span>
+                            <input type="radio" name="shipping_method" data-price="15.00" value="dhl">
+                            <span class="option-title">DHL Kurier (15 zł)</span>
                             <span class="option-description">Dostawa w 1-3 dni robocze</span>
                         </label>
                     </div>
@@ -176,30 +208,26 @@
 
                 <div class="d-flex justify-content-between">
                     <span>Podsumowanie</span>
-                    <span>25.00 zł</span>
+                    <span id="productsTotal">{{number_format($totalProductPrice,2)}}</span>
                 </div>
                 <div class="d-flex justify-content-between">
                     <span>Opłata za dostawę</span>
-                    <span>0.00 zł</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <span>Podatek</span>
-                    <span>0.00 zł</span>
+                    <span id="shippingCost">0.00 zł</span>
                 </div>
 
                 <hr>
 
                 <div class="d-flex justify-content-between fw-bold">
-                    <span>Suma całkowita</span>
-                    <span>25.00 zł</span>
+                    <span>Łącznie do zapłaty</span>
+                    <span id="totalPrice">{{number_format($totalProductPrice,2)}}</span>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="button-wrapper">
-        <a class="checkout-button" href="{{ route('checkout.summary') }}">
-            Przejdź do podsumowania
+        <a class="checkout-button" href="#">
+            Zapłać
         </a>
     </div>
 
