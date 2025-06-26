@@ -15,6 +15,8 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    @vite('resources/js/delete.js')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -72,8 +74,14 @@
                         </li>
                     @endguest
                 </ul>
-                <a class="nav-link" href="{{ route('cart.index') }}">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                <a class="nav-link position-relative" href="{{ route('cart.index') }}">
+                    <i class="fa-solid fa-cart-shopping fa-lg"></i>
+
+                    @if(count($cartItems) > 0)
+                        <span class="cart-badge">
+                            {{count($cartItems)}}
+                        </span>
+                    @endif
                 </a>
             </div>
         </div>

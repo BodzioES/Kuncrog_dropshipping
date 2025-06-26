@@ -1,0 +1,29 @@
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 90vh;
+    padding: 20px;
+}
+
+.cart-table-wrapper {
+    width: 100%;
+    max-width: 900px;
+    max-height: 60vh;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+/* Optional: style table rows */
+.cart-table th, .cart-table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* Center the checkout button */
+.button-wrapper {
+    text-align: center;
+}

@@ -10,12 +10,15 @@ class ShippingMethod extends Model
 {
     use HasFactory;
 
-    protected $table = 'shipping_method';
+    protected $table = 'shipping_methods';
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = [
+        'name',
+        'description',
+    ];
 
     public function orders(): HasMany
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'id_shipping_method');
     }
 }
