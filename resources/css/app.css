@@ -1,16 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+}
 
-.cart-badge {
+.nav-link .fa-cart-shopping {
+    font-size: 24px;
+}
+
+.nav-link span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    top: -4px;
-    right: -6px;
+    top: 5px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
     background-color: red;
     color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
     font-size: 12px;
     font-weight: bold;
-    line-height: 1;
+    border-radius: 50%;
 }

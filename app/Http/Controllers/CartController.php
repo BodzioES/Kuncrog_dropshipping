@@ -50,7 +50,6 @@ class CartController extends Controller
                     ];
                 }
             }
-
             $isGuest = true;
         }
 
@@ -124,7 +123,7 @@ class CartController extends Controller
                 return response()->json(['message' => 'Usunięto z koszyka (gość).']);
             }
         }
-
         return response()->json(['message' => 'Nie znaleziono produktu.'], 404);
     }
+
 }

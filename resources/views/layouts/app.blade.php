@@ -13,10 +13,14 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-    @vite('resources/js/delete.js')
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss',
+            'resources/js/app.js',
+            'resources/js/delete.js',
+            'resources/css/app.css'
+            ])
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -74,13 +78,14 @@
                         </li>
                     @endguest
                 </ul>
-                <a class="nav-link position-relative" href="{{ route('cart.index') }}">
-                    <i class="fa-solid fa-cart-shopping fa-lg"></i>
-
-                    @if(count($cartItems) > 0)
-                        <span class="cart-badge">
-                            {{count($cartItems)}}
-                        </span>
+                {{--
+                    Ponizej jest ikonka koszyka do ktorej jest przekazywana
+                    ilosc produktow dodana do koszyka (dane pobiera z AppServiceProvidder.php)
+                 --}}
+                <a class="nav-link" href="{{ route('cart.index') }}">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    @if($cartCount > 0)
+                        <span>{{$cartCount}}</span>
                     @endif
                 </a>
             </div>
