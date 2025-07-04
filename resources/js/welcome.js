@@ -1,3 +1,6 @@
+//to jest biblioteka umozliwiajaca wyswietlanie tego modala po dodaniu produktu do oszyka
+import { Modal } from 'bootstrap';
+window.bootstrap = { Modal };
 $(function (){
 
     $('button.add-cart-button').click(function(event) {
@@ -14,7 +17,16 @@ $(function (){
                 quantity: quantity
             },
             success: function(response) {
-                alert(response.message);
+                $.ajax({
+                    url: '/cart/modal',
+                    method: 'GET',
+                    success: function (modalContent) {
+                        console.log('Modal content:', modalContent);
+                        $('#cartModalBody').html(modalContent);
+                        let cartModal = new bootstrap.Modal(document.getElementById('cartModal'), {});
+                        cartModal.show();
+                    }
+                });
             },
             error: function(response) {
                 alert(response.responseJSON.message);

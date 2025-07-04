@@ -16,6 +16,7 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/cart/list', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::get('/cart/modal', [CartController::class, 'getCartModalContent']);
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\JsonResponse;
@@ -76,6 +77,7 @@ class CartController extends Controller
             $cartItem->quantity += 1;
             $cartItem->save();
 
+            //to narazie nie jest uzywane ale moze kiedys byc wiec to zostawiam
             return response()->json(['message' => 'Dodano do koszyka (konto).']);
         } else {
             $quantity = $request->input('quantity', 1);
@@ -100,6 +102,7 @@ class CartController extends Controller
             }
 
             session()->put('cart', $cart);
+            //to narazie nie jest uzywane ale moze kiedys byc wiec to zostawiam
             return response()->json(['message' => 'Dodano do koszyka (gość).']);
         }
     }
@@ -124,6 +127,28 @@ class CartController extends Controller
             }
         }
         return response()->json(['message' => 'Nie znaleziono produktu.'], 404);
+    }
+
+    //zwraca html koszyka content modal
+    public function getCartModalContent(): Response
+    {
+        if (Auth::check()) {
+            $cartItems = Cart::with('product')->where('id_user', Auth::id())->get();
+        } else {
+            $cart = session()->get('cart', []);
+            $cartItems = collect();
+            foreach ($cart as $productId => $details) {
+                $product = Product::find($productId);
+                if ($product) {
+                    $cartItems->push((object)[
+                        'product' => $product,
+                        'quantity' => $details['quantity'] ?? 1
+                    ]);
+                }
+            }
+        }
+
+        return response(view('cart.cart_modal_content', compact('cartItems')));
     }
 
 }

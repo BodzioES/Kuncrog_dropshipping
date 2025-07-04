@@ -68,6 +68,25 @@
                 <a href="#" class="btn btn-lg btn-block btn-primary mt-5" id="filter-button">{{__('shop.welcome.filter')}}</a>
             </form>
         </div>
+
+        <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cartModalLabel">Koszyk</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
+                    </div>
+                    <div class="modal-body" id="cartModalBody">
+                        <p>Ładowanie koszyka...</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{ route('cart.index') }}" class="btn btn-primary">Przejdź do koszyka</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kontynuuj zakupy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 @endsection
 @section('javascript')
