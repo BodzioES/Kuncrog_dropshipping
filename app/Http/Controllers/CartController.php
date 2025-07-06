@@ -107,6 +107,54 @@ class CartController extends Controller
         }
     }
 
+    public function updateQuantity(Request $request, $id): JsonResponse
+    {
+        $action = request()->input('action');
+
+        if (Auth::check()) {
+            $cartItems = Cart::where('id',$id)->where('id_user', Auth::id())->first();
+
+            if ($action) {
+                if ($action == 'increase') {
+                    $cartItems->quantity += 1;
+                }elseif ($action == 'decrease') {
+                    $cartItems->quantity = max(1, $cartItems->quantity - 1);
+                }
+                $cartItems->save();
+
+                return response()->json(['message' => 'Zaktualizowano ilość']);
+            }
+        }else{
+            $cart = session()->get('cart', []);
+            if(isset($cart[$id])){
+                if($action === 'increase'){
+                    $cart[$id]['quantity'] += 1;
+                }elseif ($action === 'decrease'){
+                    $cart[$id]['quantity'] = max(1,$cart[$id]['quantity'] - 1);
+                }
+                session()->put('cart', $cart);
+
+                return response()->json(['message' => 'Zaktualizowano ilość']);
+            }
+        }
+        return response()->json(['message' => 'Nie znaleziono produktu.'], 404);
+    }
+
+    public function updateCount(): JsonResponse
+    {
+        $count = 0;
+
+        if (Auth::check()) {
+            $count = Cart::where('id_user', Auth::id())->sum('quantity');
+        } else {
+            $cart = session()->get('cart', []);
+            foreach ($cart as $item) {
+                $count += $item['quantity'] ?? 1;
+            }
+        }
+
+        return response()->json(['count' => $count]);
+    }
     public function destroy($id): JsonResponse
     {
         if (Auth::check()) {

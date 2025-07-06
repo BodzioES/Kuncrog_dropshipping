@@ -24,6 +24,21 @@ $(function (){
                         $('#cartModalBody').html(modalContent);
                         let cartModal = new bootstrap.Modal(document.getElementById('cartModal'), {});
                         cartModal.show();
+
+                        $.ajax({
+                            url: '/cart/count',
+                            method: 'GET',
+                            success: function (data){
+                                const count = data.count;
+                                const $badge = $('#cart-count-badge');
+
+                                if (count > 0){
+                                    $badge.text(count).removeClass('d-none');
+                                }else{
+                                    $badge.addClass('d-none');
+                                }
+                            }
+                        })
                     }
                 });
             },

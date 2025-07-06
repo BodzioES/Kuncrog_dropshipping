@@ -15,7 +15,7 @@
                 @endphp
                 <tr>
                     <td width="15%">
-                        <img src="{{ $item->product->photo_url ?? '' }}" class="img-fluid" alt="{{ $name }}">
+                        <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb" class="img-fluid" alt="photo">
                     </td>
                     <td>
                         {{ $name }}
@@ -27,8 +27,14 @@
                             <button class="btn btn-outline-secondary btn-sm update-cart" data-id="{{ $item->product->id ?? $item['id'] }}" data-action="increase">+</button>
                         </div>
                     </td>
-                    <td>{{ number_format($price, 2) }} $</td>
-                    <td>{{ number_format($subtotal, 2) }} $</td>
+                    <td>
+                        <div class="small text-muted">Cena</div>
+                        {{ number_format($price, 2) }} PLN
+                    </td>
+                    <td>
+                        <div class="small text-muted">Suma</div>
+                        {{ number_format($subtotal, 2) }} PLN
+                    </td>
                     <td>
                         <button class="btn btn-sm btn-danger delete-cart-item" data-id="{{ $item->product->id ?? $item['id'] }}">
                             <i class="fas fa-trash"></i>
@@ -43,7 +49,7 @@
     <hr>
 
     <div class="d-flex justify-content-between align-items-center px-3">
-        <h5 class="mb-0">Łączna suma:</h5>
+        <h5 class="mb-0">Łączna kwota:</h5>
         <h4 class="mb-0">{{ number_format($total, 2) }} PLN</h4>
     </div>
 @endif

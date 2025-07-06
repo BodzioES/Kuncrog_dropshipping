@@ -84,9 +84,9 @@
 
                 <a class="nav-link" href="{{ route('cart.index') }}">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    @if($cartCount > 0)
-                        <span>{{$cartCount}}</span>
-                    @endif
+                    <span id="cart-count-badge" class="{{ $cartCount > 0 ? '' : 'd-none' }}">
+                        {{ $cartCount }}
+                    </span>
                 </a>
 
             </div>

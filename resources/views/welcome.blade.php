@@ -95,4 +95,5 @@
 @section('js-files')
     @vite(['resources/js/welcome.js'])
     @vite('resources/js/modal_delete.js')
+    @vite('resources/js/modal_quantity.js')
 @endsection

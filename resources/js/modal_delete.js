@@ -16,6 +16,21 @@ $(function (){
                   method: 'GET',
                   success: function (modalContent){
                       $('#cartModalBody').html(modalContent);
+
+                      $.ajax({
+                          url: '/cart/count',
+                          method: 'GET',
+                          success: function (data){
+                              const count = data.count;
+                              const $badge = $('#cart-count-badge');
+
+                              if (count > 0){
+                                  $badge.text(count).removeClass('d-none');
+                              }else{
+                                  $badge.addClass('d-none');
+                              }
+                          }
+                      })
                   }
               });
            },

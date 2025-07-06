@@ -17,6 +17,9 @@ Route::get('/cart/list', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 Route::get('/cart/modal', [CartController::class, 'getCartModalContent']);
+Route::post('/cart/update/{id}', [CartController::class, 'updateQuantity']);
+Route::get('/cart/count', [CartController::class, 'updateCount']);
+
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
