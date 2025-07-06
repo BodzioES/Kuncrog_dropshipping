@@ -81,12 +81,14 @@
                     Ponizej jest ikonka koszyka do ktorej jest przekazywana
                     ilosc produktow dodana do koszyka (dane pobiera z AppServiceProvidder.php)
                  --}}
+
                 <a class="nav-link" href="{{ route('cart.index') }}">
                     <i class="fa-solid fa-cart-shopping"></i>
                     @if($cartCount > 0)
                         <span>{{$cartCount}}</span>
                     @endif
                 </a>
+
             </div>
         </div>
     </nav>

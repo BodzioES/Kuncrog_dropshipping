@@ -1,4 +1,4 @@
-//to jest biblioteka umozliwiajaca wyswietlanie tego modala po dodaniu produktu do oszyka
+//to jest biblioteka umozliwiajaca wyswietlanie tego modala po dodaniu produktu do koszyka
 import { Modal } from 'bootstrap';
 window.bootstrap = { Modal };
 $(function (){
@@ -21,7 +21,6 @@ $(function (){
                     url: '/cart/modal',
                     method: 'GET',
                     success: function (modalContent) {
-                        console.log('Modal content:', modalContent);
                         $('#cartModalBody').html(modalContent);
                         let cartModal = new bootstrap.Modal(document.getElementById('cartModal'), {});
                         cartModal.show();

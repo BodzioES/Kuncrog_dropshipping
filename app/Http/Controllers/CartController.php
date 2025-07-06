@@ -129,7 +129,7 @@ class CartController extends Controller
         return response()->json(['message' => 'Nie znaleziono produktu.'], 404);
     }
 
-    //zwraca html koszyka content modal
+    //zwraca html koszyka content modal, jest to przekazywane do cart.modal_content.blade.php
     public function getCartModalContent(): Response
     {
         if (Auth::check()) {
@@ -147,7 +147,6 @@ class CartController extends Controller
                 }
             }
         }
-
         return response(view('cart.cart_modal_content', compact('cartItems')));
     }
 
