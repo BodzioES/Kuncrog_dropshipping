@@ -21,6 +21,7 @@ class CartController extends Controller
 
     public function index(): View
     {
+        //wyswietlenie produktow i ich danych z koszyku jako zalogowany uzytkownik
         if (Auth::check()) {
             $cartItems = Cart::with('product')
                 ->where('id_user', Auth::id())
@@ -35,7 +36,9 @@ class CartController extends Controller
                     ];
                 });
             $isGuest = false;
-        } else {
+        }
+        //wyswietlenie produktow i ich danych z koszyku jako gosc
+        else {
             $cart = session()->get('cart', []);
             $cartItems = [];
 
@@ -54,6 +57,7 @@ class CartController extends Controller
             $isGuest = true;
         }
 
+        //zwracanie do cart/index.blade.php danych produktu oraz czy uzytkownik jest gosciem czy tez nie
         return view('cart.index', compact('cartItems', 'isGuest'));
     }
 
@@ -65,6 +69,7 @@ class CartController extends Controller
      */
     public function store(Request $request, Product $product): JsonResponse
     {
+        //dodawanie produktu do koszyka jako zalogowany uzytkownik
         if (Auth::check()) {
             $cartItem = Cart::firstOrCreate(
                 ['id_user' => Auth::id(), 'id_product' => $product->id],
@@ -79,7 +84,9 @@ class CartController extends Controller
 
             //to narazie nie jest uzywane ale moze kiedys byc wiec to zostawiam
             return response()->json(['message' => 'Dodano do koszyka (konto).']);
-        } else {
+        }
+        //dodawanie produktu do koszyka jako gosc
+        else {
             $quantity = $request->input('quantity', 1);
             $cart = session()->get('cart', []);
 
@@ -109,15 +116,21 @@ class CartController extends Controller
 
     public function updateQuantity(Request $request, $id): JsonResponse
     {
+        //sluzy do zwiekszania badz zmniejszania ilosci produktow ktore sa w modal cart (czyli te
+        // okienko ktore sie wyswietla jak sie doda produkt do koszyka)
+
+        //pobieramy z data-action ktora jest w cart_modal_conent.blade.php akcje aby sprawdzic ktora kliknelismy
         $action = request()->input('action');
 
         if (Auth::check()) {
             $cartItems = Cart::where('id',$id)->where('id_user', Auth::id())->first();
 
+            //sprawdzanie akcji czy kliknelismy przycisk ktory ma zmiejszac ilosc produktow lub zwiekszac
             if ($action) {
                 if ($action == 'increase') {
                     $cartItems->quantity += 1;
                 }elseif ($action == 'decrease') {
+                    //max sluzy do tego aby zapobiec ujemnej liczbie produktow (minimalna liczba to jeden, nie moze byc mniejsza)
                     $cartItems->quantity = max(1, $cartItems->quantity - 1);
                 }
                 $cartItems->save();
@@ -125,6 +138,7 @@ class CartController extends Controller
                 return response()->json(['message' => 'Zaktualizowano ilość']);
             }
         }else{
+            //tutaj jest wykonywane doladnie to samo lecz dla goscia
             $cart = session()->get('cart', []);
             if(isset($cart[$id])){
                 if($action === 'increase'){
@@ -142,6 +156,8 @@ class CartController extends Controller
 
     public function updateCount(): JsonResponse
     {
+        //funkcja ma za zadanie wysylac aktualna ilosc produktow z koszyka do app.blade.php a konkretnie czerwonej kropki od koszyka
+        //jest uzywana gdy wykonuje sie ajax, na przyklad podczas usuniecia produktu z koszyka badz zmiejszania jego ilosci w koszyku i zwiekszania
         $count = 0;
 
         if (Auth::check()) {
@@ -180,6 +196,7 @@ class CartController extends Controller
     //zwraca html koszyka content modal, jest to przekazywane do cart.modal_content.blade.php
     public function getCartModalContent(): Response
     {
+        //wyswietla koszyk w cart modal, pokazuje aktualna liste ktora jest w koszyku
         if (Auth::check()) {
             $cartItems = Cart::with('product')->where('id_user', Auth::id())->get();
         } else {
@@ -195,6 +212,7 @@ class CartController extends Controller
                 }
             }
         }
+        //przekazuje zmienna $cartItems  do cart_modal_content.blade.php
         return response(view('cart.cart_modal_content', compact('cartItems')));
     }
 

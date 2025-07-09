@@ -2,19 +2,28 @@ import '../css/checkout.css';
 
 //obsluga adresu rozliczeniowego (ten co sie wysuwa na stronie checkout po odznaczeniu)
 document.addEventListener('DOMContentLoaded', () => {
+    //pobieranie wartosci od checkbox czy jest on klikniety czy nie
     const checkbox = document.getElementById('sameAddressCheckbox');
+    //pobieranie diva ktory wyswietla ten adres wysylkowy
     const shippingDiv = document.getElementById('shipping-adress');
 
+    //funkcja sprawdzajaca czy pole typu checkbox jest zaznaczone
     const toggleShippingAdress = () => {
         if (checkbox.checked){
+            //ukrywanie elementu (diva)
             shippingDiv.style.display = 'none';
         }else{
+            //pokazywanie elementu (diva)
             shippingDiv.style.display = 'block';
         }
     };
 
+    // 👇 Uruchamiamy funkcję od razu po załadowaniu strony,
+    // żeby formularz był od razu w odpowiednim stanie (np. ukryty, jeśli checkbox zaznaczony)
     toggleShippingAdress();
 
+    // 🔁 Gdy użytkownik kliknie checkboxa – uruchamiamy ponownie funkcję,
+    // żeby na bieżąco pokazać/ukryć pola adresu wysyłki
     checkbox.addEventListener('change', toggleShippingAdress);
 });
 

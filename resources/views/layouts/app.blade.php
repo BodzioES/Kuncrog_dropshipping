@@ -84,6 +84,7 @@
 
                 <a class="nav-link" href="{{ route('cart.index') }}">
                     <i class="fa-solid fa-cart-shopping"></i>
+                    {{-- $cartCount jest pobierane z AppServiceProvider.php --}}
                     <span id="cart-count-badge" class="{{ $cartCount > 0 ? '' : 'd-none' }}">
                         {{ $cartCount }}
                     </span>

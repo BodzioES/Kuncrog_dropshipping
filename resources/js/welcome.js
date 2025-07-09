@@ -3,9 +3,12 @@ import { Modal } from 'bootstrap';
 window.bootstrap = { Modal };
 $(function (){
 
+    //wykonuje sie po wcisnieciu przycisku z welcome.blade.php
+    //dodaje on produkt do koszyka
     $('button.add-cart-button').click(function(event) {
         event.preventDefault();
 
+        //pobiera odpowiednie id produktu dzieki data-id="{{ $product->id }}" ktory jest w przycisku
         var productId = $(this).data('id');
         var quantity = 1;
 
@@ -16,6 +19,8 @@ $(function (){
                 _token: $('meta[name="csrf-token"]').attr('content'),
                 quantity: quantity
             },
+            //jesli sie powiedzie to robi kolejny ajax ktory wyswietla cart modal (czyli taki mini koszyk)
+            //wiadomo idzie to "zapytanie" do controllera ktory odesle do tego cart modal dane produktow ktore sa w koszyku
             success: function(response) {
                 $.ajax({
                     url: '/cart/modal',
@@ -24,17 +29,23 @@ $(function (){
                         $('#cartModalBody').html(modalContent);
                         let cartModal = new bootstrap.Modal(document.getElementById('cartModal'), {});
                         cartModal.show();
-
+                        //jesli to sie powiedzie to wykonuje sie kolejny ajax XD, ktory ma za zadanie odswiezyc strone bez przeladowania
+                        // w celu aktualizacji tej czerwonej kropki ktora jest obok ikony koszyka ktora pokazuje liczbe produktow w koszyku
                         $.ajax({
                             url: '/cart/count',
                             method: 'GET',
+                            //wysylane jest tak jakby zapytanie do controllera aby ten odeslal z powrotem tutaj jako data odpowiedz ile jest produktow w koszyku
                             success: function (data){
+                                //przypisujemy ta wartosc jako count i wsadzamy to do count
                                 const count = data.count;
                                 const $badge = $('#cart-count-badge');
 
+                                //jezeli nie ma produktow to usuwana jest ta klasa w tej ikonce koszyka
                                 if (count > 0){
                                     $badge.text(count).removeClass('d-none');
-                                }else{
+                                }
+                                //jezezeli jest to doadajemy klase do naszego #cart-count-badge
+                                else{
                                     $badge.addClass('d-none');
                                 }
                             }

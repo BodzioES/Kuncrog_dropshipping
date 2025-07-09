@@ -30,7 +30,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
-        //przekazuje to ilosc produktow w koszyku do layouts (do tej czerwonej kropki przy ikonie koszyka)
+        //przekazuje to aktualna ilosc produktow w koszyku do layouts (do tej czerwonej kropki przy ikonie koszyka)
+        // dzieki temu przy pierwszym zaladowniu strony dziala licnzik w tej ikonce koszyka
+        // bez tego by to nie dzialalo dopoki nie odpalil by sie jakikolwiek ajax ktory aktualizuje w bez przeladowania ten koszyk
         View::composer('*', function ($view) {
             $cartCount = 0;
 
@@ -43,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
 
+            //zwraca zmienna $cartCount do app.blade.php
             $view->with('cartCount', $cartCount);
         });
     }
