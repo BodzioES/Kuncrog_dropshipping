@@ -7,21 +7,21 @@
             <div class="overlay">
                 <h1>Nowa wiosenna kolekcja</h1>
                 <p>Pastelowe sukienki i lekkie tkaniny</p>
-                <a href="/kolekcja-wiosna">Zobacz teraz</a>
+                <a href="">Zobacz teraz</a>
             </div>
         </div>
         <div class="slide" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb');">
             <div class="overlay">
                 <h1>Sport‑luxe w stylu 2025</h1>
                 <p>Sportowe kurtki i retro trampki</p>
-                <a href="/sport-luxe">Sprawdź</a>
+                <a href="">Sprawdź</a>
             </div>
         </div>
         <div class="slide" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb');">
             <div class="overlay">
                 <h1>Przezroczyste topy i organza</h1>
                 <p>Delikatne, eteryczne fasony</p>
-                <a href="/organza">Kup teraz</a>
+                <a href="">Kup teraz</a>
             </div>
         </div>
     </div>

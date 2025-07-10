@@ -20,7 +20,7 @@
                     @foreach($cartItems as $item)
                         <tr>
                             <td>
-                                <img src="{{ $isGuest ? $item['image'] : $item->image }}" width="50" alt="photo">
+                                <img src={{--{{ $isGuest ? $item['image'] : $item->image }}--}}"https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb" width="60" alt="photo">
                             </td>
                             <td>{{ $isGuest ? $item['name'] : $item->name }}</td>
                             <td>{{ $isGuest ? $item['price'] : $item->price }} zł</td>
