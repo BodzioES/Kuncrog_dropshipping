@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PaymentMethod;
 use App\Models\ShippingMethod;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
@@ -70,6 +71,41 @@ class CheckoutController extends Controller
             'shippingMethods',
             'paymentMethods',
         ));
+    }
+
+    public function updateTotal(Request $request): JsonResponse{
+        $shippingId = $request->input('id_shipping_method');
+
+        $shippingMethod = ShippingMethod::find($shippingId);
+        if (!$shippingMethod) {
+            return response()->json(['error' => 'Shipping method not found'], 400);
+        }
+
+        $shippingCost = $shippingMethod->price;
+
+        $cartItems = Auth::check()
+            ? Cart::with('product')->where('id_user', Auth::id())->get()
+            : collect(session()->get('cart',[]));
+
+        $totalProductPrice = 0;
+
+        foreach ($cartItems as $item) {
+            $price = Auth::check()
+                ? $item->product->price
+                : $item['price'];
+            $quantity = Auth::check()
+                ? $item->quantity
+                : $item['quantity'];
+
+            $totalProductPrice += $price * $quantity;
+        }
+
+        $totalPrice = $totalProductPrice + $shippingCost;
+
+        return response()->json([
+           'shippingCost' => number_format($shippingCost, 2,),
+           'totalPrice' => number_format($totalPrice, 2,),
+        ]);
     }
 
     public function store(Request $request)
@@ -167,5 +203,7 @@ class CheckoutController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
+
+
 }
 

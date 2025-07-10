@@ -15,6 +15,7 @@ class ShippingMethod extends Model
     protected $fillable = [
         'name',
         'description',
+        'price',
     ];
 
     public function orders(): HasMany

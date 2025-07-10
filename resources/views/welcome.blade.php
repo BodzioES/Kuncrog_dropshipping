@@ -1,6 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <div id="hero">
+        <div class="slide active" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb');">
+            <div class="overlay">
+                <h1>Nowa wiosenna kolekcja</h1>
+                <p>Pastelowe sukienki i lekkie tkaniny</p>
+                <a href="/kolekcja-wiosna">Zobacz teraz</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb');">
+            <div class="overlay">
+                <h1>Sport‑luxe w stylu 2025</h1>
+                <p>Sportowe kurtki i retro trampki</p>
+                <a href="/sport-luxe">Sprawdź</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb');">
+            <div class="overlay">
+                <h1>Przezroczyste topy i organza</h1>
+                <p>Delikatne, eteryczne fasony</p>
+                <a href="/organza">Kup teraz</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sekcja z opisem marki -->
+    <section class="text-center py-5 bg-light">
+        <div class="container">
+            <h2 class="mb-4">Kuncrog – produkty na czasie!</h2>
+            <p class="lead">
+                Nasz sklep jest stale aktualizowany oraz odświeżany o najróżniejsze nowości, które stale wchodzą na rynek. Dbamy o to, aby w naszym sklepie były ciekawe oraz funkcjonalne produkty!
+            </p>
+        </div>
+    </section>
+
+    <!-- Sekcja z popularnymi kategoriami -->
+    <section class="py-5">
+        <div class="container">
+            <h3 class="text-center mb-4">Popularne kategorie</h3>
+            <div class="row justify-content-center text-center">
+                @foreach($products_categories as $category)
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
+                        <div class="category-item">
+                            <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb" alt="{{ $category->name }}" class="img-fluid rounded-circle mb-2" style="width: 120px; height: 120px; object-fit: cover;">
+                            <div>{{ $category->name }}</div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     <div class="container pt-5">
         <div class="row">
             <div class="col-md-8 order-md-2 col-lg-9">
@@ -69,6 +121,7 @@
             </form>
         </div>
 
+        {{-- POKAZ SLAJDOW Z TYMI ZDJECIAMI ALE TO JEST NARAZIR CHWILOWE --}}
         <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -86,7 +139,15 @@
                 </div>
             </div>
         </div>
-
+        <script>
+            const slides = document.querySelectorAll('#hero .slide');
+            let current = 0;
+            setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 7000);
+        </script>
     </div>
 @endsection
 @section('javascript')
@@ -97,3 +158,4 @@
     @vite('resources/js/modal_delete.js')
     @vite('resources/js/modal_quantity.js')
 @endsection
+@vite(['resources/css/welcome.css'])
