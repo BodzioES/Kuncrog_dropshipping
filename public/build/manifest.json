@@ -1,23 +1,90 @@
 {
+  "_bootstrap.esm-CY1Kz5oP.js": {
+    "file": "assets/bootstrap.esm-CY1Kz5oP.js",
+    "name": "bootstrap.esm"
+  },
+  "_index-Dq7h7Pqt.js": {
+    "file": "assets/index-Dq7h7Pqt.js",
+    "name": "index"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-Bg2YoYZh.css",
+    "file": "assets/app-Rk_5-SXn.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
-  "resources/js/app.js": {
-    "file": "assets/app-5aoXox2F.js",
-    "name": "app",
-    "src": "resources/js/app.js",
+  "resources/css/cart.css": {
+    "file": "assets/cart-CqpfoU46.css",
+    "src": "resources/css/cart.css",
     "isEntry": true
   },
+  "resources/css/checkout.css": {
+    "file": "assets/checkout-B2oSY_rT.css",
+    "src": "resources/js/checkout.js",
+    "isEntry": true
+  },
+  "resources/css/welcome.css": {
+    "file": "assets/welcome-BupjSj2B.css",
+    "src": "resources/css/welcome.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-pgkZuY8i.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_bootstrap.esm-CY1Kz5oP.js",
+      "_index-Dq7h7Pqt.js"
+    ]
+  },
+  "resources/js/bootstrap.js": {
+    "file": "assets/bootstrap-D4GczymL.js",
+    "name": "bootstrap",
+    "src": "resources/js/bootstrap.js",
+    "isEntry": true,
+    "imports": [
+      "_bootstrap.esm-CY1Kz5oP.js",
+      "_index-Dq7h7Pqt.js"
+    ]
+  },
+  "resources/js/checkout.js": {
+    "file": "assets/checkout-BxoLJqps.js",
+    "name": "checkout",
+    "src": "resources/js/checkout.js",
+    "isEntry": true,
+    "css": [
+      "assets/checkout-B2oSY_rT.css"
+    ]
+  },
   "resources/js/delete.js": {
-    "file": "assets/delete-BbsiXP1l.js",
+    "file": "assets/delete-DKNQ2Fqg.js",
     "name": "delete",
     "src": "resources/js/delete.js",
     "isEntry": true
   },
+  "resources/js/modal_delete.js": {
+    "file": "assets/modal_delete-Bat7ER1X.js",
+    "name": "modal_delete",
+    "src": "resources/js/modal_delete.js",
+    "isEntry": true
+  },
+  "resources/js/modal_quantity.js": {
+    "file": "assets/modal_quantity-d0yVcKgT.js",
+    "name": "modal_quantity",
+    "src": "resources/js/modal_quantity.js",
+    "isEntry": true
+  },
+  "resources/js/welcome.js": {
+    "file": "assets/welcome-BnPdf5zY.js",
+    "name": "welcome",
+    "src": "resources/js/welcome.js",
+    "isEntry": true,
+    "imports": [
+      "_bootstrap.esm-CY1Kz5oP.js"
+    ]
+  },
   "resources/sass/app.scss": {
-    "file": "assets/app-Dj-g7-rV.css",
+    "file": "assets/app-BU_j8Ipo.css",
     "src": "resources/sass/app.scss",
     "isEntry": true
   }
