@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL; //to jest biblioteka do tego config co jest zaraz pod bootem
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Cart;
-use App\Models\Product;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +28,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //to jest po to aby serwer uzywal adresu www.kuncrog.pl zamiast adresu ip raspberry
+        //dzieki temu route dziala poprawnie i przekieruje na http://www.kuncrog.pl/cart/list zamiast http://192.168.1.115/cart/list
+        if (config('app.env') === 'production') {
+            URL::forceRootUrl(config('app.url'));
+        }
+
         Paginator::useBootstrap();
 
         //przekazuje to aktualna ilosc produktow w koszyku do layouts (do tej czerwonej kropki przy ikonie koszyka)
