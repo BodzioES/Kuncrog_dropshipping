@@ -3,7 +3,7 @@
 @section('content')
 
     <div id="hero">
-        <div class="slide active" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb');">
+        <div class="slide active" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image');">
             <div class="overlay">
                 <h1>Nowa wiosenna kolekcja</h1>
                 <p>Pastelowe sukienki i lekkie tkaniny</p>
@@ -44,7 +44,7 @@
                 @foreach($products_categories as $category)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
                         <div class="category-item">
-                            <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb" alt="{{ $category->name }}" class="img-fluid rounded-circle mb-2" style="width: 120px; height: 120px; object-fit: cover;">
+                            <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image" alt="{{ $category->name }}" class="img-fluid rounded-circle mb-2" style="width: 120px; height: 120px; object-fit: cover;">
                             <div>{{ $category->name }}</div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                             <div class="col-6 col-md-6 col-lg-4 mb-3">
                                 <div class="card h-100 border-0">
                                     <div class="card-img-top">
-                                        <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb" class="img-fluid" alt="photo">
+                                        <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image" class="img-fluid" alt="photo">
                                     </div>
                                     <div class="card-body text-center">
                                         <h4 class="card-title">

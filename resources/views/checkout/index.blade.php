@@ -129,7 +129,7 @@
 
                         @foreach($cartItems as $item)
                             <div class="product-item d-flex align-items-center mb-3">
-                                <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb"
+                                <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image"
                                      class="product-img me-3"
                                      alt="photo"
                                      style="width: 80px; height: auto; object-fit: contain;">

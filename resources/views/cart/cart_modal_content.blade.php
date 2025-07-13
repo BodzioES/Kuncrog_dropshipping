@@ -15,7 +15,7 @@
                 @endphp
                 <tr>
                     <td width="15%">
-                        <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb" class="img-fluid" alt="photo">
+                        <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image" class="img-fluid" alt="photo">
                     </td>
                     <td>
                         {{ $name }}
