@@ -13,24 +13,8 @@
 
 ## 🔗 Odwiedź teraz
 
-👉 Kliknij i zobacz, co przygotowaliśmy:  
+👉 Kliknij i zobacz, co przygotowałem:  
 ➡️ [**www.kuncrog.pl**](https://www.kuncrog.pl)
-
----
-
-## 🛠️ Co znajdziesz na stronie?
-
-- 💡 Ciekawe treści
-- ⚙️ Projekty
-- 🎨 Kreatywne rozwiązania
-- 🚀 I wiele więcej...
-
----
-
-## 📫 Kontakt
-
-Masz pytania, sugestie albo chcesz nawiązać współpracę?  
-Skontaktuj się z nami przez formularz na stronie lub bezpośrednio przez GitHub.
 
 ---
 
