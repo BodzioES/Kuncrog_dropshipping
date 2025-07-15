@@ -57,7 +57,7 @@ class CartController extends Controller
             $isGuest = true;
         }
 
-        //zwracanie do cart/index.blade.php danych produktu oraz czy uzytkownik jest gosciem czy tez nie
+        //zwracanie do cart/show.blade.php danych produktu oraz czy uzytkownik jest gosciem czy tez nie
         return view('cart.index', compact('cartItems', 'isGuest'));
     }
 

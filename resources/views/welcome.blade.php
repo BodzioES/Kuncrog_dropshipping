@@ -2,6 +2,7 @@
 
 @section('content')
 
+    {{-- POKAZ SLAJDOW Z TYMI ZDJECIAMI ALE TO JEST NARAZIR CHWILOWE --}}
     <div id="hero">
         <div class="slide active" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image');">
             <div class="overlay">
@@ -10,14 +11,14 @@
                 <a href="">Zobacz teraz</a>
             </div>
         </div>
-        <div class="slide" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb');">
+        <div class="slide" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image');">
             <div class="overlay">
                 <h1>Sport‑luxe w stylu 2025</h1>
                 <p>Sportowe kurtki i retro trampki</p>
                 <a href="">Sprawdź</a>
             </div>
         </div>
-        <div class="slide" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=dawid+to+zjeb');">
+        <div class="slide" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image');">
             <div class="overlay">
                 <h1>Przezroczyste topy i organza</h1>
                 <p>Delikatne, eteryczne fasony</p>
@@ -76,23 +77,25 @@
                     <div class="row" id="products-wrapper">
                         @foreach($products as $product)
                             <div class="col-6 col-md-6 col-lg-4 mb-3">
-                                <div class="card h-100 border-0">
-                                    <div class="card-img-top">
-                                        <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image" class="img-fluid" alt="photo">
+                                <a href="{{route('product_page.show',$product->id)}}" style="text-decoration: none">
+                                    <div class="card h-100 border-0">
+                                        <div class="card-img-top">
+                                            <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image" class="img-fluid" alt="photo">
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <h4 class="card-title">
+                                                {{ $product->name }}
+                                            </h4>
+                                            <h5 class="card-price small">
+                                                <i>PLN {{ $product->price }}</i>
+                                            </h5>
+                                        </div>
+                                        <div style="display: none" id="product-quantity-{{$product->id}}">{{$product->quantity}}</div> <!--TUTAJ TRZEBA Z TYM POGRZEBAC-->
+                                        <button class="btn btn-success btn-sm add-cart-button" data-id="{{ $product->id }}">
+                                            <i class="fas fa-cart-plus"></i> Dodaj do koszyka
+                                        </button>
                                     </div>
-                                    <div class="card-body text-center">
-                                        <h4 class="card-title">
-                                            {{ $product->name }}
-                                        </h4>
-                                        <h5 class="card-price small">
-                                            <i>PLN {{ $product->price }}</i>
-                                        </h5>
-                                    </div>
-                                    <div style="display: none" id="product-quantity-{{$product->id}}">{{$product->quantity}}</div> <!--TUTAJ TRZEBA Z TYM POGRZEBAC-->
-                                    <button class="btn btn-success btn-sm add-cart-button" data-id="{{ $product->id }}">
-                                        <i class="fas fa-cart-plus"></i> Dodaj do koszyka
-                                    </button>
-                                </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>
@@ -121,7 +124,7 @@
             </form>
         </div>
 
-        {{-- POKAZ SLAJDOW Z TYMI ZDJECIAMI ALE TO JEST NARAZIR CHWILOWE --}}
+
         <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -139,6 +142,7 @@
                 </div>
             </div>
         </div>
+        {{-- POKAZ SLAJDOW Z TYMI ZDJECIAMI ALE TO JEST NARAZIR CHWILOWE --}}
         <script>
             const slides = document.querySelectorAll('#hero .slide');
             let current = 0;
