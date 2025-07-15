@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductPageController;
@@ -33,6 +34,8 @@ Route::get('/product_page/{product}',[ProductPageController::class,'show'])->nam
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::middleware(['can:isAdmin'])->group(function () {
+        Route::get('admin', [AdminController::class,'index'])->name('admin.dashboard');
+
         Route::resource('products', ProductController::class);
 
         Route::get('/users/list', [UserController::class, 'index'])->name('users.index');
