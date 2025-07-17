@@ -34,7 +34,7 @@ Route::get('/product_page/{product}',[ProductPageController::class,'show'])->nam
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::middleware(['can:isAdmin'])->group(function () {
-        Route::get('admin', [AdminController::class,'index'])->name('admin.dashboard');
+        Route::get('admin/dashboard', [AdminController::class,'index'])->name('admin.dashboard');
 
         Route::resource('products', ProductController::class);
 

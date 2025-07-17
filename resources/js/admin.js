@@ -1,3 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.min.css'; //bez teego nie dzialaja style w admin/dashboard
+import 'bootstrap';
+
 import Chart from 'chart.js/auto';
 import feather from 'feather-icons';
 
