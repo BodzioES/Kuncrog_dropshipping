@@ -239,4 +239,4 @@
     </div>
     <canvas id="myChart" width="900" height="380"></canvas>
 @endsection
-
+@vite(['resources/css/admin.css'])
