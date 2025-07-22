@@ -26,6 +26,7 @@ $(function (){
                     url: '/cart/modal',
                     method: 'GET',
                     success: function (modalContent) {
+                        console.log('Modal content:', modalContent);
                         $('#cartModalBody').html(modalContent);
                         let cartModal = new bootstrap.Modal(document.getElementById('cartModal'), {});
                         cartModal.show();

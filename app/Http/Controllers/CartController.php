@@ -138,7 +138,7 @@ class CartController extends Controller
                 return response()->json(['message' => 'Zaktualizowano ilość']);
             }
         }else{
-            //tutaj jest wykonywane doladnie to samo lecz dla goscia
+            //tutaj jest wykonywane dokladnie to samo lecz dla goscia
             $cart = session()->get('cart', []);
             if(isset($cart[$id])){
                 if($action === 'increase'){
@@ -171,6 +171,34 @@ class CartController extends Controller
 
         return response()->json(['count' => $count]);
     }
+
+    //zwraca html koszyka content modal, jest to przekazywane do cart.modal_content.blade.php
+    public function getCartModalContent(): Response|JsonResponse
+    {
+        try {
+            if (Auth::check()) {
+                $cartItems = Cart::with('product')->where('id_user', Auth::id())->get();
+            } else {
+                $cart = session()->get('cart', []);
+                $cartItems = collect();
+                foreach ($cart as $productId => $details) {
+                    $product = Product::find($productId);
+                    if ($product) {
+                        $cartItems->push((object)[
+                            'id' => $product->id,
+                            'product' => $product,
+                            'quantity' => $details['quantity'] ?? 1,
+                        ]);
+                    }
+                }
+            }
+            return response(view('cart.cart_modal_content', compact('cartItems')));
+        } catch (\Throwable $e) {
+            return response()->json([
+                'message' => 'Błąd podczas ładowania koszyka: ' . $e->getMessage()
+            ], 500);
+        }
+    }
     public function destroy($id): JsonResponse
     {
         if (Auth::check()) {
@@ -194,26 +222,4 @@ class CartController extends Controller
     }
 
     //zwraca html koszyka content modal, jest to przekazywane do cart.modal_content.blade.php
-    public function getCartModalContent(): Response
-    {
-        //wyswietla koszyk w cart modal, pokazuje aktualna liste ktora jest w koszyku
-        if (Auth::check()) {
-            $cartItems = Cart::with('product')->where('id_user', Auth::id())->get();
-        } else {
-            $cart = session()->get('cart', []);
-            $cartItems = collect();
-            foreach ($cart as $productId => $details) {
-                $product = Product::find($productId);
-                if ($product) {
-                    $cartItems->push((object)[
-                        'product' => $product,
-                        'quantity' => $details['quantity'] ?? 1
-                    ]);
-                }
-            }
-        }
-        //przekazuje zmienna $cartItems  do cart_modal_content.blade.php
-        return response(view('cart.cart_modal_content', compact('cartItems')));
-    }
-
 }

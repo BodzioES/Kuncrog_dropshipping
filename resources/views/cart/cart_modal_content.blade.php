@@ -9,7 +9,7 @@
                 @php
                     $name = $item->product->name ?? $item['name'];
                     $price = $item->product->price ?? $item['price'];
-                    $quantity = $item->quantity;
+                    $quantity = $item->quantity ?? $item['quantity'];
                     $subtotal = $price * $quantity;
                     $total += $subtotal;
                 @endphp
@@ -22,9 +22,9 @@
                     </td>
                     <td class="text-center">
                         <div class="input-group">
-                            <button class="btn btn-outline-secondary btn-sm update-cart" data-id="{{ $item->product->id ?? $item['id'] }}" data-action="decrease">-</button>
+                            <button class="btn btn-outline-secondary btn-sm update-cart" data-id="{{ $item->id ?? $item['id'] }}" data-action="decrease">-</button>
                             <input type="text" class="form-control text-center" value="{{ $quantity }}" disabled style="max-width: 50px;">
-                            <button class="btn btn-outline-secondary btn-sm update-cart" data-id="{{ $item->product->id ?? $item['id'] }}" data-action="increase">+</button>
+                            <button class="btn btn-outline-secondary btn-sm update-cart" data-id="{{ $item->id ?? $item['id'] }}" data-action="increase">+</button>
                         </div>
                     </td>
                     <td>
@@ -36,7 +36,7 @@
                         {{ number_format($subtotal, 2) }} PLN
                     </td>
                     <td>
-                        <button class="btn btn-sm btn-danger delete-cart-item" data-id="{{ $item->product->id ?? $item['id'] }}">
+                        <button class="btn btn-sm btn-danger delete-cart-item" data-id="{{ $item->id ?? $item['id'] }}">
                             <i class="fas fa-trash"></i>
                         </button>
                     </td>

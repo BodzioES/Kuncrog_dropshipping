@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="checkout-page">
-        <form id="checkout-form">
+        <form id="checkout-form" method="POST" action="{{route('checkout.store')}}">
+            @csrf
             <div class="container checkout-container">
                 <!-- Lewy kontener -->
                 <div class="checkout-left">
@@ -15,28 +16,28 @@
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
                                 <label>Imię *</label>
-                                <input type="text" name="first_name" class="form-control" placeholder="Imię">
+                                <input type="text" name="address[first_name]" class="form-control" placeholder="Imię">
                             </div>
                             <div class="form-group w-50">
                                 <label>Nazwisko *</label>
-                                <input type="text" name="last_name" class="form-control" placeholder="Nazwisko">
+                                <input type="text" name="address[last_name]" class="form-control" placeholder="Nazwisko">
                             </div>
                         </div>
 
                         <div class="form-group mt-3">
                             <label>E-mail *</label>
-                            <input type="email" name="email" class="form-control" placeholder="email@example.com">
+                            <input type="email" name="address[email]" class="form-control" placeholder="email@example.com">
                         </div>
 
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
                                 <label>Ulica (ulica i numer) *</label>
-                                <input type="text" name="street_and_house_number" class="form-control" placeholder="Ulica">
+                                <input type="text" name="address[street_and_house_number]" class="form-control" placeholder="Ulica">
                             </div>
 
                             <div class="form-group w-50">
                                 <label>Numer Mieszkania (opcjonalnie)</label>
-                                <input type="text" name="apartment_number" class="form-control" placeholder="Numer mieszkania">
+                                <input type="text" name="address[apartment_number]" class="form-control" placeholder="Numer mieszkania">
                             </div>
                         </div>
 
@@ -44,18 +45,18 @@
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
                                 <label>Miasto *</label>
-                                <input type="text" name="city" class="form-control" placeholder="Miasto">
+                                <input type="text" name="address[city]" class="form-control" placeholder="Miasto">
                             </div>
 
                             <div class="form-group w-50">
                                 <label>Kod pocztowy *</label>
-                                <input type="text" name="postal_code" class="form-control" placeholder="Kod pocztowy">
+                                <input type="text" name="address[postal_code]" class="form-control" placeholder="Kod pocztowy">
                             </div>
                         </div>
 
                         <div class="form-group mt-3">
                             <label>Numer telefonu *</label>
-                            <input type="number" name="phone_number" class="form-control" placeholder="Numer telefonu">
+                            <input type="text" name="address[phone_number]" class="form-control" placeholder="Numer telefonu">
                         </div>
                     </div>
 
@@ -142,13 +143,16 @@
                                     <div class="d-flex justify-content-between mt-1">
                                         <div class="fw-bold text-muted">
                                             {{$price =  $isGuest ? $item['price'] : $item->price }} zł
+                                            <input type="hidden" name="items[{{$loop->index}}][current_price]" value="{{$price}}">
                                         </div>
                                         <div class="fw-bold">
                                             x{{$quantity =  $isGuest ? $item['quantity'] : $item->quantity }}
+                                            <input type="hidden" name="items[{{$loop->index}}][quantity]" value="{{$quantity}}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="items[{{$loop->index}}][id_product]" value="{{ $isGuest ? $item['id'] : $item->id_product }}">
                         @endforeach
                     </div>
 
@@ -200,7 +204,8 @@
 
                     <div class="d-flex justify-content-between fw-bold">
                         <span>Łącznie do zapłaty</span>
-                        <span id="totalPrice">{{number_format($totalProductPrice,2)}} zł</span>
+                        <span id="totalPrice" name="total_price">{{number_format($totalProductPrice,2)}} zł</span>
+                        <input type="hidden" name="total_price" value="{{$totalProductPrice}}">
                     </div>
                 </div>
             </div>

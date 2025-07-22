@@ -63,10 +63,10 @@ $(function (){
                 const data = await response.json();
 
                 if (data.success) {
-                    Swal.fire('Sukces!', 'Zamówienie zostało złożone', 'success')
-                        .then(() => window.location.href = '/');
+                    await Swal.fire('Sukces!', data.message, 'success');
+                    window.location.href = '/';
                 } else {
-                    await Swal.fire('Błąd!', 'Nie udało się zapisać zamówienia', 'error');
+                    await Swal.fire('Błąd!', data.message || 'Nie udało się zapisać zamówienia', 'error');
                 }
             } catch (err) {
                 console.error(err);

@@ -125,6 +125,7 @@
         </div>
 
 
+        {{-- TO JEST TEN KOSZYK KTORY SIE WYSWIETLA PO DODANIU PRODUKTU DO KOSZYKA --}}
         <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">

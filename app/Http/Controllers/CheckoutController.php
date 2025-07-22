@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Nette\Schema\ValidationException;
+use function Laravel\Prompts\alert;
 
 class CheckoutController extends Controller
 {
@@ -25,6 +27,7 @@ class CheckoutController extends Controller
                 ->map(function ($item) {
                     return (object)[
                         'id' => $item->id,
+                        'id_product' => $item->product->id,
                         'name' => $item->product->name,
                         'price' => $item->product->price,
                         'quantity' => $item->quantity,
@@ -110,100 +113,98 @@ class CheckoutController extends Controller
 
     public function store(Request $request)
     {
-        try{
-            $request->validate([
-                'street_and_house_number' => 'required|string',
-                'apartment_number' => 'required|string',
-                'city' => 'required|string',
-                'postal_code' => 'required|string',
-                'first_name' => 'required|string',
-                'last_name' => 'required|string',
-                'phone_number' => 'required|string',
-                'email' => 'required|string|email|max:255',
-                'id_shipping_method' => 'required|exists:shipping_methods,id',
-                'id_payment_method' => 'required|exists:payments_methods,id',
-            ]);
-        } catch (ValidationException $e){
-            return response()->json([
-                'success' => false,
-                'message' => 'blad walidacji',
-                'errors' => $e->errors()
-            ],422);
-        }
+        $request->validate([
+            //to sluzy do tego aby sprawdzic najpierw czy te dane spelniaja wymogi ktore sa ponizej, jesli nie to nie wykona sie zapytanie do bazy
+            'address.first_name' => 'required|string|max:255',
+            'address.last_name' => 'required|string|max:255',
+            'address.email' => 'required|email|max:255',
+            'address.street_and_house_number' => 'required|string|max:255',
+            'address.apartment_number' => 'nullable|string|max:255',
+            'address.city' => 'required|string|max:255',
+            'address.postal_code' => 'required|string|max:20',
+            'address.phone_number' => 'required|string|max:20',
 
+            'id_payment_method' => 'required|integer',
+            'id_shipping_method' => 'required|integer',
 
+            'items' => 'required|array|min:1',
+            'items.*.quantity' => 'required|integer|min:1',
+            'items.*.current_price' => 'required|numeric|min:0',
+            'items.*.id_product' => 'required|integer',
+
+        ]);
+        //Po walidacji — nigdy się nie wykona jeśli walidacja padnie!!!!!!!!!!
         DB::beginTransaction();
 
         try {
-            // 1. Zapisz adres
-            $address = Address::create([
-                'street_and_house_number' => $request->street_and_house_number,
-                'apartment_number' => $request->apartment_number,
-                'city' => $request->city,
-                'postal_code' => $request->postal_code,
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'phone_number' => $request->phone_number,
-                'email' => $request->email,
-            ]);
+            $userId = Auth::check() ? Auth::id() : null;
 
-            // 2. Pobierz produkty z koszyka
             if (Auth::check()) {
-                $cartItems = Cart::with('product')->where('id_user', Auth::id())->get();
-            } else {
-                $sessionCart = session('cart', []);
-                $cartItems = collect();
+                // ZALOGOWANY UŻYTKOWNIK
 
-                foreach ($sessionCart as $productId => $details) {
-                    $product = Product::find($productId);
-                    if ($product) {
-                        $cartItems->push((object)[
-                            'id_product' => $product->id,
-                            'price' => $product->price,
-                            'quantity' => $details['quantity'],
+                // Zapis adresu z requestu
+                $address = new Address($request->input('address'));
+                $address->save();
+
+
+                $order = new Order();
+                $order->id_user = $userId;
+                $order->id_shipping_method = $request->input('id_shipping_method');
+                $order->id_payment_method = $request->input('id_payment_method');
+                $order->total_price = $request->input('total_price');
+                $order->status = 'pending';
+                $order->id_address = $address->id;
+                $order->save();
+
+                foreach ($request->input('items') as $itemData) {
+                        OrderItem::create([
+                            'id_order' => $order->id,
+                            'id_product' => $itemData['id_product'],
+                            'current_price' => $itemData['current_price'],
+                            'quantity' => $itemData['quantity'],
                         ]);
-                    }
                 }
+
+                DB::table('cart')->where('id_user', $userId)->delete();
+
+            } else {
+
+                $cart = session()->get('cart', []);
+
+                // Zapis adresu z requestu
+                $address = new Address($request->input('address'));
+                $address->save();
+
+                $order = new Order();
+                $order->id_shipping_method = $request->input('id_shipping_method');
+                $order->id_payment_method = $request->input('id_payment_method');
+                $order->total_price = $request->input('total_price');
+                $order->status = 'pending';
+                $order->id_address = $address->id;
+                $order->save();
+
+
+                foreach ($request->input('items') as $itemData) {
+                    OrderItem::create([
+                        'id_order' => $order->id,
+                        'id_product' => $itemData['id_product'],
+                        'current_price' => $itemData['current_price'],
+                        'quantity' => $itemData['quantity'],
+                    ]);
+                }
+
+
+                session()->forget('cart');
             }
-
-            // 3. Oblicz sumę
-            $total = $cartItems->sum(fn($item) => $item->price * $item->quantity);
-
-            // 4. Stwórz zamówienie
-            $order = Order::create([
-                'id_user' => Auth::id(),
-                'id_address' => $address->id,
-                'id_shipping_method' => $request->id_shipping_method,
-                'id_payment_method' => $request->id_payment_method,
-                'total_price' => $total,
-                'status' => 'nowe',
-            ]);
-
-            // 5. Zapisz pozycje zamówienia
-            foreach ($cartItems as $item) {
-                OrderItem::create([
-                    'id_order' => $order->id,
-                    'id_product' => $item->id_product ?? $item->product->id,
-                    'quantity' => $item->quantity,
-                    'current_price' => $item->price,
-                ]);
-            }
-
-            // 6. Wyczyść koszyk
-            Auth::check()
-                ? Cart::where('id_user', Auth::id())->delete()
-                : session()->forget('cart');
 
             DB::commit();
-
-            return response()->json(['success' => true]);
+            return redirect()->back()->with('success', 'Zamówienie zostało złożone.');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+            return redirect()->back()->with('error', 'Błąd: ' . $e->getMessage());
         }
+
     }
-
-
 }
 
