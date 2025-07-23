@@ -141,7 +141,6 @@ class CheckoutController extends Controller
 
             if (Auth::check()) {
                 // ZALOGOWANY UŻYTKOWNIK
-
                 // Zapis adresu z requestu
                 $address = new Address($request->input('address'));
                 $address->save();
