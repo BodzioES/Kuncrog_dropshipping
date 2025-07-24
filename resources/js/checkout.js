@@ -43,35 +43,40 @@ $(function (){
     document.addEventListener('DOMContentLoaded',function (){
         document.querySelectorAll('input[name="shipping_method"]');
     });
+});
 
-    // kod do zlozenia zamowienia na stronie checkout
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelector('#checkout-form').addEventListener('submit', async function (e) {
-            e.preventDefault();
+// kod do zlozenia zamowienia na stronie checkout
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#checkout-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
 
-            const formData = new FormData(this);
+        const formData = new FormData(this);
 
-            try {
-                const response = await fetch('/checkout', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: formData
+        try {
+            const response = await fetch('/checkout', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json'
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                await Swal.fire({
+                    title: 'Sukces!',
+                    text: data.message,
+                    icon: 'success',
+                    confirmButtonText: '<i class="fas fa-check"></i> OK'
                 });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    await Swal.fire('Sukces!', data.message, 'success');
-                    window.location.href = '/';
-                } else {
-                    await Swal.fire('Błąd!', data.message || 'Nie udało się zapisać zamówienia', 'error');
-                }
-            } catch (err) {
-                console.error(err);
-                await Swal.fire('Błąd!', 'Wystąpił problem z serwerem', 'error');
+                window.location.href = '/';
+            } else {
+                await Swal.fire('Błąd!', data.message || 'Nie udało się zapisać zamówienia', 'error');
             }
-        });
+        } catch (err) {
+            console.error(err);
+            await Swal.fire('Błąd!', 'Wystąpił problem z serwerem', 'error');
+        }
     });
 });

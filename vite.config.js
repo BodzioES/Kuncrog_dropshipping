@@ -19,13 +19,15 @@ export default defineConfig({
                 'resources/css/cart.css',
                 'resources/css/app.css',
                 'resources/css/productPage.css',
-                'resources/js/app.js',
                 'resources/css/admin.css',
                 'resources/js/admin.js',
             ],
             refresh: true,
         }),
     ],
+    server: {
+        hmr: false, // jak to nic nie da to do usuniecia
+    },
     resolve: {
         alias: {
             $: "jQuery",

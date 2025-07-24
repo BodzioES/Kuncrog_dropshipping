@@ -197,11 +197,17 @@ class CheckoutController extends Controller
             }
 
             DB::commit();
-            return redirect()->back()->with('success', 'Zamówienie zostało złożone.');
 
+            return response()->json([
+                'success' => true,
+                'message' => 'Order placed',
+            ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Błąd: ' . $e->getMessage());
+            return response()->json([
+               'success' => false,
+                'message' => $e->getMessage(),
+            ],500);
         }
 
     }
