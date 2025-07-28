@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class OrderItem extends Model
 {
@@ -16,13 +17,13 @@ class OrderItem extends Model
         'current_price',
     ];
 
-    public function product() : HasOne
+    public function product(): BelongsTo
     {
-        return $this->hasOne(Product::class,  'id_product');
+        return $this->belongsTo(Product::class, 'id_product', 'id');
     }
 
-    public function order() : HasOne
+    public function order(): HasMany
     {
-        return $this->hasOne(Order::class,  'id_order');
+        return $this->hasMany(Order::class,  'id_order');
     }
 }

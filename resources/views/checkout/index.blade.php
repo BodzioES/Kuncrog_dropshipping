@@ -152,7 +152,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="items[{{$loop->index}}][id_product]" value="{{ $isGuest ? $item['id'] : $item->id_product }}">
+                            <input type="hidden" name="items[{{$loop->index}}][id_product]" value="{{ $isGuest ? $item['id_product'] : $item->id_product }}">
                         @endforeach
                     </div>
 

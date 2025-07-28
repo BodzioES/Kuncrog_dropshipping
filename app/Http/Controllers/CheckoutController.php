@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmationMail;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Order;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Nette\Schema\ValidationException;
 use function Laravel\Prompts\alert;
 
@@ -44,6 +46,7 @@ class CheckoutController extends Controller
                 if ($product && is_array($details)) {
                     $cartItems[] = [
                         'id' => $product->id,
+                        'id_product' => $product->id,
                         'name' => $product->name,
                         'price' => $product->price,
                         'quantity' => $details['quantity'] ?? 1,
@@ -191,12 +194,14 @@ class CheckoutController extends Controller
                         'quantity' => $itemData['quantity'],
                     ]);
                 }
-
-
                 session()->forget('cart');
             }
 
             DB::commit();
+
+            //wysylanie informacji z tabeli order i order_item do OrderConfirmationMail.php
+            $order->load('items.product', 'paymentMethod', 'shippingMethod');
+            Mail::to($address->email)->send(new OrderConfirmationMail($order));
 
             return response()->json([
                 'success' => true,
