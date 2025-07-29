@@ -1,5 +1,7 @@
 $(function () {
     $('.delete').click(function () {
+        const id = $(this).data("id");
+        const baseUrl = document.querySelector('[data-url]').getAttribute('data-url');
         Swal.fire({
             title: "Czy na pewno chcesz usunąć rekord?",
             icon: "warning",
@@ -11,7 +13,7 @@ $(function () {
             if (result.isConfirmed) {
                 $.ajax({
                     method: "DELETE",
-                    url: document.querySelector('script[data-url]').getAttribute('data-url') + '/' + $(this).data("id"),
+                    url: baseUrl + '/' + id,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }

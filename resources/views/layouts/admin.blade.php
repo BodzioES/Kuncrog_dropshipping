@@ -5,7 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Dashboard')</title>
 
-    @vite(['resources/css/admin.css', 'resources/js/admin.js'])
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    @vite([
+    'resources/css/admin.css',
+    'resources/js/admin.js',
+    'resources/js/app.js',
+     'resources/js/delete.js',
+    ])
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -29,13 +39,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('products.index')}}">
                             <span data-feather="shopping-cart"></span>
                             Products
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('admin.users.index')}}">
                             <span data-feather="users"></span>
                             Customers
                         </a>
@@ -94,6 +104,9 @@
         </main>
     </div>
 </div>
-
+<script type="text/javascript">
+    @yield('javascript')
+</script>
+@yield('js-files')
 </body>
 </html>

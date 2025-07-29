@@ -30,7 +30,7 @@ class Order extends Model
 
     public function address(): BelongsTo
     {
-        return $this->belongsTo(Address::class, 'id_address');
+        return $this->belongsTo(Address::class, 'id_address','id_address');
     }
 
     public function items(): HasMany

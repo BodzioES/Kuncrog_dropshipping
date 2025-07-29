@@ -36,10 +36,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware(['can:isAdmin'])->group(function () {
         Route::get('admin/dashboard', [AdminController::class,'index'])->name('admin.dashboard');
 
-        Route::resource('products', ProductController::class);
+        Route::resource('admin/dashboard/products', ProductController::class);
 
-        Route::get('/users/list', [UserController::class, 'index'])->name('users.index');
-        Route::delete('/users/{user}', [UserController::class, 'destroy']);
+        Route::get('admin/dashboard/users/list', [UserController::class, 'index'])->name('admin.users.index');
+        Route::delete('admin/dashboard/users/{user}', [UserController::class, 'destroy']);
     });
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');

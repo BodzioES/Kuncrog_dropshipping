@@ -155,7 +155,7 @@ class CheckoutController extends Controller
                 $order->id_payment_method = $request->input('id_payment_method');
                 $order->total_price = $request->input('total_price');
                 $order->status = 'pending';
-                $order->id_address = $address->id;
+                $order->id_address = $address->id_address;
                 $order->save();
 
                 foreach ($request->input('items') as $itemData) {
@@ -182,7 +182,7 @@ class CheckoutController extends Controller
                 $order->id_payment_method = $request->input('id_payment_method');
                 $order->total_price = $request->input('total_price');
                 $order->status = 'pending';
-                $order->id_address = $address->id;
+                $order->id_address = $address->id_address;
                 $order->save();
 
 
@@ -200,7 +200,7 @@ class CheckoutController extends Controller
             DB::commit();
 
             //wysylanie informacji z tabeli order i order_item do OrderConfirmationMail.php
-            $order->load('items.product', 'paymentMethod', 'shippingMethod');
+            $order->load('items.product', 'paymentMethod', 'shippingMethod','address');
             Mail::to($address->email)->send(new OrderConfirmationMail($order));
 
             return response()->json([

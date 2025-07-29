@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Address extends Model
 {
     protected $table = 'addresses';
+    protected $primaryKey = 'id_address';
 
     protected $fillable = [
       'street_and_house_number',
@@ -21,6 +22,6 @@ class Address extends Model
     ];
     public function orders() : HasMany
     {
-        return $this->hasMany(Order::class, 'id_address');
+        return $this->hasMany(Order::class, 'id_address','id_address');
     }
 }

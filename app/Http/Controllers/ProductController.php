@@ -19,8 +19,8 @@ class ProductController extends Controller
      */
     public function index(): View
     {
-        return view('products.index',[
-            'products' => Product::paginate(3)
+        return view('admin.products.index',[
+            'products' => Product::paginate(10)
         ]);
     }
 
@@ -31,7 +31,7 @@ class ProductController extends Controller
      */
     public function create(): View
     {
-        return view('products.create',[
+        return view('admin.products.create',[
             'categories' => ProductCategory::all()
         ]);
     }
@@ -49,7 +49,7 @@ class ProductController extends Controller
             $product->image_url = $request->file('image')->store('products');
         }
         $product->save();
-        return redirect()->route('products.index')->with('status',__('shop.product.status.store.success'));
+        return redirect()->route('admin.products.index')->with('status',__('shop.product.status.store.success'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ProductController extends Controller
      */
     public function show(Product $product): View
     {
-        return view('products.show',[
+        return view('admin.products.show',[
             'product' => $product
         ]);
     }
@@ -73,7 +73,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product): View
     {
-        return view('products.edit',[
+        return view('admin.products.edit',[
             'product' => $product
         ],
         [
@@ -95,7 +95,7 @@ class ProductController extends Controller
             $product->image_url = $request->file('image')->store('products');
         }
         $product->save();
-        return redirect()->route('products.index')->with('status',__('shop.product.status.update.success'));
+        return redirect()->route('admin.products.index')->with('status',__('shop.product.status.update.success'));
     }
 
     /**

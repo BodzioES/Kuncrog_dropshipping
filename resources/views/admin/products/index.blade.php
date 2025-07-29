@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+    <div class="container" data-url="{{ route('products.index') }}">
     <div class="container">
         @include('helpers.flash-messages')
         <div class="row">
@@ -40,7 +41,7 @@
                             <a href="{{route('products.edit',$product->id)}}">
                                 <button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
                             </a>
-                            <button class="btn btn-danger btn-sm delete" data-id="{{$product->id}}"><i class="fa-solid fa-trash"></i></button>
+                            <button class="btn btn-danger btn-sm delete" data-id="{{$product->id}}" data-url="{{ route('products.index') }}"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 @endforeach
@@ -50,8 +51,10 @@
         </div>
     </div>
 @endsection
-<script type="text/javascript" data-url="{{ url('products') }}">
-    @yield('javascript')
-</script>
-@vite('resources/js/delete.js')
+
+@section('scripts')
+    <script data-url="{{ route('products.index') }}"></script>
+    @vite('resources/js/delete.js')
+@endsection
+
 
