@@ -49,7 +49,7 @@ class ProductController extends Controller
             $product->image_url = $request->file('image')->store('products');
         }
         $product->save();
-        return redirect()->route('admin.products.index')->with('status',__('shop.product.status.store.success'));
+        return redirect()->route('products.index')->with('status',__('shop.product.status.store.success'));
     }
 
     /**
@@ -95,7 +95,7 @@ class ProductController extends Controller
             $product->image_url = $request->file('image')->store('products');
         }
         $product->save();
-        return redirect()->route('admin.products.index')->with('status',__('shop.product.status.update.success'));
+        return redirect()->route('products.index')->with('status',__('shop.product.status.update.success'));
     }
 
     /**

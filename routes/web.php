@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductPageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,12 +35,15 @@ Route::get('/product_page/{product}',[ProductPageController::class,'show'])->nam
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::middleware(['can:isAdmin'])->group(function () {
+
         Route::get('admin/dashboard', [AdminController::class,'index'])->name('admin.dashboard');
 
         Route::resource('admin/dashboard/products', ProductController::class);
 
         Route::get('admin/dashboard/users/list', [UserController::class, 'index'])->name('admin.users.index');
-        Route::delete('admin/dashboard/users/{user}', [UserController::class, 'destroy']);
+        Route::delete('admin/dashboard/users/list/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
+        Route::get('admin/dashboard/orders/list', [OrderController::class, 'index'])->name('admin.orders.index');
     });
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');

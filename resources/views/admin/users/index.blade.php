@@ -28,7 +28,7 @@
                     <td>{{$user->surname}}</td>
                     <td>{{$user->phone_number}}</td>
                     <td>
-                        <button class="btn btn-danger btn-sm delete" data-id="{{$user->id}}">
+                        <button class="btn btn-danger btn-sm delete" data-id="{{$user->id}}" data-url="{{ route('admin.users.index') }}">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </td>
@@ -39,8 +39,8 @@
         {{ $users->links() }}
     </div>
 @endsection
-<script type="text/javascript" data-url="{{ url('users') }}">
-    @yield('javascript')
-</script>
-@vite('resources/js/delete.js')
+@section('scripts')
+    <script data-url="{{ route('admin.users.index') }}"></script>
+    @vite('resources/js/delete.js')
+@endsection
 

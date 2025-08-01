@@ -10,6 +10,7 @@
 
     @vite([
     'resources/css/admin.css',
+    'resources/css/order.css',
     'resources/js/admin.js',
     'resources/js/app.js',
      'resources/js/delete.js',
@@ -27,13 +28,13 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="{{route('admin.dashboard')}}">
                             <span data-feather="home"></span>
                             Dashboard <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('admin.orders.index')}}">
                             <span data-feather="file"></span>
                             Orders
                         </a>

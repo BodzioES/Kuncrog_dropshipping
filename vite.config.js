@@ -21,6 +21,7 @@ export default defineConfig({
                 'resources/css/productPage.css',
                 'resources/css/admin.css',
                 'resources/js/admin.js',
+                'resources/css/order.css',
             ],
             refresh: true,
         }),
