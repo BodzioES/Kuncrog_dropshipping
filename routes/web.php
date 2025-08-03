@@ -44,6 +44,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('admin/dashboard/users/list/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
         Route::get('admin/dashboard/orders/list', [OrderController::class, 'index'])->name('admin.orders.index');
+        Route::get('admin/dashboard/orders/list/show/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
+        Route::get('admin/dashboard/orders/list/edit/{order}', [OrderController::class, 'edit'])->name('admin.orders.edit');
+        Route::get('admin/dashboard/orders/list/edit/{order}/invoice', [OrderController::class, 'invoice'])->name('admin.orders.invoice');
+
     });
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
