@@ -8,9 +8,33 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index(){
-        $orders = Order::with('address','items.product','paymentMethod','shippingMethod')
-            ->get();
+    public function index(Request $request){
+        $query = Order::with('address','items.product','paymentMethod','shippingMethod');
+
+        if ($status = $request->query('status')){
+            $query->where('status', $status);
+        }
+
+        if ($id = $request->query('id')){
+            $query->where('id', $id);
+        }
+
+        if ($date_from = $request->query('created_at')){
+            $query->whereDate('created_at', $date_from);
+        }
+
+        if ($fullName = $request->query('full_name')){
+            $fullName = trim($fullName);
+            $query->whereHas('address',function($q) use ($fullName){
+                $q->whereRaw("CONCAT(first_name, ' ', last_name) like '%{$fullName}%'")
+                ->orWhereRaw("CONCAT(last_name, ' ', first_name) like '%{$fullName}%'");
+            });
+        }
+
+        $orders = $query->orderBy('created_at', 'desc')
+            ->paginate(10)
+            ->withQueryString();
+
         return view('admin.orders.index',compact('orders'));
     }
 
