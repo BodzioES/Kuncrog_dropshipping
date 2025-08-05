@@ -80,7 +80,7 @@
                         </td>
                         <td colspan="1" class="text-center text-muted py-4">
 
-                            <a href="{{route('admin.orders.show',$order->id)}}">
+                            <a href="{{route('admin.orders.show',$order)}}">
                                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
                             </a>
 

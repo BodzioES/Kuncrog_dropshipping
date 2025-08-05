@@ -39,6 +39,7 @@ class OrderController extends Controller
     }
 
     public function show(Order $order){
+        $order->load('address','items.product','paymentMethod','shippingMethod');
         return view('admin.orders.show',compact('order'));
     }
 
