@@ -47,6 +47,12 @@ class OrderController extends Controller
         return view('admin.orders.edit',compact('order'));
     }
 
+    public function update(Request $request, Order $order){
+        $order->fill($request->validated()->save());
+
+        return redirect()->route('admin.orders.index')->with('success','Order status has been updated');
+    }
+
     public function invoice(Order $order){
         $order->load('address','items.product','paymentMethod','shippingMethod');
 

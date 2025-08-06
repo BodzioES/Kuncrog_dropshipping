@@ -37,28 +37,20 @@
             border-bottom: 1px solid #ccc;
             padding-bottom: 4px;
         }
-        .details, .items {
+        .details, .items, .totals {
             width: 100%;
             border-collapse: collapse;
         }
         .details td {
             padding: 4px 6px;
         }
-        .items th, .items td {
+        .items th, .items td, .totals td {
             border: 1px solid #999;
             padding: 6px 8px;
             text-align: left;
         }
         .items th {
             background: #f2f2f2;
-        }
-        .totals {
-            margin-top: 10px;
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .totals td {
-            padding: 6px 8px;
         }
         .text-right {
             text-align: right;
@@ -79,7 +71,7 @@
         <div class="logo">Kuncrog</div>
         <div class="invoice-meta">
             <div><strong>Numer zamówienia:</strong> {{$order->id}}#</div>
-            <div><strong>Data:</strong> </div>
+            <div><strong>Data:</strong> {{$order->created_at}} </div>
         </div>
     </div>
 
@@ -88,13 +80,16 @@
             <tr>
                 <td style="vertical-align: top; width: 50%;">
                     <strong>Do:</strong><br>
-
+                    {{$order->address->first_name}} {{$order->address->last_name}}<br>
+                    {{$order->address->street_and_house_number}}<br>
+                    {{$order->address->email}}<br>
+                    {{$order->address->phone_number}}
                 </td>
                 <td style="vertical-align: top; width: 50%;">
                     <strong>Płatność:</strong><br>
-                    <br>
+                    {{$order->paymentMethod->name}}<br><br>
                     <strong>Dostawa:</strong><br>
-
+                    {{$order->shippingMethod->name}}
                 </td>
             </tr>
         </table>
@@ -112,7 +107,17 @@
             </tr>
             </thead>
             <tbody>
-
+            @foreach($order->items as $item)
+                @php
+                    $totalProductPrice = $item->quantity * $item->current_price;
+                @endphp
+                <tr>
+                    <td>{{ $item->product->name }}</td>
+                    <td>{{ $item->quantity }}</td>
+                    <td>{{ number_format($item->current_price, 2, ',', ' ') }} zł</td>
+                    <td>{{ number_format($totalProductPrice, 2, ',', ' ') }} zł</td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
@@ -120,16 +125,22 @@
     <div class="section">
         <table class="totals">
             <tr>
-                <td style="width: 70%;"><strong>Razem produkty:</strong></td>
-                <td class="text-right">} zł</td>
+                <td colspan="3" class="text-right"><strong>Razem za produkty:</strong></td>
+                <td>
+                    <strong>
+                        {{ number_format($order->items->sum(function($item) {
+                            return $item->quantity * $item->current_price;
+                        }), 2, ',', ' ') }} zł
+                    </strong>
+                </td>
             </tr>
             <tr>
-                <td><strong>Dostawa:</strong></td>
-                <td class="text-right"> zł</td>
+                <td colspan="3" class="text-right"><strong>Dostawa:</strong></td>
+                <td class="text-right">{{ number_format($order->shippingMethod->price, 2, ',', ' ') }} zł</td>
             </tr>
             <tr style="font-size: 14px;">
-                <td><strong>Łącznie:</strong></td>
-                <td class="text-right"><strong>{ zł</strong></td>
+                <td colspan="3" class="text-right"><strong>Łącznie:</strong></td>
+                <td class="text-right"><strong>{{ number_format($order->total_price + $order->shippingMethod->price, 2, ',',' ') }} zł</strong></td>
             </tr>
         </table>
     </div>

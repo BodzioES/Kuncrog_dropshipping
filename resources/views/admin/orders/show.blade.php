@@ -53,7 +53,6 @@
                     <tbody>
                     @foreach($order->items as $products)
                         @php
-                            $totalPrice = 0;
                             $quantity = $products->quantity;
                             $price = $products->current_price;
                             $totalPrice = $quantity * $price;
@@ -75,7 +74,9 @@
         <a href="{{route('admin.orders.index')}}">
             <button class="btn btn-secondary">Powrót</button>
         </a>
-
+        <a href="{{route('admin.orders.invoice',$order)}}">
+            <button class="btn btn-warning">Pobierz</button>
+        </a>
     </div>
 
 @endsection
