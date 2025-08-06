@@ -15,13 +15,22 @@
                     <input type="number" min="1" class="form-control @error('id') is-invalid @enderror" name="id" value="{{$order->id}}" required autocomplete="id">
                 </div>
                 <div class="col-md-3">
-                    <strong>Status:</strong> {{$order->status}}
+                    <strong>Status:</strong>
+                    <select id="status" class="form-control @error('status') is-invalid @enderror" name="status">
+                        @foreach($statuses as $status)
+                            <option value="{{$status}}" {{ $order->status === $status ? 'selected' : '' }}>
+                                {{ucfirst($status)}}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-md-3">
-                    <strong>Łączna kwota:</strong> {{$order->total_price}} zł
+                    <strong>Łączna kwota:</strong>
+                    <input type="number" min="1" class="form-control @error('total_price') is-invalid @enderror" name="total_price" value="{{$order->total_price}}" required autocomplete="total_price">
                 </div>
                 <div class="col-md-3">
-                    <strong>Data złożenia:</strong> {{$order->created_at}}
+                    <strong>Data złożenia:</strong>
+                    <input type="date"  class="form-control @error('created_at') is-invalid @enderror" name="created_at" value="{{$order->created_at}}" required autocomplete="created_at">
                 </div>
                 <div class="col-md-3">
                     <strong>Metoda płatności:</strong> {{$order->paymentMethod->name}}
