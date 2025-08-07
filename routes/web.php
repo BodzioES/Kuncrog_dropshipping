@@ -46,6 +46,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('admin/dashboard/orders/list', [OrderController::class, 'index'])->name('admin.orders.index');
         Route::get('admin/dashboard/orders/list/show/{order}', [OrderController::class, 'show'])->name('admin.orders.show');
         Route::get('admin/dashboard/orders/list/edit/{order}', [OrderController::class, 'edit'])->name('admin.orders.edit');
+        Route::put('admin/dashboard/orders/list/edit/{order}', [OrderController::class, 'update'])->name('admin.orders.update');
         Route::get('admin/dashboard/orders/list/edit/{order}/invoice', [OrderController::class, 'invoice'])->name('admin.orders.invoice');
 
     });

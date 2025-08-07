@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\PaymentMethod;
+use App\Models\ShippingMethod;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -44,12 +47,38 @@ class OrderController extends Controller
     }
 
     public function edit(Order $order){
+        $shippingMethods = ShippingMethod::all();
+        $paymentMethods = PaymentMethod::all();
         $statuses = ['pending','shipped','delivered','cancelled'];
-        return view('admin.orders.edit',compact('order','statuses'));
+        return view('admin.orders.edit',compact('order','statuses','shippingMethods','paymentMethods'));
     }
 
-    public function update(Request $request, Order $order){
-        $order->fill($request->validated()->save());
+    public function update(Request $request, Order $order): RedirectResponse
+    {
+        $validated = $request->validate([
+            'order.id' => 'required|integer',
+            'order.status' => 'required|in:pending,shipped,delivered,cancelled',
+            'order.id_payment_method' => 'required|integer',
+            'order.id_shipping_method' => 'required|integer',
+            'order.total_price' => 'required|numeric',
+            'order.created_at' => 'required|date',
+
+            'address.first_name' => 'required|string',
+            'address.last_name' => 'required|string',
+            'address.street_and_house_number' => 'required|string',
+            'address.apartment_number' => 'nullable|string|max:255',
+            'address.postal_code' => 'required|string|max:255',
+            'address.city' => 'required|string|max:255',
+        ]);
+
+        // 1. Nadpis danych zamówienia
+        $order->fill($validated['order']);
+        $order->save();
+
+        // 2. Nadpis danych adresowe
+        if (isset($validated['address'])){
+            $order->address->update($validated['address']);
+        }
 
         return redirect()->route('admin.orders.index')->with('success','Order status has been updated');
     }
