@@ -4,6 +4,8 @@
 
     <div class="container my-5">
         <div class="cart-body">
+            {{-- FORMULARZ DO EDYCJI DANYCH Z ZAMOWIENIA --}}
+            {{-- WYSYLA DANE Z FORMULARZA DO CONTROLLERA KTORY MA FUNKCJE UPDATE, JEST PRZEKAZYWANY ID ZAMOWIENIA (TO WYSTARCZA) --}}
             <form method="POST" action="{{ route('admin.orders.update', $order->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -23,9 +25,10 @@
                         <div class="col-md-3">
                             <strong>Status:</strong>
                             <select id="status" class="form-control @error('order.status') is-invalid @enderror" name="order[status]">
-                                @foreach($statuses as $status)
+                                {{-- STWORZONA ZMIENNA TABLICOWA ZE STATUSAMI Z KONTROLERA  --}}
+                                @foreach($statuses as $status) {{-- Z TABLICY ROBIMY OSOBNY OBIEKT --}}
                                     <option value="{{$status}}" {{ $order->status === $status ? 'selected' : '' }}>
-                                        {{ucfirst($status)}}
+                                        {{ucfirst($status)}} {{-- POROWNUJEMY STATUS Z ZAMOWIENIA DO STATUSU Z TABLICY, JESLI JEST INNY TO GO ZAMIENIA JESLI NIE TO NIC NIE ROBI --}}
                                     </option>
                                 @endforeach
                             </select>
@@ -37,16 +40,17 @@
                         </div>
         <!------------------------------------------------------------------------------------------------------------------------------->
                         <div class="col-md-3">
-                            <strong>Data złożenia:</strong>
+                            <strong>Data złożenia:</strong>                                                                                             {{-- ZMIENIA TO FORMAT DATY --}}
                             <input type="date"  class="form-control @error('order.created_at') is-invalid @enderror" name="order[created_at]" value="{{ \Carbon\Carbon::parse($order->created_at)->format('Y-m-d') }}" required autocomplete="created_at">
                         </div>
         <!------------------------------------------------------------------------------------------------------------------------------->
                         <div class="col-md-3">
                             <strong>Metoda płatności:</strong>
                             <select id="id_payment_method" class="form-control @error('order.id_payment_method') is-invalid @enderror" name="order[id_payment_method]">
-                                @foreach($paymentMethods as $paymentMethod)
+                                {{-- ZMIENNA KTORA PRZYPISANA MA TABELE PAYMENTMETHOD Z RELACJI "paymentMethod Z TABELI ORDERS --}}
+                                @foreach($paymentMethods as $paymentMethod){{-- SPRADZANE JEST CZY ZMIENNA ZOSTALA WYBRANA JESLI NIE TO ZASTEPUJA TA STARA --}}
                                     <option value="{{$paymentMethod->id}}" {{ $order->id_payment_method === $paymentMethod->id ? 'selected' : '' }}>
-                                        {{ucfirst($paymentMethod->name)}}
+                                        {{-- FUNKCJA KTORA ZAMIENIA PIERWSZY ZNAK NA DUZA LITERKE --}} {{ucfirst($paymentMethod->name)}}
                                     </option>
                                 @endforeach
                             </select>
@@ -58,7 +62,8 @@
                         <div class="col-md-3">
                             <strong>Metoda dostawy:</strong>
                             <select id="id_shipping_method" class="form-control @error('order.id_shipping_method') is-invalid @enderror" name="order[id_shipping_method]">
-                            @foreach($shippingMethods as $shippingMethod)
+                                {{-- ZMIENNA KTORA PRZYPISANA MA TABELE SHIPPINGMETHOD Z RELACJI "shippingtMethod Z TABELI ORDERS --}}
+                            @foreach($shippingMethods as $shippingMethod){{-- ANALOGICZNIE JAK POWYZEJ --}}
                                 <option value="{{$shippingMethod->id}}" {{ $order->id_shipping_method === $shippingMethod->id ? 'selected' : '' }}>
                                     {{ucfirst($shippingMethod->name)}}
                                 </option>
@@ -77,6 +82,8 @@
                         <strong>Dane adresowe</strong>
                     </div>
                     <div class="card-body row">
+
+                        {{-- name="" jest uzywany w kontrolerze do validated, value wyswietla biezaca wartosc w okienku edytacyjnym --}}
 
                         <div class="col-md-4">
                             <strong>Imię:</strong>
@@ -137,6 +144,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {{-- relacja orders->order_items gdzie pobieramy kazdy produkt z zamowienia i zapisujemy go osobno jako $products --}}
                             @foreach($order->items as $products)
                                 @php
                                     $quantity = $products->quantity;
@@ -144,6 +152,8 @@
                                     $totalPrice = $quantity * $price;
                                 @endphp
                                 <tr>
+                                    {{-- uzywamy $products->product->name bo nazwa nie znajduje sie bezposrednio w tabeli order_items wiec musimy
+                                      relacja dostac sie do tabeli products i z tamtad wziasc nazwe produktu--}}
                                     <td>{{$products->product->name}}</td>
                                     <td>x{{$products->quantity}}</td>
                                     <td>{{$products->current_price}} zł</td>

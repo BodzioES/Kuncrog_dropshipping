@@ -64,7 +64,7 @@
                             {{$order->created_at}}
                         </td>
                         <td colspan="1" class="text-center text-muted py-4">
-                            {{$order->id}}
+                            #{{$order->id}}
                         </td>
                         <td colspan="1" class="text-center text-muted py-4">
                             {{$order->address->first_name}} {{$order->address->last_name}}
@@ -73,7 +73,7 @@
                             {{$order->paymentMethod->name}}
                         </td>
                         <td colspan="1" class="text-center text-muted py-4">
-                            {{$order->total_price}}
+                            {{$order->total_price}} zł
                         </td>
                         <td colspan="1" class="text-center text-muted py-4">
                             {{$order->status}}
@@ -87,8 +87,6 @@
                             <a href="{{route('admin.orders.edit',$order->id)}}">
                                 <button><i class="fa-solid fa-pen-to-square"></i></button>
                             </a>
-
-                            <button class="delete" data-id="{{$order->id}}" data-url="{{route('admin.orders.index')}}"><i class="fa-solid fa-trash"></i></button>
 
                             <a href="{{route('admin.orders.invoice',$order)}}">
                                 <button><i class="fa-solid fa-file-pdf"></i></button>
