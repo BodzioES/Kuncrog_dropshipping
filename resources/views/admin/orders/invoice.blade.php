@@ -107,11 +107,13 @@
             </tr>
             </thead>
             <tbody>
+            <!-- dobieranie sie do tabeli order_items aby wyswietlic informacje o produktach -->
             @foreach($order->items as $item)
                 @php
                     $totalProductPrice = $item->quantity * $item->current_price;
                 @endphp
                 <tr>
+                    <!-- ten product to wejscie w relacje z tabela products aby moc wpisac nazwe produktu  -->
                     <td>{{ $item->product->name }}</td>
                     <td>{{ $item->quantity }}</td>
                     <td>{{ number_format($item->current_price, 2, ',', ' ') }} zł</td>
@@ -128,6 +130,8 @@
                 <td colspan="3" class="text-right"><strong>Razem za produkty:</strong></td>
                 <td>
                     <strong>
+                        <!-- tworzona jest funkcja ktora zlicza i sumuje osobno kazdy produkt ktory jest w danym zamowieniu
+                          funkcja przeszukuje tabele abby odnalezc wszystkie produkty ktore sa w zamowieniu, sumuje je i mnozy przez ilosc-->
                         {{ number_format($order->items->sum(function($item) {
                             return $item->quantity * $item->current_price;
                         }), 2, ',', ' ') }} zł

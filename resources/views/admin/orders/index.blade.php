@@ -11,6 +11,8 @@
                     <label for="status" class="form-label small mb-1">Status</label>
                     <select name="status" id="status" class="form-select form-select-sm">
                         <option value="">Wszystkie</option>
+                        <!-- request() sluzy do pobierania obecnego zapytania HTTP, w tym przypadku POST
+                         po prostu sprawdza czy dana opcja jest zaznaczona a 'status' jest przekazywany do kontrolera -->
                         <option value="pending" {{request('status') === 'pending' ? 'selected' : ''}}>W realizacji</option>
                         <option value="shipped" {{request('status') === 'shipped' ? 'selected' : ''}}>Zrealizowane</option>
                         <option value="delivered" {{request('status') === 'delivered' ? 'selected' : ''}}>Dostarczone</option>
@@ -18,6 +20,8 @@
                     </select>
                 </div>
 
+                <!-- id, created_at itd, sa przekazywane do kontrolera za pomoca request do zmiennej w php przypisujemy te dane za pomoca
+                 $request (czyli to co wysylamy formularzem) ->query (czyli nasza kwerenda) i w nawiasach nazwa tego requesta, czyli id, full_name itd-->
                 <div class="col-auto">
                     <label for="id" class="form-label small mb-1">Numer zamówienia</label>
                     <input type="number" name="id" id="id" value="{{request('id')}}" class="form-control form-control-sm" placeholder="Numer zamówienia">
@@ -37,6 +41,7 @@
                     <button type="submit" class="btn btn-sm btn-primary">Filtruj</button>
                 </div>
 
+                <!-- jesli dana opcja filtracji jest zaznaczona to po przeladowaniu strony wyswietla nam sie przycisk ktory moze wyczyscic te filtry -->
                 @if(request()->filled('status') || request()->filled('id') || request()->filled('created_at') || request()->filled('full_name'))
                     <div class="col-auto">
                         <a href="{{route('admin.orders.index')}}" class="btn btn-sm btn-outline-secondary">Wyczyść</a>
@@ -58,6 +63,7 @@
                 </tr>
                 </thead>
                 <tbody>
+                <!-- wyswietlenie z tabeli $order oraz tabel powiazanych z ta tabela informacji o zamowieniach -->
                 @forelse($orders as $order)
                     <tr>
                         <td colspan="1" class="text-center text-muted py-4">
@@ -100,6 +106,8 @@
                     </td>
                 @endforelse
                 </tbody>
+                <!-- generuje HTML z linkami do kolejnych stron wyników (np. „Poprzednia”, „1”, „2”, „Następna”)
+                wstawiajac to automatycznie wyswietlamy kontrolki paginacji-->
                 {{$orders->links()}}
             </table>
         </div>

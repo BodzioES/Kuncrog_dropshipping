@@ -19,11 +19,14 @@ class OrderItem extends Model
 
     public function product(): BelongsTo
     {
+        # to id_product oraz id jest dodane poniewaz to sa nietypowe nazwy kolumna w tabeli ktore laravel sam by nie widzial
+        # wiec trzeba je napisac aby doprecyzowac
         return $this->belongsTo(Product::class, 'id_product', 'id');
     }
 
     public function order(): HasMany
     {
+        # tutaj tak samo, laravel szuka z automatu "order_id" a nie odwrotnie
         return $this->hasMany(Order::class,  'id_order');
     }
 }

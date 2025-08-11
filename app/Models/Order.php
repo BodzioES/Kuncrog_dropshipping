@@ -33,6 +33,7 @@ class Order extends Model
         return $this->belongsTo(Address::class, 'id_address','id_address');
     }
 
+    # zeby nie bylo ten items() to jest order_items ;D
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class, 'id_order');

@@ -40,6 +40,7 @@ class OrderController extends Controller
             });
         }
 
+        # wyswietlenie wszystkich zamowien jest sortowane przez date (od najnowszych do najstarszych)
         $orders = $query->orderBy('created_at', 'desc')
             ->paginate(10)
             ->withQueryString();

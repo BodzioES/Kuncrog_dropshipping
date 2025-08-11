@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ManageProductRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductImage;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -46,7 +47,16 @@ class ProductController extends Controller
     {
         $product = new Product($request->validated());
         if ($request->hasFile('image')) {
-            $product->image_url = $request->file('image')->store('products');
+            foreach ($request->file('image') as $image) {
+                $path = $image->store('public/products');
+                $filename = basename($path);
+
+                ProductImage::create([
+                    'id_product' => $product->id,
+                    'image_url' => $filename,
+                    'is_main' => $image === 0,
+                ]);
+            }
         }
         $product->save();
         return redirect()->route('products.index')->with('status',__('shop.product.status.store.success'));
@@ -92,7 +102,16 @@ class ProductController extends Controller
     {
         $product->fill($request->validated());
         if ($request->hasFile('image')) {
-            $product->image_url = $request->file('image')->store('products');
+            foreach ($request->file('image') as $image) {
+                $path = $image->store('public/products');
+                $filename = basename($path);
+
+                ProductImage::create([
+                    'id_product' => $product->id,
+                    'image_url' => $filename,
+                    'is_main' =>  false,
+                ]);
+            }
         }
         $product->save();
         return redirect()->route('products.index')->with('status',__('shop.product.status.update.success'));
