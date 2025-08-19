@@ -43,11 +43,11 @@ class Product extends Model
 
     public function images(): HasMany
     {
-        return $this->hasMany(ProductImage::class,'id_products')->orderBy('created_at','DESC');
+        return $this->hasMany(ProductImage::class,'id_product')->orderBy('created_at','DESC');
     }
 
     public function mainImage(): HasOne
     {
-        return $this->hasOne(ProductImage::class,'id_products')->where('main',true);
+        return $this->hasOne(ProductImage::class,'id_product')->where('main',true);
     }
 }

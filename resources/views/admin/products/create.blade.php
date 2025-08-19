@@ -90,7 +90,7 @@
                                 <label for="image" class="col-md-4 col-form-label text-md-end">{{__('shop.product.fields.image')}}</label>
 
                                 <div class="col-md-6">
-                                    <input id="image" multiple type="file"  class="form-control @error('image') is-invalid @enderror" name="image">
+                                    <input id="image" multiple type="file" class="form-control @error('image') is-invalid @enderror" name="image[]">
 
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">
@@ -113,4 +113,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('image').addEventListener('change',function (){
+            if(this.files.length > 5){
+             Swal.fire({
+                 title: "Mozesz dodac maksymalnie 5 zdjec",
+                 icon: "warning",
+                 confirmButtonText: "Ok"
+             }).then((result) => {
+                 this.value ='';
+                });
+            }
+        });
+    </script>
 @endsection

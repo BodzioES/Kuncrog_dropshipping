@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductImage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
@@ -19,7 +20,7 @@ class WelcomeController extends Controller
     public function index(Request $request): View|JsonResponse
     {
         $filters = $request->query('filter');
-        $query = Product::query();
+        $query = Product::with('images');
         if (!empty($filters)) {
             if (array_key_exists('categories', $filters)) {
                 $query = $query->whereIn('id_products_categories', $filters['categories']);

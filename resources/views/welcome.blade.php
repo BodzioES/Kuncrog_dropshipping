@@ -4,21 +4,21 @@
 
     {{-- POKAZ SLAJDOW Z TYMI ZDJECIAMI ALE TO JEST NARAZIR CHWILOWE --}}
     <div id="hero">
-        <div class="slide active" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image');">
+        <div class="slide active" style="background-image:url('https://rueparis.pl/wp-content/uploads/sites/54/2022/02/wiosenna-kolekcja-ubran-rue-paris.jpg');">
             <div class="overlay">
                 <h1>Nowa wiosenna kolekcja</h1>
                 <p>Pastelowe sukienki i lekkie tkaniny</p>
                 <a href="">Zobacz teraz</a>
             </div>
         </div>
-        <div class="slide" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image');">
+        <div class="slide" style="background-image:url('https://cdn.shopify.com/s/files/1/0605/4995/5814/files/sport_luxe_banner_mockd_1024x1024.jpg?v=1636070459');">
             <div class="overlay">
                 <h1>Sport‑luxe w stylu 2025</h1>
                 <p>Sportowe kurtki i retro trampki</p>
                 <a href="">Sprawdź</a>
             </div>
         </div>
-        <div class="slide" style="background-image:url('https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image');">
+        <div class="slide" style="background-image:url('https://fioza.pl/wp-content/uploads/2025/04/elegancka-przezroczysta-bluzka.jpg');">
             <div class="overlay">
                 <h1>Przezroczyste topy i organza</h1>
                 <p>Delikatne, eteryczne fasony</p>
@@ -44,8 +44,18 @@
             <div class="row justify-content-center text-center">
                 @foreach($products_categories as $category)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
-                        <div class="category-item">
-                            <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image" alt="{{ $category->name }}" class="img-fluid rounded-circle mb-2" style="width: 120px; height: 120px; object-fit: cover;">
+                        <div class="category-item text-center">
+                            <button type="button"
+                                    class="btn btn-light category-button"
+                                    data-category="{{$category->id}}"
+                                    style="border: none; background: transparent;">
+                                <img
+                                    src="{{ asset('storage/category/' . $category->image) }}"
+                                    alt="{{ $category->name }}"
+                                    class="img-fluid rounded-circle mb-2"
+                                    style="width: 120px; height: 120px; object-fit: cover;"
+                                >
+                            </button>
                             <div>{{ $category->name }}</div>
                         </div>
                     </div>
@@ -80,14 +90,14 @@
                                 <a href="{{route('product_page.show',$product->id)}}" style="text-decoration: none">
                                     <div class="card h-100 border-0">
                                         <div class="card-img-top">
-                                            <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image" class="img-fluid" alt="photo">
+                                            <img src="{{asset('storage/products/' . $product->images->first()->image_url)}}" alt="Photo">
                                         </div>
                                         <div class="card-body text-center">
                                             <h4 class="card-title">
                                                 {{ $product->name }}
                                             </h4>
                                             <h5 class="card-price small">
-                                                <i>PLN {{ $product->price }}</i>
+                                                <i>{{ $product->price }} PLN</i>
                                             </h5>
                                         </div>
                                         <div style="display: none" id="product-quantity-{{$product->id}}">{{$product->quantity}}</div> <!--TUTAJ TRZEBA Z TYM POGRZEBAC-->
@@ -101,6 +111,7 @@
                     </div>
                 </div>
             </div>
+
             <form class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
                 <h3 class="mt-0 mb-5">{{__('shop.welcome.products')}} <span class="text-primary">{{ count($products) }}</span></h3>
                 <h6 class="text-uppercase font-weight-bold mb-3">{{__('shop.welcome.categories')}}</h6>
@@ -120,8 +131,9 @@
                 </div>
                 <input id="ex2" type="text" class="slider " value="50,150" data-slider-min="10" data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]" data-value="50,150" style="display: none;">
                 <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
-                <a href="#" class="btn btn-lg btn-block btn-primary mt-5" id="filter-button">{{__('shop.welcome.filter')}}</a>
+                <a href="#products-wrapper" class="btn btn-lg btn-block btn-primary mt-5" id="filter-button">{{__('shop.welcome.filter')}}</a>
             </form>
+
         </div>
 
 

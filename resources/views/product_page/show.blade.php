@@ -14,10 +14,11 @@
             <div class="d-flex justify-content-between">
                 @foreach($productImages as $key => $image)
                     <img
-                        src="{{asset('storage/public/products/' . $image->image_url)}}"
+                        src="{{asset('storage/products/' . $image->image_url)}}"
                         alt="Thumbnail {{$key+1}}"
                         class="thumbnail rounded {{$key === 0 ? 'active' : ''}}"
                         onclick="changeImage(event,this.src)"
+                    >
                 @endforeach
             </div>
         </div>

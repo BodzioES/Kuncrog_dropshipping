@@ -43,23 +43,27 @@ class ProductController extends Controller
      * @param ManageProductRequest $request
      * @return RedirectResponse
      */
+
+    # ManageProductRequest to plik w folderze Request odpowiadajacy za wszystkie walidacje dotyczacy produktu!!!
     public function store(ManageProductRequest $request): RedirectResponse
     {
         $product = new Product($request->validated());
+        $product->save();
         if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $image) {
-                $path = $image->store('public/products');
+            foreach ($request->file('image') as $index => $image) {
+                $path = $image->store('products', 'public');
                 $filename = basename($path);
 
                 ProductImage::create([
                     'id_product' => $product->id,
                     'image_url' => $filename,
-                    'is_main' => $image === 0,
+                    'is_main' => $index === 0 ? 1 : 0,
                 ]);
             }
         }
-        $product->save();
-        return redirect()->route('products.index')->with('status',__('shop.product.status.store.success'));
+        return redirect()
+            ->route('products.index')
+            ->with('status',__('shop.product.status.store.success'));
     }
 
     /**
@@ -102,14 +106,21 @@ class ProductController extends Controller
     {
         $product->fill($request->validated());
         if ($request->hasFile('image')) {
-            foreach ($request->file('image') as $image) {
-                $path = $image->store('public/products');
+            $currentImageCount = $product->images()->count();
+            $newImages = $request->file('image');
+
+            if ($currentImageCount + count($newImages) > 5) {
+                return back()->with('image', 'Produkt może mieć maksymalnie 5 zdjęć.');
+            }
+
+            foreach ($newImages as $index => $image) {
+                $path = $image->store('products', 'public');
                 $filename = basename($path);
 
                 ProductImage::create([
-                    'id_product' => $product->id,
-                    'image_url' => $filename,
-                    'is_main' =>  false,
+                   'id_product' => $product->id,
+                   'image_url' => $filename,
+                   'is_main' =>  $product->images()->count() === 0 && $index === 0 ? 1 : 0,
                 ]);
             }
         }

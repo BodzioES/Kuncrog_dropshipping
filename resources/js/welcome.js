@@ -1,7 +1,6 @@
 //to jest biblioteka umozliwiajaca wyswietlanie tego modala po dodaniu produktu do koszyka
 import { Modal } from 'bootstrap';
 window.bootstrap = { Modal };
-$(function (){
 
     //wykonuje sie po wcisnieciu przycisku z welcome.blade.php
     //dodaje on produkt do koszyka
@@ -73,25 +72,27 @@ $(function (){
         })
             .done(function( response ) {
                 $('div#products-wrapper').empty();
-                $.each(response.data,function (index, product){
-                    const html = '<div class="col-6 col-md-6 col-lg-4 mb-3">\n' +
-                        '                                <div class="card h-100 border-0">\n' +
-                        '                                    <div class="card-img-top">\n' +
-                        '                                        <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image" class="img-fluid" alt="photo">\n' +
-                        '                                    </div>\n' +
-                        '                                    <div class="card-body text-center">\n' +
-                        '                                        <h4 class="card-title">\n' +
-                                                                    product.name +
-                        '                                        </h4>\n' +
-                        '                                        <h5 class="card-price small">\n' +
-                        '                                            <i>PLN '+ product.price +'</i>\n' +
-                        '                                        </h5>\n' +
-                        '                                    </div>\n' +
-                        '                                    <button class="btn btn-success btn-sm add-cart-button" data-id="{{ $product->id }}">\n' +
-                        '                                        <i class="fas fa-cart-plus"></i> Dodaj do koszyka\n' +
-                        '                                    </button>\n' +
-                        '                                </div>\n' +
-                        '                            </div>'
+                $.each(response.data, function(index, product) {
+                    //jezeli istnieje zdjecie to jest wyswietlane a jesli nie to pisze no-image.png
+                    let imagePath = (product.images && product.images.length > 0)
+                        ? '/storage/products/' + product.images[0].image_url
+                        : '/storage/no-image.png'; // fallback
+
+                    const html = `
+                    <div class="col-6 col-md-6 col-lg-4 mb-3">
+                        <div class="card h-100 border-0">
+                            <div class="card-img-top">
+                                <img src="${imagePath}" class="img-fluid" alt="photo">
+                            </div>
+                            <div class="card-body text-center">
+                                <h4 class="card-title">${product.name}</h4>
+                                <h5 class="card-price small"><i>${product.price} PLN </i></h5>
+                            </div>
+                            <button class="btn btn-success btn-sm add-cart-button" data-id="${product.id}">
+                                <i class="fas fa-cart-plus"></i> Dodaj do koszyka
+                            </button>
+                        </div>
+                    </div>`;
                     $('div#products-wrapper').append(html);
                 });
             })
@@ -99,4 +100,48 @@ $(function (){
                 alert("nie dziala");
             });
     }
-});
+
+
+    $(document).on('click','.category-button',function (e){
+        e.preventDefault();
+        let categoryId = $(this).data('category');
+
+        $.ajax({
+            url: "/",
+            method: "GET",
+            data:{
+                'filter[categories][]' : categoryId
+            },
+            dataType: "json"
+        }).done(function (response){
+            $('div#products-wrapper').empty();
+            $.each(response.data, function(index, product) {
+                let imagePath = (product.images && product.images.length > 0)
+                    ? '/storage/products/' + product.images[0].image_url
+                    : '/storage/no-image.png';
+
+                const html = `
+            <div class="col-6 col-md-6 col-lg-4 mb-3">
+                <div class="card h-100 border-0">
+                    <div class="card-img-top">
+                        <img src="${imagePath}" class="img-fluid" alt="photo">
+                    </div>
+                    <div class="card-body text-center">
+                        <h4 class="card-title">${product.name}</h4>
+                        <h5 class="card-price small"><i>${product.price} PLN</i></h5>
+                    </div>
+                    <button class="btn btn-success btn-sm add-cart-button" data-id="${product.id}">
+                        <i class="fas fa-cart-plus"></i> Dodaj do koszyka
+                    </button>
+                </div>
+            </div>`;
+                $('div#products-wrapper').append(html);
+            });
+        })
+            .fail(function() {
+                alert("Błąd filtrowania produktów");
+            });
+    });
+
+
+
