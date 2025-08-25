@@ -77,21 +77,24 @@ window.bootstrap = { Modal };
                     let imagePath = (product.images && product.images.length > 0)
                         ? '/storage/products/' + product.images[0].image_url
                         : '/storage/no-image.png'; // fallback
+                    const productUrl = '/product_page/' + product.id;
 
                     const html = `
                     <div class="col-6 col-md-6 col-lg-4 mb-3">
-                        <div class="card h-100 border-0">
-                            <div class="card-img-top">
-                                <img src="${imagePath}" class="img-fluid" alt="photo">
+                        <a href="${productUrl}" style="text-decoration: none">
+                            <div class="card h-100 border-0">
+                                <div class="card-img-top">
+                                    <img src="${imagePath}" class="img-fluid" alt="photo">
+                                </div>
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">${product.name}</h4>
+                                    <h5 class="card-price small"><i>${product.price} PLN </i></h5>
+                                </div>
+                                <button class="btn btn-success btn-sm add-cart-button" data-id="${product.id}">
+                                    <i class="fas fa-cart-plus"></i> Dodaj do koszyka
+                                </button>
                             </div>
-                            <div class="card-body text-center">
-                                <h4 class="card-title">${product.name}</h4>
-                                <h5 class="card-price small"><i>${product.price} PLN </i></h5>
-                            </div>
-                            <button class="btn btn-success btn-sm add-cart-button" data-id="${product.id}">
-                                <i class="fas fa-cart-plus"></i> Dodaj do koszyka
-                            </button>
-                        </div>
+                        </a>
                     </div>`;
                     $('div#products-wrapper').append(html);
                 });
@@ -120,20 +123,23 @@ window.bootstrap = { Modal };
                     ? '/storage/products/' + product.images[0].image_url
                     : '/storage/no-image.png';
 
+                const productUrl = '/product_page/' + product.id;
                 const html = `
             <div class="col-6 col-md-6 col-lg-4 mb-3">
-                <div class="card h-100 border-0">
-                    <div class="card-img-top">
-                        <img src="${imagePath}" class="img-fluid" alt="photo">
+                <a href="${productUrl}" style="text-decoration: none">
+                    <div class="card h-100 border-0">
+                        <div class="card-img-top">
+                            <img src="${imagePath}" class="img-fluid" alt="photo">
+                        </div>
+                        <div class="card-body text-center">
+                            <h4 class="card-title">${product.name}</h4>
+                            <h5 class="card-price small"><i>${product.price} PLN</i></h5>
+                        </div>
+                        <button class="btn btn-success btn-sm add-cart-button" data-id="${product.id}">
+                            <i class="fas fa-cart-plus"></i> Dodaj do koszyka
+                        </button>
                     </div>
-                    <div class="card-body text-center">
-                        <h4 class="card-title">${product.name}</h4>
-                        <h5 class="card-price small"><i>${product.price} PLN</i></h5>
-                    </div>
-                    <button class="btn btn-success btn-sm add-cart-button" data-id="${product.id}">
-                        <i class="fas fa-cart-plus"></i> Dodaj do koszyka
-                    </button>
-                </div>
+                </a>
             </div>`;
                 $('div#products-wrapper').append(html);
             });

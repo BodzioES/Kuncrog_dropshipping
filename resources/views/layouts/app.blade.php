@@ -112,11 +112,11 @@
 <footer class="bg-body-tertiary text-center mt-auto">
     <div class="container pt-4">
         <section class="mb-4 ">
-            <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#"><i class="fab fa-facebook-f"></i></a>
-            <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#"><i class="fab fa-twitter"></i></a>
-            <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#"><i class="fab fa-google"></i></a>
-            <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#"><i class="fab fa-instagram"></i></a>
-            <a class="btn btn-link btn-floating btn-lg text-body m-1" href="#"><i class="fab fa-github"></i></a>
+            <a class="btn btn-link btn-floating btn-lg text-body m-1" target="_blank" href="https://www.facebook.com/profile.php?id=100017190855716"><i class="fab fa-facebook-f"></i></a>
+            <a class="btn btn-link btn-floating btn-lg text-body m-1" target="_blank" href="https://www.linkedin.com/in/albert-rogozinski-505777270/"><i class="fab fa-linkedin"></i></a>
+            <a class="btn btn-link btn-floating btn-lg text-body m-1" target="_blank" href="https://media.tenor.com/WuOwfnsLcfYAAAAC/star-wars-obi-wan-kenobi.gif"><i class="fab fa-google"></i></a>
+            <a class="btn btn-link btn-floating btn-lg text-body m-1" target="_blank" href="https://www.instagram.com/albert_rogoz/#"><i class="fab fa-instagram"></i></a>
+            <a class="btn btn-link btn-floating btn-lg text-body m-1" target="_blank" href="https://github.com/BodzioES"><i class="fab fa-github"></i></a>
         </section>
     </div>
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">

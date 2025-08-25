@@ -20,7 +20,13 @@
                     @foreach($cartItems as $item)
                         <tr>
                             <td>
-                                <img src={{--{{ $isGuest ? $item['image'] : $item->image }}--}}"https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image" width="60" alt="photo">
+                                {{--  !!! Operator .konkatenacji ma wyższy priorytet niż operator trójargumentowy ?:
+                                  czyli bez nawiasow wykona sie 1 albo 0
+                                  czyli cos takiego ( asset('storage/products/' . $isGuest) ) ? $item['image'] : $item->image
+                                  po prostu bez nawiasow sprawdza czy jest gosciem czy nie i zostawia reszte kody w sensie go nie czyta --}}
+                                <img src="{{ asset('storage/products/' . ($isGuest ? $item['image'] : $item->image)) }}" alt="Photo"
+                                    style="width: 80px; height: auto;"
+                                >
                             </td>
                             <td>{{ $isGuest ? $item['name'] : $item->name }}</td>
                             <td>{{ $isGuest ? $item['price'] : $item->price }} zł</td>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,7 @@ class CartController extends Controller
                         'name' => $item->product->name,
                         'price' => $item->product->price,
                         'quantity' => $item->quantity,
-                        'image' => $item->product?->image,
+                        'image' => $item->product->images->first()->image_url,
                     ];
                 });
             $isGuest = false;
@@ -50,7 +51,7 @@ class CartController extends Controller
                         'name' => $product->name,
                         'price' => $product->price,
                         'quantity' => $details['quantity'] ?? 1,
-                        'image' => $product->image,
+                        'image' => $product->images->first()->image_url,
                     ];
                 }
             }
@@ -192,6 +193,16 @@ class CartController extends Controller
                     }
                 }
             }
+
+            //to dodaje zdjecie produktu do $cartItems aby moglo sie wyswietlac na stronie
+            //$item moze byc dowonlna nazwa, na przyklad $produkt
+            $cartItems->each(function ($item) {
+                $firstImage = $item->product->images->first();
+                $item->product->image_url = $firstImage
+                    ? asset('storage/products/' . $firstImage->image_url)
+                    : asset('storage/products/no-image.png');
+            });
+
             return response(view('cart.cart_modal_content', compact('cartItems')));
         } catch (\Throwable $e) {
             return response()->json([

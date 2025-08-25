@@ -33,7 +33,7 @@ class CheckoutController extends Controller
                         'name' => $item->product->name,
                         'price' => $item->product->price,
                         'quantity' => $item->quantity,
-                        'image' => $item->product?->image,
+                        'image' => $item->product->images->first()->image_url,
                     ];
                 });
             $isGuest = false;
@@ -50,7 +50,7 @@ class CheckoutController extends Controller
                         'name' => $product->name,
                         'price' => $product->price,
                         'quantity' => $details['quantity'] ?? 1,
-                        'image' => $product->image,
+                        'image' => $product->images->first()->image_url,
                     ];
                 }
             }
