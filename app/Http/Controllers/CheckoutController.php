@@ -142,6 +142,15 @@ class CheckoutController extends Controller
         try {
             $userId = Auth::check() ? Auth::id() : null;
 
+            $shippingMethod = ShippingMethod::findOrFail($request->input('id_shipping_method'));
+
+            $totalProductPrice = 0;
+            foreach ($request->input('items') as $item) {
+                $totalProductPrice += $item['current_price'] * $item['quantity'];
+            }
+
+            $totalPrice = $totalProductPrice + $shippingMethod->price;
+
             if (Auth::check()) {
                 // ZALOGOWANY UŻYTKOWNIK
                 // Zapis adresu z requestu
@@ -153,7 +162,7 @@ class CheckoutController extends Controller
                 $order->id_user = $userId;
                 $order->id_shipping_method = $request->input('id_shipping_method');
                 $order->id_payment_method = $request->input('id_payment_method');
-                $order->total_price = $request->input('total_price');
+                $order->total_price = $totalPrice;
                 $order->status = 'pending';
                 $order->id_address = $address->id_address;
                 $order->save();
@@ -180,7 +189,7 @@ class CheckoutController extends Controller
                 $order = new Order();
                 $order->id_shipping_method = $request->input('id_shipping_method');
                 $order->id_payment_method = $request->input('id_payment_method');
-                $order->total_price = $request->input('total_price');
+                $order->total_price = $totalPrice;
                 $order->status = 'pending';
                 $order->id_address = $address->id_address;
                 $order->save();

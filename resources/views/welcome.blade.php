@@ -84,9 +84,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row g-3" id="products-wrapper">
+                    <div class="row" id="products-wrapper">
                         @foreach($products as $product)
-                                <div id="pole" class="col-12 col-md-6 col-lg-4">
+                                <div id="pole" class="col-12 col-md-6 col-lg-4 m-3">
                                     <a href="{{route('product_page.show',$product->id)}}" style="text-decoration: none">
                                         <div class="card h-100 border-0">
                                             <div class="card-img-top">

@@ -65,6 +65,8 @@
                                 @can(['isAdmin'])
                                     <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
                                 @endcan
+                                <a class="dropdown-item" href="{{ route('myOrders.index') }}">Moje zamówienia</a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

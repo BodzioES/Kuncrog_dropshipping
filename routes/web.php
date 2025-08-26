@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductPageController;
+use App\Http\Controllers\UserOrdersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -23,7 +24,6 @@ Route::get('/cart/modal', [CartController::class, 'getCartModalContent']);
 Route::post('/cart/update/{id}', [CartController::class, 'updateQuantity']);
 Route::get('/cart/count', [CartController::class, 'updateCount']);
 
-
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 Route::post('/checkout/update-total', [CheckoutController::class, 'updateTotal']);
@@ -31,6 +31,7 @@ Route::post('/checkout/update-total', [CheckoutController::class, 'updateTotal']
 
 Route::get('/product_page/{product}',[ProductPageController::class,'show'])->name('product_page.show');
 
+Route::get('/my-orders', [UserOrdersController::class, 'index'])->name('myOrders.index');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 

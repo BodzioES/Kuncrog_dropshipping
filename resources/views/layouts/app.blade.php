@@ -77,6 +77,8 @@
                                     <a class="dropdown-item" href="{{ route('products.index') }}">Produkty</a>
                                     --}}
                                 @endcan
+                                <a class="dropdown-item" href="{{ route('myOrders.index') }}">Moje zamówienia</a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
