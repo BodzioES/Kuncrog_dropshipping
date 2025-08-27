@@ -84,31 +84,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="products-wrapper">
+                    <div class="row g-4" id="products-wrapper">
                         @foreach($products as $product)
-                                <div id="pole" class="col-12 col-md-6 col-lg-4 m-3">
+                            <div class="col-12 col-sm-6 col-md-4">
+                                <div id="pole" class="card h-100 border-0">
                                     <a href="{{route('product_page.show',$product->id)}}" style="text-decoration: none">
-                                        <div class="card h-100 border-0">
-                                            <div class="card-img-top">
-                                                <img src="{{asset('storage/products/' . $product->images->first()->image_url)}}" alt="Photo">
-                                            </div>
-                                            <div class="card-body text-center">
-                                                <h4 class="card-title">
-                                                    {{ $product->name }}
-                                                </h4>
-                                                <h5 class="card-price small">
-                                                    <i>{{ $product->price }} PLN</i>
-                                                </h5>
-                                            </div>
-                                            <div style="display: none" id="product-quantity-{{$product->id}}">{{$product->quantity}}</div> <!--TUTAJ TRZEBA Z TYM POGRZEBAC-->
-                                            <button class="btn btn-success btn-sm add-cart-button" data-id="{{ $product->id }}">
-                                                <i class="fas fa-cart-plus"></i> Dodaj do koszyka
-                                            </button>
+                                        <div class="card-img-top text-center">
+                                            <img src="{{asset('storage/products/' . $product->images->first()->image_url)}}"
+                                                 alt="Photo"
+                                                 style="height: auto; object-fit: cover; width: 100%;">
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <h4 class="card-title">{{ $product->name }}</h4>
+                                            <h5 class="card-price small"><i>{{ $product->price }} PLN</i></h5>
                                         </div>
                                     </a>
+                                    <div style="display: none" id="product-quantity-{{$product->id}}">{{$product->quantity}}</div>
+                                    <button class="btn btn-success btn-sm add-cart-button m-2" data-id="{{ $product->id }}">
+                                        <i class="fas fa-cart-plus"></i> Dodaj do koszyka
+                                    </button>
                                 </div>
+                            </div>
                         @endforeach
                     </div>
+
                 </div>
             </div>
 

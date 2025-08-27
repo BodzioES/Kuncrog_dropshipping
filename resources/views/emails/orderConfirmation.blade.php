@@ -1,7 +1,7 @@
 <div style="background-color: #2f2f2f; font-family: Arial, sans-serif; padding: 30px;">
     <div style="max-width: 700px; margin: 0 auto; background-color: #fff; padding: 30px; border-radius: 8px;">
         <div style="text-align: left; padding-bottom: 20px;">
-            <img src="https://dummyimage.com/300x240/fc00fc/000000.jpg&text=image" width="50" alt="Logo">
+           <h1>Kuncrog</h1>
         </div>
 
         <h2 style="margin-bottom: 10px;">Twoje zamówienie zostało potwierdzone!</h2>
@@ -33,6 +33,12 @@
         <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
             @foreach($order->items as $item)
                 <tr style="border-bottom: 1px solid #ddd;">
+                    <td>
+                        <img src="{{ url('storage/products/' . $item->product->images->first()->image_url) }}"
+                             alt="photo"
+                             width="50"
+                        >
+                    </td>
                     <td style="padding: 10px 0; width: 60%;">
                         <strong>{{ $item->product->name }}</strong><br>
                         Ilość: {{ $item->quantity }}

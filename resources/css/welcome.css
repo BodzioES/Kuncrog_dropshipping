@@ -41,17 +41,31 @@
     border-color: #ff5a5f;
 }
 
-#pole:hover{
-    box-shadow: 8px 8px 16px rgba(0,0,0,0.3);
-    transform: scale(1.05);
-}
-
 #pole {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    height: 100%; /* card wypełnia całą kolumnę */
-    box-shadow: 4px 4px 8px rgba(0,0,0,0.3); /* cień tylko w prawo i w dół */
-    box-sizing: border-box; /* padding wlicza się do szerokości */
+    padding: 15px;
+    border-radius: 8px;
+    height: 100%;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+    box-sizing: border-box;
     transition: all 0.3s;
+}
+
+#pole:hover {
+    box-shadow: 8px 8px 16px rgba(0,0,0,0.3);
+    transform: scale(1.03);
+}
+
+#pole:active {
+    transform: scale(0.98);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.card-body {
+    color: #000;
+}
+
+.card-body .card-title,
+.card-body .card-price {
+    color: #000;
 }
