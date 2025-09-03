@@ -50,7 +50,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('admin/dashboard/orders/list/edit/{order}', [OrderController::class, 'update'])->name('admin.orders.update');
         Route::get('admin/dashboard/orders/list/edit/{order}/invoice', [OrderController::class, 'invoice'])->name('admin.orders.invoice');
 
-        Route::get('/my-orders', [OrderController::class, 'orderView'])->name('myOrders.orderView');
     });
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');

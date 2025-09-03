@@ -80,22 +80,25 @@ window.bootstrap = { Modal };
                     const productUrl = '/product_page/' + product.id;
 
                     const html = `
-                    <div class="col-6 col-md-6 col-lg-4 mb-3">
-                        <a href="${productUrl}" style="text-decoration: none">
-                            <div class="card h-100 border-0">
-                                <div class="card-img-top">
-                                    <img src="${imagePath}" class="img-fluid" alt="photo">
-                                </div>
-                                <div class="card-body text-center">
-                                    <h4 class="card-title">${product.name}</h4>
-                                    <h5 class="card-price small"><i>${product.price} PLN </i></h5>
-                                </div>
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <div id="pole" class="card h-100 border-0">
+                                <a href="${productUrl}" style="text-decoration: none">
+                                    <div class="card-img-top text-center">
+                                        <img src="${imagePath}" class="img-fluid"
+                                            alt="Photo"
+                                            style="height: auto; object-fit: cover; width: 100%;">
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title">${product.name}</h4>
+                                        <h5 class="card-price small"><i>${product.price} PLN </i></h5>
+                                    </div>
+                                </a>
+                                <div style="display: none" id="product-quantity-{{$product->id}}">${product.quantity}</div>
                                 <button class="btn btn-success btn-sm add-cart-button" data-id="${product.id}">
                                     <i class="fas fa-cart-plus"></i> Dodaj do koszyka
                                 </button>
                             </div>
-                        </a>
-                    </div>`;
+                        </div>`;
                     $('div#products-wrapper').append(html);
                 });
             })
@@ -125,22 +128,72 @@ window.bootstrap = { Modal };
 
                 const productUrl = '/product_page/' + product.id;
                 const html = `
-            <div class="col-6 col-md-6 col-lg-4 mb-3">
-                <a href="${productUrl}" style="text-decoration: none">
-                    <div class="card h-100 border-0">
-                        <div class="card-img-top">
-                            <img src="${imagePath}" class="img-fluid" alt="photo">
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div id="pole" class="card h-100 border-0">
+                            <a href="${productUrl}" style="text-decoration: none">
+                                <div class="card-img-top text-center">
+                                    <img src="${imagePath}" class="img-fluid"
+                                        alt="Photo"
+                                        style="height: auto; object-fit: cover; width: 100%;">
+                                </div>
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">${product.name}</h4>
+                                    <h5 class="card-price small"><i>${product.price} PLN </i></h5>
+                                </div>
+                            </a>
+                            <div style="display: none" id="product-quantity-{{$product->id}}">${product.quantity}</div>
+                            <button class="btn btn-success btn-sm add-cart-button" data-id="${product.id}">
+                                <i class="fas fa-cart-plus"></i> Dodaj do koszyka
+                            </button>
                         </div>
-                        <div class="card-body text-center">
-                            <h4 class="card-title">${product.name}</h4>
-                            <h5 class="card-price small"><i>${product.price} PLN</i></h5>
+                    </div>`;
+                $('div#products-wrapper').append(html);
+            });
+        })
+            .fail(function() {
+                alert("Błąd filtrowania produktów");
+            });
+    });
+
+    $(document).on('click','.sort-link',function (e){
+        e.preventDefault();
+        let sortValue = $(this).data('sort');
+
+        $.ajax({
+            url: "/",
+            method: "GET",
+            data: {
+                sort: sortValue
+            },
+            dataType: "json",
+        }).done(function (response){
+            $('div#products-wrapper').empty();
+            $.each(response.data, function(index, product) {
+                let imagePath = (product.images && product.images.length > 0)
+                    ? '/storage/products/' + product.images[0].image_url
+                    : '/storage/no-image.png';
+
+                const productUrl = '/product_page/' + product.id;
+                const html = `
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div id="pole" class="card h-100 border-0">
+                            <a href="${productUrl}" style="text-decoration: none">
+                                <div class="card-img-top text-center">
+                                    <img src="${imagePath}" class="img-fluid"
+                                        alt="Photo"
+                                        style="height: auto; object-fit: cover; width: 100%;">
+                                </div>
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">${product.name}</h4>
+                                    <h5 class="card-price small"><i>${product.price} PLN </i></h5>
+                                </div>
+                            </a>
+                            <div style="display: none" id="product-quantity-{{$product->id}}">${product.quantity}</div>
+                            <button class="btn btn-success btn-sm add-cart-button" data-id="${product.id}">
+                                <i class="fas fa-cart-plus"></i> Dodaj do koszyka
+                            </button>
                         </div>
-                        <button class="btn btn-success btn-sm add-cart-button" data-id="${product.id}">
-                            <i class="fas fa-cart-plus"></i> Dodaj do koszyka
-                        </button>
-                    </div>
-                </a>
-            </div>`;
+                    </div>`;
                 $('div#products-wrapper').append(html);
             });
         })

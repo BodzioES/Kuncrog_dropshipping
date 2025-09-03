@@ -6,10 +6,12 @@ use App\Http\Requests\ManageProductRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -102,14 +104,29 @@ class ProductController extends Controller
      * @param Product $product
      * @return RedirectResponse
      */
-    public function update(ManageProductRequest $request, Product $product): RedirectResponse
+    public function update(Request $request, Product $product): RedirectResponse
     {
-        $product->fill($request->validated());
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'stock_quantity' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:1',
+            'id_products_categories' => 'nullable|integer|min:0',
+            'image' => 'nullable',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        $product->fill($validated);
         if ($request->hasFile('image')) {
-            $currentImageCount = $product->images()->count();
+
+            foreach ($product->images as $image) {
+                Storage::disk('public')->delete('products/' . $image->image_url);
+                $image->delete();
+            }
+
             $newImages = $request->file('image');
 
-            if ($currentImageCount + count($newImages) > 5) {
+            if (count($newImages) > 5) {
                 return back()->with('image', 'Produkt może mieć maksymalnie 5 zdjęć.');
             }
 
@@ -125,7 +142,9 @@ class ProductController extends Controller
             }
         }
         $product->save();
-        return redirect()->route('products.index')->with('status',__('shop.product.status.update.success'));
+
+        return redirect()->route('products.index')
+            ->with('status',__('shop.product.status.update.success'));
     }
 
     /**

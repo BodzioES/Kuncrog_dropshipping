@@ -112,10 +112,4 @@ class OrderController extends Controller
         # zwraca pobieranie pdf, czyli klasycznie
         return $pdf->download($filename);
     }
-
-    public function orderView(): View{
-        $orders = Order::where('id_user',Auth::id())->get();
-
-        return view('myOrders',compact('orders'));
-    }
 }

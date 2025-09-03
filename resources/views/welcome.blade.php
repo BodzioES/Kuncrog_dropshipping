@@ -72,14 +72,14 @@
                         <div class="col-12">
                             <div class="dropdown">
                                 <label class="mr-2 float-left">Sort by:</label>
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropDownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     Relevance
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#">Cena rosnąco</a></li>
-                                    <li><a class="dropdown-item" href="#">Cena malejąco</a></li>
-                                    <li><a class="dropdown-item" href="#">Od A do Z</a></li>
-                                    <li><a class="dropdown-item" href="#">Od Z do A</a></li>
+                                    <li><a class="dropdown-item sort-link" href="#" data-sort="price_asc">Cena rosnąco</a></li>
+                                    <li><a class="dropdown-item sort-link" href="#" data-sort="price_desc">Cena malejąco</a></li>
+                                    <li><a class="dropdown-item sort-link" href="#" data-sort="name_asc">Od A do Z</a></li>
+                                    <li><a class="dropdown-item sort-link" href="#" data-sort="name_desc">Od Z do A</a></li>
                                 </ul>
                             </div>
                         </div>

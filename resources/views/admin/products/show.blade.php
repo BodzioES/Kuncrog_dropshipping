@@ -53,6 +53,25 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="mb-3 text-center">
+                        <label>Aktualne zdjęcia</label> <br>
+                        @foreach($product->images as $img)
+                            <img src="{{asset('storage/products/' . $img->image_url)}}"
+                                 alt="phtoto"
+                                 style="width: 60px; height: auto;">
+                        @endforeach
+                    </div>
+
+                    <div class="row mb-0 justify-content-center">
+                        <div class="col-md-6 offset-md-4">
+                            <a href="{{route('products.index')}}">
+                                <button type="button" class="btn btn-primary">
+                                    Powrót
+                                </button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

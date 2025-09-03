@@ -46,6 +46,11 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto"></ul>
+
+                <div class="mx-auto text-center fw-bold">
+                    👥 Odwiedziło nas już <span class="text-primary">{{ $visitorsCount }}</span> osób
+                </div>
+
                 <ul class="navbar-nav ms-auto">
                     @guest
                         <li class="nav-item dropdown">
@@ -77,7 +82,7 @@
                                     <a class="dropdown-item" href="{{ route('products.index') }}">Produkty</a>
                                     --}}
                                 @endcan
-                                <a class="dropdown-item" href="{{ route('myOrders.orderView') }}">Moje zamówienia</a>
+                                <a class="dropdown-item" href="{{ route('myOrders.index') }}">Moje zamówienia</a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

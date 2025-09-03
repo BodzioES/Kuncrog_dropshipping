@@ -2,14 +2,15 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\App;
+
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\URL; //to jest biblioteka do tego config co jest zaraz pod bootem
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Cart;
+use App\Models\Visitors;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -56,5 +57,25 @@ class AppServiceProvider extends ServiceProvider
             //zwraca zmienna $cartCount do app.blade.php
             $view->with('cartCount', $cartCount);
         });
+
+        //  POBIERA ADRES IP OD UZYTKOWNIKA KTORY WEJDZIE NA STRONE
+        $ip = request()->ip();
+
+        //  SPRAWDZA CZY ADRES JEST JUZ W BAZIE JAK NIE TO GO DODAJE
+        Visitors::firstOrCreate(['ip_address' => $ip]);
+
+
+        // liczy unikalne IP (cache na 60s, żeby nie mielić bazy)
+        /*
+         * Służy do cache’owania wyniku zapytania, żeby za każdym razem nie liczyć od nowa
+         * przez godzinę wynik będzie brany z cache, zamiast pytać bazę. Po godzinie wynik się przeliczy i zapisze na nowo
+         *
+         * */
+        $visitorsCount = Cache::remember('visitors_count',60, function () {
+            return Visitors::count('ip_address');
+        });
+
+        // udostępnia liczbę adresow ip do WSZYSTKICH WIDOKÓW
+        view()->share('visitorsCount', $visitorsCount);
     }
 }

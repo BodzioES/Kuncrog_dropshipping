@@ -3,6 +3,7 @@
 @section('content')
     <div class="container" data-url="{{ route('products.index') }}">
     <div class="container">
+        {{-- TO ODPOWIADA ZA WYSWIETLENIE KOMUNIKATU O POTWIERDZENIU AKTUALIZACJI PRODUKTU --}}
         @include('helpers.flash-messages')
         <div class="row">
             <div class="col-12 d-flex justify-content-between align-items-center">
