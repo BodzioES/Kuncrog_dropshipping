@@ -30,7 +30,7 @@
                             </td>
                             <td>{{ $isGuest ? $item['name'] : $item->name }}</td>
                             <td>{{ $isGuest ? $item['price'] : $item->price }} zł</td>
-                            <td>{{ $isGuest ? $item['quantity'] : $item->quantity }}</td>
+                            <td>x{{ $isGuest ? $item['quantity'] : $item->quantity }}</td>
                             <td>
                                 <button class="btn btn-danger delete" data-id="{{ $isGuest ? $item['id'] : $item->id }}">
                                     USUŃ

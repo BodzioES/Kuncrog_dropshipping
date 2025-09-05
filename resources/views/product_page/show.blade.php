@@ -4,79 +4,65 @@
 
 <div class="container mt-5">
     <div class="row">
-        <!-- Product Images -->
-        <div class="col-md-6 mb-4">
+        <div class="col-md-6 mb-4 d-flex flex-column">
             <img src="{{asset('storage/products/' . ($productImages->first()->image_url ?? 'default.jpg')) }}"
                  alt="Product"
-                 class="img-fluid rounded mb-3 product-image"
+                 class="img-fluid rounded mb-2 product-image shadow flex-grow-1"
                  id="mainImage"
+                 style="width: 100%; height: 100%; object-fit: contain;"
             >
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-start gap-2 flex-wrap">
                 @foreach($productImages as $key => $image)
                     <img
                         src="{{asset('storage/products/' . $image->image_url)}}"
                         alt="Thumbnail {{$key+1}}"
-                        class="thumbnail rounded {{$key === 0 ? 'active' : ''}}"
+                        class="thumbnail rounded border border-dark p-1 {{$key === 0 ? 'active' : ''}}"
+                        style="max-width: 90px; height: auto; cursor: pointer;"
                         onclick="changeImage(event,this.src)"
                     >
                 @endforeach
             </div>
         </div>
 
-        <!-- Product Details -->
+
         <div class="col-md-6">
-            <h2 class="mb-3">{{$product->name}}</h2>
-            <p class="text-muted mb-4">SKU: WH1000XM4 ??</p>
+
+            <h1 class="fw-bold mb-4 text-dark">{{$product->name}}</h1>
+
             <div class="mb-3">
-                <span class="h4 me-2">{{$product->price}} zł</span>
-                {{--<span class="text-muted"><s>$399.99</s></span>--}}
+                <span class="fs-3 fw-bold text-success">{{$product->price}} zł</span>
             </div>
+
             <div class="mb-3">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-half text-warning"></i>
+                <i class="bi bi-star-fill text-warning fs-5"></i>
+                <i class="bi bi-star-fill text-warning fs-5"></i>
+                <i class="bi bi-star-fill text-warning fs-5"></i>
+                <i class="bi bi-star-fill text-warning fs-5"></i>
+                <i class="bi bi-star-half text-warning fs-5"></i>
                 {{--<span class="ms-2">4.5 (120 reviews)</span>--}}
             </div>
-            <p class="mb-4">{{$product->description}}</p>
-            {{--
-                <div class="mb-4">
-                    <h5>Color:</h5>
-                    <div class="btn-group" role="group" aria-label="Color selection">
-                        <input type="radio" class="btn-check" name="color" id="black" autocomplete="off" checked>
-                        <label class="btn btn-outline-dark" for="black">Black</label>
-                        <input type="radio" class="btn-check" name="color" id="silver" autocomplete="off">
-                        <label class="btn btn-outline-secondary" for="silver">Silver</label>
-                        <input type="radio" class="btn-check" name="color" id="blue" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="blue">Blue</label>
-                    </div>
-                </div>
-            --}}
+
+            <p class="mb-4 fs-5 text-secondary">{{$product->description}}</p>
+
             <div class="mb-4">
-                <label for="quantity" class="form-label">Ilość:</label>
-                <input type="number" class="form-control" id="quantity" value="1" min="1" style="width: 80px;">
+                <div class="number-input align-items-center">
+                    <button class="btn btn-outline-dark btn-sm"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-</button>
+                    <input type="number" class="form-control mx-2 text-center fw-bold"
+                           id="quantity" value="1" min="1" style="width: 90px; font-size: 1.1rem;">
+                    <button class="btn btn-outline-dark btn-sm"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+</button>
+                </div>
             </div>
-            <button class="btn btn-dark btn-lg mb-3 me-2 add-cart-button" data-id="{{ $product->id }}">
+
+            <button class="btn btn-dark btn-lg mb-3 me-2 add-cart-button shadow-sm"
+                    data-id="{{ $product->id }}"
+                    data-quantity-input="#quantity">
                 <i class="bi bi-cart-plus"></i> Dodaj do koszyka
             </button>
-            {{--
-                <button class="btn btn-outline-secondary btn-lg mb-3">
-                    <i class="bi bi-heart"></i> Add to Wishlist
-                </button>
-            --}}
-
-            <div class="mt-4">
-                <h5>Key Features:</h5>
-                <ul>
-                    <li>Industry-leading noise cancellation</li>
-                    <li>30-hour battery life</li>
-                    <li>Touch sensor controls</li>
-                    <li>Speak-to-chat technology</li>
-                </ul>
-            </div>
         </div>
     </div>
+
 </div>
 
 <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">

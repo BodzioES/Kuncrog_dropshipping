@@ -135,7 +135,6 @@
 
         </div>
 
-
         {{-- TO JEST TEN KOSZYK KTORY SIE WYSWIETLA PO DODANIU PRODUKTU DO KOSZYKA --}}
         <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -154,7 +153,8 @@
                 </div>
             </div>
         </div>
-        {{-- POKAZ SLAJDOW Z TYMI ZDJECIAMI ALE TO JEST NARAZIR CHWILOWE --}}
+
+        {{-- POKAZ SLAJDOW Z TYMI ZDJECIAMI ALE TO JEST NA RAZIE CHWILOWE --}}
         <script>
             const slides = document.querySelectorAll('#hero .slide');
             let current = 0;

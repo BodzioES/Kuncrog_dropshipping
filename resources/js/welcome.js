@@ -9,7 +9,17 @@ window.bootstrap = { Modal };
 
         //pobiera odpowiednie id produktu dzieki data-id="{{ $product->id }}" ktory jest w przycisku
         var productId = $(this).data('id');
-        var quantity = 1;
+
+        // Sprawdzamy, czy przycisk ma przypisany input z ilością
+        var quantitySelector = $(this).data('quantity-input'); // np. "#quantity"
+        var quantity = 1; // domyślna ilość
+
+        if (quantitySelector){
+            var $input = $(quantitySelector);
+            if ($input.length){
+                quantity = parseInt($input.val());
+            }
+        }
 
         $.ajax({
             url: '/cart/' + productId,

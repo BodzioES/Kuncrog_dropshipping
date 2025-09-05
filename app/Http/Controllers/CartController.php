@@ -70,6 +70,8 @@ class CartController extends Controller
      */
     public function store(Request $request, Product $product): JsonResponse
     {
+        $quantity = $request->input('quantity',1); // pobieramy quantity, domyślnie 1
+
         //dodawanie produktu do koszyka jako zalogowany uzytkownik
         if (Auth::check()) {
             $cartItem = Cart::firstOrCreate(
@@ -80,7 +82,7 @@ class CartController extends Controller
                     'quantity' => 0,
                 ]
             );
-            $cartItem->quantity += 1;
+            $cartItem->quantity += $quantity;
             $cartItem->save();
 
             //to narazie nie jest uzywane ale moze kiedys byc wiec to zostawiam
@@ -98,7 +100,7 @@ class CartController extends Controller
             }
 
             if (isset($cart[$product->id])) {
-                $cart[$product->id]['quantity'] += 1;
+                $cart[$product->id]['quantity'] += $quantity;
             } else {
                 $cart[$product->id] = [
                     'id' => $product->id,
