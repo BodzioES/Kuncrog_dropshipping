@@ -58,20 +58,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('cartCount', $cartCount);
         });
 
-        //  POBIERA ADRES IP OD UZYTKOWNIKA KTORY WEJDZIE NA STRONE
-        $ip = request()->ip();
-
-        //  SPRAWDZA CZY ADRES JEST JUZ W BAZIE JAK NIE TO GO DODAJE
-        Visitors::firstOrCreate(['ip_address' => $ip]);
-
-
-        // liczy unikalne IP (cache na 60s, żeby nie mielić bazy)
-        /*
-         * Służy do cache’owania wyniku zapytania, żeby za każdym razem nie liczyć od nowa
-         * przez godzinę wynik będzie brany z cache, zamiast pytać bazę. Po godzinie wynik się przeliczy i zapisze na nowo
-         *
-         * */
-        $visitorsCount = Cache::remember('visitors_count',60, function () {
+        $visitorsCount = Cache::remember('visitors_count',1, function () {
             return Visitors::count('ip_address');
         });
 

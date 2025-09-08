@@ -22,12 +22,13 @@ export default defineConfig({
                 'resources/css/admin.css',
                 'resources/js/admin.js',
                 'resources/css/order.css',
+                'resources/js/cookie-navbar.js',
             ],
             refresh: true,
         }),
     ],
     server: {
-        hmr: false, // jak to nic nie da to do usuniecia
+        hmr: false,
     },
     resolve: {
         alias: {
