@@ -14,6 +14,8 @@ class TrackVisitors
         try {
             Visitors::firstOrCreate([
                 'ip_address' => $request->ip(),
+            ], [
+                'created_at' => now(),
             ]);
         } catch (\Exception $e) {
             Log::error('Visitor log failed: '.$e->getMessage());

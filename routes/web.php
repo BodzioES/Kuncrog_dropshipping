@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\UserOrdersController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -28,6 +29,28 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.in
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 Route::post('/checkout/update-total', [CheckoutController::class, 'updateTotal']);
 
+Route::get('/my-ip', function () {
+    $ip = request()->ip();
+
+    // pobranie lokalizacji z darmowego API ipapi.co
+    $location = null;
+    try {
+        $response = Http::get("https://ipapi.co/{$ip}/json/");
+        if ($response->ok()) {
+            $location = $response->json();
+        }
+    } catch (\Exception $e) {
+        $location = ['error' => $e->getMessage()];
+    }
+
+    return response()->json([
+        'laravel_ip'   => $ip,
+        'real_ip'      => $_SERVER['HTTP_X_REAL_IP'] ?? null,
+        'forwarded_for'=> $_SERVER['HTTP_X_FORWARDED_FOR'] ?? null,
+        'remote_addr'  => $_SERVER['REMOTE_ADDR'] ?? null,
+        'location'     => $location,
+    ]);
+});
 
 Route::get('/product_page/{product}',[ProductPageController::class,'show'])->name('product_page.show');
 

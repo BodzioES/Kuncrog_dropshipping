@@ -2,10 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Middleware\TrustProxies as Middleware;
-use Symfony\Component\HttpFoundation\Response;
 
 class TrustProxies extends Middleware
 {
@@ -15,7 +13,7 @@ class TrustProxies extends Middleware
      *
      * @var array|string|null
      */
-    protected $proxies = '*'; // ufamy wszystkim proxy (np. Cloudflare, Nginx)
+    protected $proxies = ['192.168.1.79']; // ufamy wszystkim proxy (np. Cloudflare, Nginx)
 
     /**
      * The headers that should be used to detect proxies.
@@ -28,13 +26,4 @@ class TrustProxies extends Middleware
         Request::HEADER_X_FORWARDED_PORT |
         Request::HEADER_X_FORWARDED_PROTO;
 
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    public function handle(Request $request, Closure $next): Response
-    {
-        return $next($request);
-    }
 }
