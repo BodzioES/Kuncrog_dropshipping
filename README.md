@@ -5,7 +5,7 @@
 
 ---
 
-## 🌐 O stronie
+## 🌐 About WebStore
 
 **Kuncrog.pl** is a project of a simple online store created in Laravel, a PHP framework.
 
