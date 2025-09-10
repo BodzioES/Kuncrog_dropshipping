@@ -1,5 +1,5 @@
 
-# 👋 Welcome to GitHubie Kuncrog.pl!
+# 👋 Welcome to GitHub Kuncrog.pl!
 
 📌 **Visit my website:** [www.kuncrog.pl](https://www.kuncrog.pl)
 
