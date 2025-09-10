@@ -13,7 +13,7 @@ class TrustProxies extends Middleware
      *
      * @var array|string|null
      */
-    protected $proxies = ['192.168.1.79']; // ufamy wszystkim proxy (np. Cloudflare, Nginx)
+    protected $proxies = ['192.168.1.79']; // ufamy proxy o tym ip
 
     /**
      * The headers that should be used to detect proxies.
