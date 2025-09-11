@@ -20,7 +20,6 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/css/productPage.css',
                 'resources/css/admin.css',
-                'resources/js/admin.js',
                 'resources/css/order.css',
                 'resources/js/cookie-navbar.js',
             ],

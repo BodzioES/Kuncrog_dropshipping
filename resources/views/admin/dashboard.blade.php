@@ -21,18 +21,38 @@
                             <button class="btn btn-sm btn-outline-secondary">Share</button>
                             <button class="btn btn-sm btn-outline-secondary">Export</button>
                         </div>
-                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
                             <span data-feather="calendar"></span>
-                            This week
+                            {{request('range') === 'month' ? 'This month' : 'This week'}}
                         </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('admin.dashboard', ['range' => 'week']) }}">This week</a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin.dashboard', ['range' => 'month']) }}">This month</a></li>
+                        </ul>
                     </div>
                 </div>
 
-                <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
-
+                <canvas id="earningsChart"></canvas>
+                <script>
+                    const ctx = document.getElementById('earningsChart');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: @json($labels),
+                            datasets: [{
+                                label: 'Zarobki (PLN)',
+                                data: @json($totals),
+                                borderWidth: 1,
+                                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                            }]
+                        }
+                    });
+                </script>
             </main>
         </div>
     </div>
-    <canvas id="myChart" width="900" height="380"></canvas>
+
+
+
 @endsection
 @vite(['resources/css/admin.css'])
