@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use Carbon\Carbon;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function Laravel\Prompts\table;
 
 class AdminController extends Controller
 {
@@ -50,6 +52,19 @@ class AdminController extends Controller
             }
         }
 
-        return view('admin.dashboard', compact('labels', 'totals', 'range'));
+        $totalUsers = count(User::all());
+        $totalOrders = count(Order::all());
+        $totalProducts = count(Product::all());
+        $totalEarnings = DB::table('orders')->sum('total_price');
+
+
+        return view('admin.dashboard',
+            compact('labels',
+                'totals',
+                'range',
+                'totalUsers',
+                'totalOrders',
+                'totalProducts',
+                'totalEarnings',));
     }
 }
