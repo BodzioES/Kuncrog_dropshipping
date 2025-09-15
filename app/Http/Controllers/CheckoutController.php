@@ -117,7 +117,6 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            //to sluzy do tego aby sprawdzic najpierw czy te dane spelniaja wymogi ktore sa ponizej, jesli nie to nie wykona sie zapytanie do bazy
             'address.first_name' => 'required|string|max:255',
             'address.last_name' => 'required|string|max:255',
             'address.email' => 'required|email|max:255',
@@ -134,7 +133,18 @@ class CheckoutController extends Controller
             'items.*.quantity' => 'required|integer|min:1',
             'items.*.current_price' => 'required|numeric|min:0',
             'items.*.id_product' => 'required|integer',
+        ], [
+            'address.first_name.required' => 'Pole Imię jest wymagane.',
+            'address.last_name.required' => 'Pole Nazwisko jest wymagane.',
+            'address.email.required' => 'Pole E-mail jest wymagane.',
+            'address.street_and_house_number.required' => 'Pole Ulica i numer domu jest wymagane.',
+            'address.city.required' => 'Pole Miasto jest wymagane.',
+            'address.postal_code.required' => 'Pole Kod pocztowy jest wymagane.',
+            'address.phone_number.required' => 'Pole Numer telefonu jest wymagane.',
 
+            'id_payment_method.required' => 'Musisz wybrać metodę płatności.',
+            'id_shipping_method.required' => 'Musisz wybrać metodę dostawy.',
+            'items.required' => 'Koszyk nie może być pusty.',
         ]);
         //Po walidacji — nigdy się nie wykona jeśli walidacja padnie!!!!!!!!!!
         DB::beginTransaction();
