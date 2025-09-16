@@ -1,0 +1,78 @@
+.container-fluid{
+    background-color: #f1f1f1;
+}
+
+.dashboard-border {
+    background-color: white;
+    border-radius: 20px;
+    padding: 1em;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Navbar */
+.custom-navbar {
+    background-color: white;  /* ciemny szary (jak bootstrap bg-dark) */
+    padding: 0.75rem 1rem;
+    color: #fff;
+    border-radius: 20px;
+}
+
+/* Layout */
+.custom-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Tytuł */
+.custom-title {
+    font-size: 1.25rem;
+    margin: 0;
+    color: black;
+}
+
+/* Prawa sekcja */
+.custom-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Input wyszukiwania */
+.custom-search-input {
+    height: 38px;
+    line-height: 38px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background-color: rgba(155, 55, 55, 0.1);
+    color: #fff;
+    padding: 0 12px;
+    box-sizing: border-box; /* ważne, żeby wysokość liczyła się poprawnie */
+}
+
+.custom-search-input:focus {
+    background-color: rgba(255,255,255,0.2);
+    border-color: #0d6efd;
+    outline: none;
+    color: #fff;
+}
+
+/* Przycisk logout */
+.custom-logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 16px;
+    border-radius: 20px;
+    background-color: #6c757d; /* szary */
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.custom-logout-btn:hover {
+    background-color: #dc3545; /* czerwony */
+    color: #fff;
+}

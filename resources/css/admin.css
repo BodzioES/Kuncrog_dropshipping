@@ -12,7 +12,9 @@ body {
  * Sidebar
  */
 
-
+.row{
+    background-color: #f1f1f1;
+}
 
 .sidebar {
     position: fixed;
@@ -21,20 +23,22 @@ body {
     left: 0;
     z-index: 100; /* Behind the navbar */
     padding: 0;
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-    background-color: black; /* ciemny */
-    color: white;
+}
+
+.my-sidebar {
+    background-color: rgba(255, 255, 255, .1);
 }
 
 .sidebar-sticky {
     position: sticky;
     top: 48px; /* Height of navbar */
-    height: calc(100vh - 48px);
+    height: calc(100vh - 78px);
     padding-top: .5rem;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: white;
     border-radius: 20px;
+    margin-bottom: 20px;
 }
 
 .sidebar .nav-link {
