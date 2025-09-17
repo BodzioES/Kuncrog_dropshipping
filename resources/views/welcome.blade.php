@@ -71,7 +71,7 @@
                     <div class="row   mb-5">
                         <div class="col-12">
                             <div class="dropdown">
-                                <label class="mr-2 float-left">Sort by:</label>
+                                <label class="mr-2 float-left">Sortuj jako:</label>
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropDownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     Relevance
                                 </button>

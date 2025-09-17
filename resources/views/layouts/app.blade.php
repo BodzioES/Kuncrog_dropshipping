@@ -48,7 +48,7 @@
                 <ul class="navbar-nav me-auto"></ul>
 
                 <div class="mx-auto text-center fw-bold">
-                    👥 Odwiedziło nas już <span class="text-primary">{{ $visitorsCount }}</span> osób
+                    👥 Odwiedziło nas już <span class="text-primary">{{ $visitorsCount }}</span> osób 👥
                 </div>
 
                 <ul class="navbar-nav ms-auto">

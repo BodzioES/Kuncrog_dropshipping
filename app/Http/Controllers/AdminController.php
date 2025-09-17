@@ -47,7 +47,7 @@ class AdminController extends Controller
             $labels = [];
             $totals = [];
             foreach ($daysOfWeek as $day) {
-                $labels[] = __(ucfirst(\Carbon\Carbon::parse($day)->locale('pl')->isoFormat('dddd')));
+                $labels[] = __(ucfirst(\Carbon\Carbon::parse($day)->locale('en')->isoFormat('dddd')));
                 $totals[] = $earnings[$day] ?? 0;
             }
         }
@@ -56,15 +56,34 @@ class AdminController extends Controller
         $totalOrders = count(Order::all());
         $totalProducts = count(Product::all());
         $totalEarnings = DB::table('orders')->sum('total_price');
+        $totalSumCurrentDay = DB::table('orders')->whereDay('created_at', now()->day)->sum('total_price');
+
+        $bestProduct = DB::table('order_items as oi')
+            ->join('products as p', 'p.id', '=', 'oi.id_product')
+            ->join('product_images as pi', function ($join) {
+                $join->on('pi.id_product', '=', 'p.id')
+                    ->where('pi.is_main', '=', 1); //tylko glowne zdjecie
+            })
+            ->select('p.name','pi.image_url',DB::raw('SUM(oi.quantity) as sumProduct'))
+            ->groupBy('oi.id_product','p.name','pi.image_url')
+            ->orderByDesc('sumProduct')
+            ->first(); //mozemy tez uzyc take(5) aby wybrac 5 najczesciej kupowanych
+
+
+
 
 
         return view('admin.dashboard',
-            compact('labels',
+            compact(
+                'labels',
                 'totals',
                 'range',
                 'totalUsers',
                 'totalOrders',
                 'totalProducts',
-                'totalEarnings',));
+                'totalEarnings',
+                'totalSumCurrentDay',
+                'bestProduct',
+            ));
     }
 }
