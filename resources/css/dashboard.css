@@ -2,7 +2,7 @@
     background-color: #f1f1f1;
 }
 
-.dashboard-border {
+.dashboard-border, .earningsChart {
     background-color: white;
     border-radius: 20px;
     padding: 1em;

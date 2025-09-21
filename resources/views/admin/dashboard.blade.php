@@ -84,10 +84,10 @@
 
                 </div>
 
-                <div class="row g-3 mb-4">
+                <div class="row g-3 mb-4 d-flex align-items-stretch">
 
                     <div class="col-md-3">
-                        <div class="totalEarnings d-flex justify-content-center align-items-center">
+                        <div class="totalEarnings h-100 d-flex justify-content-center align-items-center">
                             <div class="credit-card">
                                 <div class="card-content text-center">
                                     <h2 class="card-amount">{{$totalEarnings}} zł</h2>
@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <div class="bestProduct d-flex flex-column align-items-center justify-content-center text-center">
+                        <div class="bestProduct h-100 d-flex flex-column align-items-center justify-content-center text-center">
                             <h5 class="mb-2 text-secondary">Best Product</h5>
                             <h3 class="mb-1" style="font-weight: bold; color: #333;">{{$bestProduct->name}}</h3>
                             <p class="mb-2" style="font-weight: 500; color: #666;">Sold: {{$bestProduct->sumProduct}} pcs</p>
@@ -109,8 +109,9 @@
                     </div>
 
                     <div class="col-md-6">
-
-                        <canvas id="earningsChart"></canvas>
+                        <div class="earningsChart h-100">
+                            <canvas id="earningsChart"></canvas>
+                        </div>
                     </div>
 
                 </div>
@@ -135,9 +136,7 @@
                             </ul>
                         </div>
                     </div>
-
                     <canvas id="differentEarnings"></canvas>
-
                 </div>
                 <script>
                     const ctxV2 = document.getElementById('differentEarnings')
