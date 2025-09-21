@@ -86,16 +86,58 @@
     padding: 1em;
 }
 
+.totalEarnings {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+    padding: 1em;
+}
+
 .credit-card {
     background: linear-gradient(135deg, #667eea, #764ba2);
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-    min-height: 200px;
+    color: #fff;
+    min-height: 180px;
+    max-height: 400px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: flex-start;
+    padding: 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    width: 90%;
 }
-.credit-card h2, .credit-card h5, .credit-card small {
-    margin: 0;
+
+.card-content {
+    z-index: 1;
+}
+
+.card-amount {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.card-label {
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.9;
+    margin-bottom: 0.25rem;
+}
+
+.card-sub {
+    font-size: 0.85rem;
+    opacity: 0.75;
+}
+
+.credit-card::after {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
 }

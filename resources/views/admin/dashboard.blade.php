@@ -86,12 +86,13 @@
 
                 <div class="row g-3 mb-4">
 
-                    <div class="col-md-6">
-                        <div class="totalEarnings">
-                            <div class="credit-card d-flex flex-column align-items-center justify-content-center p-4">
-                                <h5 class="mb-2 text-light">Total Earnings</h5>
-                                <h2 class="mb-2" style="font-weight: bold; color: #fff;">{{$totalEarnings}} zł</h2>
-                                <small style="color: rgba(255,255,255,0.8); font-weight: 500;">Total Revenue</small>
+                    <div class="col-md-3">
+                        <div class="totalEarnings d-flex justify-content-center align-items-center">
+                            <div class="credit-card">
+                                <div class="card-content text-center">
+                                    <h2 class="card-amount">{{$totalEarnings}} zł</h2>
+                                    <p class="card-label">Wallet Balance</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -105,6 +106,11 @@
                                  alt="Photo"
                                  style="height: 150px; width: auto; object-fit: cover; border-radius: 15px; box-shadow: 2px 2px 6px rgba(0,0,0,0.1);">
                         </div>
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <canvas id="earningsChart"></canvas>
                     </div>
 
                 </div>
@@ -121,18 +127,57 @@
                             </div>
                             <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span data-feather="calendar"></span>
-                                {{request('range') === 'month' ? 'This month' : 'This week'}}
+                                {{request('range2') === 'month2' ? 'This month' : 'This week'}}
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('admin.dashboard', ['range' => 'week']) }}">This week</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.dashboard', ['range' => 'month']) }}">This month</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard', ['range' => 'week', 'range2' => 'week2']) }}">This week</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard', ['range' => 'month', 'range2' => 'month2']) }}">This month</a></li>
                             </ul>
                         </div>
                     </div>
 
-                    <canvas id="earningsChart"></canvas>
+                    <canvas id="differentEarnings"></canvas>
+
                 </div>
                 <script>
+                    const ctxV2 = document.getElementById('differentEarnings')
+                    new Chart(ctxV2, {
+                       type: 'bar',
+                       data: {
+                           labels: @json($labels),
+                           datasets: [
+                               {
+                                label: 'Earnings (Current)',
+                                data: @json($totals),
+                                borderWidth: 1,
+                                backgroundColor: 'rgba(154,19,204,0.6)',
+                                },
+                               {
+                               label: 'Earnings (Previous)',
+                               data: @json($previousTotals),
+                               borderWidth: 1,
+                               backgroundColor: 'rgba(19,84,204,0.6)',
+                                }
+                           ]
+                       },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    stacked: false, //osobne slupki obok siebie
+                                },
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+
                     const ctx = document.getElementById('earningsChart');
                     new Chart(ctx, {
                         type: 'bar',
