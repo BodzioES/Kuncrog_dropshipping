@@ -34,43 +34,52 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{route('admin.dashboard')}}">
+                        <a class="nav-link {{request()->routeIs('admin.dashboard') ? 'active' : ''}}"
+                           href="{{route('admin.dashboard')}}">
                             <span data-feather="home"></span>
                             Dashboard <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.orders.index')}}">
+                        <a class="nav-link {{request()->routeIs('admin.orders.*') ? 'active' : ''}}"
+                           href="{{route('admin.orders.index')}}">
                             <span data-feather="file"></span>
                             Orders
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('products.index')}}">
+                        <a class="nav-link {{request()->routeIs('products.*') ? 'active' : ''}}"
+                           href="{{route('products.index')}}">
                             <span data-feather="shopping-cart"></span>
                             Products
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.users.index')}}">
+                        <a class="nav-link {{request()->routeIs('admin.users.*') ? 'active' : ''}}"
+                           href="{{route('admin.users.index')}}">
                             <span data-feather="users"></span>
                             Customers
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link"
+                           href="#">
                             <span data-feather="bar-chart-2"></span>
                             Reports
+                            <i class="fa-solid fa-circle-exclamation" style="color:red;"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link"
+                           href="#">
                             <span data-feather="layers"></span>
                             Integrations
+                            <i class="fa-solid fa-circle-exclamation" style="color:red;"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.visitors.index')}}">
+                        <a class="nav-link {{request()->routeIs('admin.visitors.*') ? 'active' : ''}}"
+                           href="{{route('admin.visitors.index')}}">
                             <span data-feather="map-pin"></span>
                             Tracking
                         </a>
@@ -88,24 +97,28 @@
                         <a class="nav-link" href="#">
                             <span data-feather="file-text"></span>
                             Current month
+                            <i class="fa-solid fa-circle-exclamation" style="color:red;"></i>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <span data-feather="file-text"></span>
                             Last quarter
+                            <i class="fa-solid fa-circle-exclamation" style="color:red;"></i>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <span data-feather="file-text"></span>
-                            Social engagement
+                            SocialEngagement
+                            <i class="fa-solid fa-circle-exclamation" style="color:red;"></i>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <span data-feather="file-text"></span>
                             Year-end sale
+                            <i class="fa-solid fa-circle-exclamation" style="color:red;"></i>
                         </a>
                     </li>
                 </ul>

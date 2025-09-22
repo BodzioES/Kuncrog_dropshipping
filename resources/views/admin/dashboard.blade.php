@@ -9,7 +9,7 @@
             <h1 class="custom-title">Dashboard</h1>
 
             <!-- prawa strona -->
-            <div class="custom-actions">
+            <div class="custom-actions d-flex align-items-center gap-2">
                 <form class="custom-search-form" role="search">
                     <input class="custom-search-input"
                            type="text"
@@ -146,17 +146,26 @@
                            labels: @json($labels),
                            datasets: [
                                {
-                                label: 'Earnings (Current)',
-                                data: @json($totals),
-                                borderWidth: 1,
-                                backgroundColor: 'rgba(154,19,204,0.6)',
+                                    label: 'Earnings (Current)',
+                                    data: @json($totals),
+                                    borderWidth: 1,
+                                    backgroundColor: 'rgba(154,19,204,0.6)',
                                 },
                                {
-                               label: 'Earnings (Previous)',
-                               data: @json($previousTotals),
-                               borderWidth: 1,
-                               backgroundColor: 'rgba(19,84,204,0.6)',
-                                }
+                                   label: 'Earnings (Previous)',
+                                   data: @json($previousTotals),
+                                   borderWidth: 1,
+                                   backgroundColor: 'rgba(19,84,204,0.6)',
+                                },
+                               {
+                                   label: 'Diffrence (%)',
+                                   data: @json($percentageDifferent),
+                                   type: 'line', //linia na wykresie
+                                   borderColor: 'rgba(255,99,132,1)',
+                                   backgroundColor: 'rgba(255,99,132,1)',
+                                   yAxisID: 'y1', // osobna os dla procentow
+                                   tension: 0.3, //gladka linia
+                               }
                            ]
                        },
                         options: {
@@ -171,7 +180,22 @@
                                     stacked: false, //osobne slupki obok siebie
                                 },
                                 y: {
-                                    beginAtZero: true
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Earnings (PLN)'
+                                    }
+                                },
+                                y1: {
+                                    position: 'right',
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Change (%)'
+                                    },
+                                    grid: {
+                                        drawOnChartArea: false //zeby kratki sie nie nakladaly
+                                    }
                                 }
                             }
                         }

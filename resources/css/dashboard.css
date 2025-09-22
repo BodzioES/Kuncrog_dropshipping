@@ -40,6 +40,11 @@
     gap: 0.75rem;
 }
 
+.custom-search-form {
+    display: flex;
+    align-items: center; /* wyrównanie input do środka */
+}
+
 /* Input wyszukiwania */
 .custom-search-input {
     height: 38px;

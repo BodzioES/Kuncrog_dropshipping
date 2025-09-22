@@ -51,10 +51,6 @@ body {
     color: #999;
 }
 
-.sidebar .nav-link.active {
-    color: #007bff;
-}
-
 .sidebar .nav-link:hover .feather,
 .sidebar .nav-link.active .feather {
     color: inherit;
@@ -100,3 +96,16 @@ body {
 
 .border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.sidebar-sticky li:hover {
+    background-color: rgba(192, 192, 192, 0.58);
+    border-radius: 30px;
+}
+
+.nav-link.active{
+    font-weight: bold;
+    font-size: 1.05rem;  /* delikatne powiększenie */
+    color: #0d6efd !important; /* bootstrapowy niebieski */
+    background-color: rgba(13, 110, 253, 0.1); /* subtelne tło */
+    border-radius: 8px;
+}
