@@ -13,7 +13,7 @@
         </div>
         <div class="slide" style="background-image:url('https://cdn.shopify.com/s/files/1/0605/4995/5814/files/sport_luxe_banner_mockd_1024x1024.jpg?v=1636070459');">
             <div class="overlay">
-                <h1>Sport‑luxe w stylu 2025</h1>
+                <h1>Sport-luxe w stylu 2025</h1>
                 <p>Sportowe kurtki i retro trampki</p>
                 <a href="">Sprawdź</a>
             </div>
@@ -32,7 +32,8 @@
         <div class="container">
             <h2 class="mb-4">Kuncrog – produkty na czasie!</h2>
             <p class="lead">
-                Nasz sklep jest stale aktualizowany oraz odświeżany o najróżniejsze nowości, które stale wchodzą na rynek. Dbamy o to, aby w naszym sklepie były ciekawe oraz funkcjonalne produkty!
+                Nasz sklep jest stale aktualizowany oraz odświeżany o najróżniejsze nowości,
+                które stale wchodzą na rynek. Dbamy o to, aby w naszym sklepie były ciekawe oraz funkcjonalne produkty!
             </p>
         </div>
     </section>
@@ -66,73 +67,109 @@
 
     <div class="container pt-5">
         <div class="row">
-            <div class="col-md-8 order-md-2 col-lg-9">
-                <div class="container-fluid">
-                    <div class="row   mb-5">
-                        <div class="col-12">
-                            <div class="dropdown">
-                                <label class="mr-2 float-left">Sortuj jako:</label>
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropDownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Relevance
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item sort-link" href="#" data-sort="price_asc">Cena rosnąco</a></li>
-                                    <li><a class="dropdown-item sort-link" href="#" data-sort="price_desc">Cena malejąco</a></li>
-                                    <li><a class="dropdown-item sort-link" href="#" data-sort="name_asc">Od A do Z</a></li>
-                                    <li><a class="dropdown-item sort-link" href="#" data-sort="name_desc">Od Z do A</a></li>
-                                </ul>
+            {{-- Jeden wspólny formularz --}}
+            <form class="col-12 col-md-4 col-lg-3 sidebar-filter">
+
+                {{-- Desktop: sidebar po lewej --}}
+                <div class="d-none d-md-block">
+                    <h3 class="mt-0 mb-5">
+                        {{__('shop.welcome.products')}} <span class="text-primary">{{ count($products) }}</span>
+                    </h3>
+
+                    <h6 class="text-uppercase font-weight-bold mb-3">{{__('shop.welcome.categories')}}</h6>
+                    @foreach($products_categories as $category)
+                        <div class="mt-2 mb-2 pl-2">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="filter[categories][]" id="category-{{ $category->id }}" value="{{ $category->id }}">
+                                <label class="custom-control-label" for="category-{{ $category->id }}">{{ $category->name }}</label>
                             </div>
                         </div>
+                    @endforeach
+
+                    <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
+
+                    <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">{{__('shop.welcome.price')}}</h6>
+                    <div class="price-filter-control">
+                        <input type="number" class="form-control w-50 mb-2" placeholder="50"
+                               name="filter[price_min]" min="0">
+                        <input type="number" class="form-control w-50" placeholder="150"
+                               name="filter[price_max]" min="0">
                     </div>
-                    <div class="row g-4" id="products-wrapper">
-                        @foreach($products as $product)
-                            <div class="col-12 col-sm-6 col-md-4">
-                                <div id="pole" class="card h-100 border-0">
-                                    <a href="{{route('product_page.show',$product->id)}}" style="text-decoration: none">
-                                        <div class="card-img-top text-center">
-                                            <img src="{{asset('storage/products/' . $product->images->first()->image_url)}}"
-                                                 alt="Photo"
-                                                 style="height: auto; object-fit: cover; width: 100%;">
+                    <a href="#products-wrapper" class="btn btn-lg btn-block btn-primary mt-5" id="filter-button">{{__('shop.welcome.filter')}}</a>
+                </div>
+
+                {{-- Mobile: filtry nad produktami --}}
+                <div class="col-12 d-block d-md-none mb-4">
+                    <div class="accordion" id="filterAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFilters">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFilters" aria-expanded="true"
+                                        aria-controls="collapseFilters">
+                                    🔍 Filtry produktów
+                                </button>
+                            </h2>
+                            <div id="collapseFilters" class="accordion-collapse collapse show"
+                                 aria-labelledby="headingFilters" data-bs-parent="#filterAccordion">
+                                <div class="accordion-body">
+                                    <h6 class="text-uppercase font-weight-bold mb-3">{{__('shop.welcome.categories')}}</h6>
+                                    @foreach($products_categories as $category)
+                                        <div class="mt-2 mb-2 pl-2">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" name="filter[categories][]" id="category-{{ $category->id }}" value="{{ $category->id }}">
+                                                <label class="custom-control-label" for="category-{{ $category->id }}">{{ $category->name }}</label>
+                                            </div>
                                         </div>
-                                        <div class="card-body text-center">
-                                            <h4 class="card-title">{{ $product->name }}</h4>
-                                            <h5 class="card-price small"><i>{{ $product->price }} PLN</i></h5>
-                                        </div>
-                                    </a>
-                                    <div style="display: none" id="product-quantity-{{$product->id}}">{{$product->quantity}}</div>
-                                    <button class="btn btn-success btn-sm add-cart-button m-2" data-id="{{ $product->id }}">
-                                        <i class="fas fa-cart-plus"></i> Dodaj do koszyka
-                                    </button>
+                                    @endforeach
+
+                                    <hr>
+
+                                    <h6 class="text-uppercase mt-3 mb-2 font-weight-bold">{{__('shop.welcome.price')}}</h6>
+                                    <div class="d-flex gap-2">
+                                        <input type="number" class="form-control" placeholder="50"
+                                               name="filter[price_min]" min="0">
+                                        <input type="number" class="form-control" placeholder="150"
+                                               name="filter[price_max]" min="0">
+                                    </div>
+
+                                    <a href="#products-wrapper" class="btn btn-lg btn-block btn-primary mt-5" id="filter-button">{{__('shop.welcome.filter')}}</a>
+
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
-
-                </div>
-            </div>
-
-            <form class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
-                <h3 class="mt-0 mb-5">{{__('shop.welcome.products')}} <span class="text-primary">{{ count($products) }}</span></h3>
-                <h6 class="text-uppercase font-weight-bold mb-3">{{__('shop.welcome.categories')}}</h6>
-                @foreach($products_categories as $category)
-                    <div class="mt-2 mb-2 pl-2">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="filter[categories][]" id="category-{{ $category->id }}" value="{{ $category->id }}">
-                            <label class="custom-control-label" for="category-{{ $category->id }}">{{ $category->name }}</label>
                         </div>
                     </div>
-                @endforeach
-                <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
-                <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">{{__('shop.welcome.price')}}</h6>
-                <div class="price-filter-control">
-                    <input type="number" class="form-control w-50 pull-left mb-2" placeholder="50" name="filter[price_min]" id="price-min-control" min="0">
-                    <input type="number" class="form-control w-50 pull-right" placeholder="150" name="filter[price_max]" id="price-max-control" min="0">
                 </div>
-                <input id="ex2" type="text" class="slider " value="50,150" data-slider-min="10" data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]" data-value="50,150" style="display: none;">
-                <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
-                <a href="#products-wrapper" class="btn btn-lg btn-block btn-primary mt-5" id="filter-button">{{__('shop.welcome.filter')}}</a>
+
             </form>
 
+            {{-- Produkty --}}
+            <div class="col-md-8 col-lg-9">
+                <div class="row g-4" id="products-wrapper">
+                    @foreach($products as $product)
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <div id="pole" class="card h-100 border-0">
+                                <a href="{{route('product_page.show',$product->id)}}"
+                                   style="text-decoration: none">
+                                    <div class="card-img-top text-center">
+                                        <img src="{{asset('storage/products/' . $product->images->first()->image_url)}}"
+                                             alt="Photo" style="height: auto; object-fit: cover; width: 100%;">
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title">{{ $product->name }}</h4>
+                                        <h5 class="card-price small"><i>{{ $product->price }} PLN</i></h5>
+                                    </div>
+                                </a>
+                                <div style="display: none" id="product-quantity-{{$product->id}}">
+                                    {{$product->quantity}}
+                                </div>
+                                <button class="btn btn-success btn-sm add-cart-button m-2" data-id="{{ $product->id }}">
+                                    <i class="fas fa-cart-plus"></i> Dodaj do koszyka
+                                </button>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
 
         {{-- TO JEST TEN KOSZYK KTORY SIE WYSWIETLA PO DODANIU PRODUKTU DO KOSZYKA --}}
@@ -166,12 +203,15 @@
         </script>
     </div>
 @endsection
+
 @section('javascript')
 
 @endsection
+
 @section('js-files')
     @vite(['resources/js/welcome.js'])
     @vite('resources/js/modal_delete.js')
     @vite('resources/js/modal_quantity.js')
 @endsection
+
 @vite(['resources/css/welcome.css'])

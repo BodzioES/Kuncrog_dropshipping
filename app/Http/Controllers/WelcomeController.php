@@ -31,12 +31,8 @@ class WelcomeController extends Controller
                 $query = $query->where('price','>=', $filters['price_min']);
             }
             if (!empty($filters['price_max'])) {
-                $query = $query->where('price','>=', $filters['price_max']);
+                $query = $query->where('price','<=', $filters['price_max']);
             }
-
-            return response()->json([
-                'data' => $query->get()
-            ]);
         }
 
         if (!empty($sort)) {
@@ -56,7 +52,7 @@ class WelcomeController extends Controller
             }
         }
 
-        if($request->wantsJson()) {
+        if ($request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'data' => $query->get()
             ]);

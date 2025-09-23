@@ -27,31 +27,38 @@
 
 <div class="alert alert-info alert-dismissible fade show" role="alert">
     <div class="row justify-content-center text-center">
-    INFO: the webstore is in progress so a few things might be not working or bad working
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        INFO: the webstore is in progress so a few things might be not working or bad working
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 </div>
 
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
+            {{-- Logo --}}
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
+
+            {{-- Burger --}}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+            {{-- Menu --}}
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {{-- Lewa strona --}}
                 <ul class="navbar-nav me-auto"></ul>
 
-                <div class="mx-auto text-center fw-bold">
+                {{-- Licznik odwiedzin (desktop) --}}
+                <div class="mx-auto text-center fw-bold d-none d-md-block">
                     👥 Odwiedziło nas już <span class="text-primary">{{ $visitorsCount }}</span> osób 👥
                 </div>
 
-                <ul class="navbar-nav ms-auto">
+                {{-- Prawa strona --}}
+                <ul class="navbar-nav ms-auto align-items-center">
                     @guest
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -60,15 +67,17 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 @if (Route::has('login'))
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 @endif
                                 @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 @endif
                             </div>
                         </li>
                     @else
-                        <div class="navbar-brand">Witaj {{Auth::User()->name}}</div>
+                        <span class="navbar-brand welcome-user d-none d-md-inline">
+                            Witaj {{ Auth::user()->name }}
+                        </span>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -77,13 +86,8 @@
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 @can(['isAdmin'])
                                     <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                                    {{--
-                                    <a class="dropdown-item" href="{{ route('users.index') }}">Użytkownicy</a>
-                                    <a class="dropdown-item" href="{{ route('products.index') }}">Produkty</a>
-                                    --}}
                                 @endcan
                                 <a class="dropdown-item" href="{{ route('myOrders.index') }}">Moje zamówienia</a>
-
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -94,23 +98,40 @@
                             </div>
                         </li>
                     @endguest
+
+                    {{-- Koszyk --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('cart.index') }}">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span id="cart-count-badge" class="{{ $cartCount > 0 ? '' : 'd-none' }}">
+                                {{ $cartCount }}
+                            </span>
+                        </a>
+                    </li>
                 </ul>
-                {{--
-                    Ponizej jest ikonka koszyka do ktorej jest przekazywana
-                    ilosc produktow dodana do koszyka (dane pobiera z AppServiceProvidder.php)
-                 --}}
 
-                <a class="nav-link" href="{{ route('cart.index') }}">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    {{-- $cartCount jest pobierane z AppServiceProvider.php --}}
-                    <span id="cart-count-badge" class="{{ $cartCount > 0 ? '' : 'd-none' }}">
-                        {{ $cartCount }}
-                    </span>
-                </a>
+                {{-- Mobile: licznik + ikonki --}}
+                <div class="nav-mobile d-md-none">
+                    <div class="visitor-counter fw-bold text-center mb-3">
+                        👥 Odwiedziło nas już <span class="text-primary">{{ $visitorsCount }}</span> osób 👥
+                    </div>
 
+                    <div class="nav-icons">
+                        <a id="mobileUser" class="nav-link" href="#">
+                            <i class="fa-solid fa-user fa-lg"></i>
+                        </a>
+                        <a class="nav-link" href="{{ route('cart.index') }}">
+                            <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                            <span id="cart-count-badge-mobile" class="{{ $cartCount > 0 ? '' : 'd-none' }}">
+                                {{ $cartCount }}
+                            </span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
+
     <main class="py-4 flex-grow-1">
         @yield('content')
     </main>
