@@ -27,3 +27,12 @@
 .button-wrapper {
     text-align: center;
 }
+
+@media (max-width: 768px) {
+    .cart-table-wrapper {
+        display: none !important;
+    }
+    .cart-mobile {
+        display: block !important;
+    }
+}

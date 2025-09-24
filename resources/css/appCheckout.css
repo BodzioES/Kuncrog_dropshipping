@@ -1,0 +1,18 @@
+@media (max-width: 767.98px) {
+    /* Licznik odwiedzin */
+    .nav-mobile .visitor-counter {
+        font-size: 1rem;
+    }
+
+    /* Ikonki user + koszyk */
+    .nav-mobile .nav-icons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    /* Ukryj powitanie użytkownika na mobile */
+    .navbar-brand.welcome-user {
+        display: none !important;
+    }
+}

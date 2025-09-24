@@ -105,7 +105,13 @@ body {
 .nav-link.active{
     font-weight: bold;
     font-size: 1.05rem;  /* delikatne powiększenie */
-    color: #0d6efd !important; /* bootstrapowy niebieski */
-    background-color: rgba(13, 110, 253, 0.1); /* subtelne tło */
+    color: #0d6efd !important;
+    background-color: rgba(13, 110, 253, 0.1);
     border-radius: 8px;
+}
+
+.mobile-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
 }

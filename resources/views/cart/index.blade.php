@@ -5,8 +5,9 @@
         <h2 class="text-center mb-4">Twój koszyk</h2>
 
         @if(count($cartItems) > 0)
-            <div class="cart-table-wrapper">
-                <table class="table cart-table">
+            {{--  Desktop: koszyk  --}}
+            <div class="cart-table-wrapper d-none d-md-block">
+                <table class="table cart-table align-middle">
                     <thead class="thead-light">
                     <tr>
                         <th>Zdjęcie</th>
@@ -23,7 +24,7 @@
                                 {{--  !!! Operator .konkatenacji ma wyższy priorytet niż operator trójargumentowy ?:
                                   czyli bez nawiasow wykona sie 1 albo 0
                                   czyli cos takiego ( asset('storage/products/' . $isGuest) ) ? $item['image'] : $item->image
-                                  po prostu bez nawiasow sprawdza czy jest gosciem czy nie i zostawia reszte kody w sensie go nie czyta --}}
+                                  po prostu bez nawiasow sprawdza czy jest gosciem czy nie i zostawia reszte kodu w sensie go nie czyta --}}
                                 <img src="{{ asset('storage/products/' . ($isGuest ? $item['image'] : $item->image)) }}" alt="Photo"
                                     style="width: 80px; height: auto;"
                                 >
@@ -41,6 +42,33 @@
                     </tbody>
                 </table>
             </div>
+
+            {{--  Mobile: koszyk  --}}
+
+            <div class="cart-mobile d-block d-md-none">
+                @foreach($cartItems as $item)
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body d-flex align-items-center">
+                            <img src="{{asset('storage/products/' . ($isGuest ? $item['image'] : $item->image))}}"
+                                 alt="Photo" style="width: 60px; height: auto; margin-right: 10px;">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">{{ $isGuest ? $item['name'] : $item->name }}</h6>
+                                <div class="small text-muted mb-1">
+                                    Cena: {{ $isGuest ? $item['price'] : $item->price }} zł
+                                </div>
+                                <div class="small text-muted mb-1">
+                                    Ilość: x{{ $isGuest ? $item['quantity'] : $item->quantity }}
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-danger delete ms-2"
+                                    data-id="{{ $isGuest ? $item['id'] : $item->id }}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
 
             <div class="button-wrapper mt-4">
                 <a class="checkout-button" href="{{ route('checkout.index') }}">

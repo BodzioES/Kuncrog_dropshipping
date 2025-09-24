@@ -82,3 +82,18 @@
     transform: translateY(0);
     opacity: 1;
 }
+
+#cartModal .modal-content{
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+@media(max-width: 768px){
+    .cart-table{
+        display: none;
+    }
+
+    .cart-mobile{
+        display: block !important;
+    }
+}

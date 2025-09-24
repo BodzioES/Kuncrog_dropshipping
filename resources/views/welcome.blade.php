@@ -174,8 +174,8 @@
 
         {{-- TO JEST TEN KOSZYK KTORY SIE WYSWIETLA PO DODANIU PRODUKTU DO KOSZYKA --}}
         <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
                     <div class="modal-header">
                         <h5 class="modal-title" id="cartModalLabel">Koszyk</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
