@@ -41,7 +41,8 @@
                 <strong>Produkty</strong>
             </div>
             <div class="card-body p-0">
-                <table class="table table-bordered m-0">
+                {{--  Desktop  --}}
+                <table class="table table-bordered m-0 table-desktop d-none d-md-table">
                     <thead class="table-light">
                     <tr>
                         <th>Nazwa produktu</th>
@@ -59,24 +60,44 @@
                         @endphp
                         <tr>
                             <td>{{$products->product->name}}</td>
-                            <td>x{{$products->quantity}}</td>
-                            <td>{{$products->current_price}} zł</td>
-                            <td>{{$totalPrice}}</td>
+                            <td>x{{$quantity}}</td>
+                            <td>{{$price}} zł</td>
+                            <td>{{$totalPrice}} zł</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+
+                {{--  Mobile  --}}
+                <div class="table-mobile d-block d-md-none p-3">
+                    @foreach($order->items as $products)
+                        @php
+                            $quantity = $products->quantity;
+                            $price = $products->current_price;
+                            $totalPrice = $quantity * $price;
+                        @endphp
+                        <div class="product-card mb-3 p-3 border rounded shadow-sm bg-light">
+                            <p class="product-name mb-2">{{$products->product->name}}</p>
+                            <div class="product-info d-flex justify-content-between text-muted small">
+                                <span><strong>Ilość:</strong> x{{$quantity}}</span>
+                                <span><strong>Cena:</strong> {{$price}} zł</span>
+                                <span><strong>Łącznie:</strong> {{number_format($totalPrice,2,',','')}} zł</span>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
+            </div>
+            <a href="{{route('admin.orders.edit',$order->id)}}">
+                <button class="btn btn-primary">Edytuj</button>
+            </a>
+            <a href="{{route('admin.orders.index')}}">
+                <button class="btn btn-secondary">Powrót</button>
+            </a>
+            <a href="{{route('admin.orders.invoice',$order)}}">
+                <button class="btn btn-warning">Pobierz</button>
+            </a>
         </div>
-        <a href="{{route('admin.orders.edit',$order->id)}}">
-            <button class="btn btn-primary">Edytuj</button>
-        </a>
-        <a href="{{route('admin.orders.index')}}">
-            <button class="btn btn-secondary">Powrót</button>
-        </a>
-        <a href="{{route('admin.orders.invoice',$order)}}">
-            <button class="btn btn-warning">Pobierz</button>
-        </a>
     </div>
 
 @endsection
@@ -84,4 +105,5 @@
 @section('scripts')
     @vite('resources/js/delete.js')
     @vite('resources/css/order.css')
+    @vite('resources/css/orderShow.css')
 @endsection

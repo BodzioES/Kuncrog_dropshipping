@@ -14,7 +14,8 @@
             </div>
         </div>
         <div class="row">
-            <table class="table table-hover">
+            {{-- Desktop --}}
+            <table class="table table-hover table-desktop d-none d-md-table">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -42,20 +43,55 @@
                             <a href="{{route('products.edit',$product->id)}}">
                                 <button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
                             </a>
-                            <button class="btn btn-danger btn-sm delete" data-id="{{$product->id}}" data-url="{{ route('products.index') }}"><i class="fa-solid fa-trash"></i></button>
+                            <button class="btn btn-danger btn-sm delete"
+                                    data-id="{{$product->id}}"
+                                    data-url="{{ route('products.index') }}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
+
+            {{-- Mobile --}}
+            <div class="table-mobile d-block d-md-none">
+                @foreach($products as $product)
+                    <div class="product-card mb-3 p-3 border rounded shadow-sm bg-light">
+                        <p><strong>ID:</strong> {{$product->id}}</p>
+                        <p><strong>Nazwa:</strong> {{$product->name}}</p>
+                        <p><strong>Opis:</strong> {{$product->description}}</p>
+                        <p><strong>Ilość:</strong> {{$product->stock_quantity}}</p>
+                        <p><strong>Cena:</strong> {{$product->price}} zł</p>
+                        <p><strong>Kategoria:</strong> @if($product->hasCategory()){{$product->category->name}}@endif</p>
+
+                        <div class="d-flex justify-content-around mt-2">
+                            <a href="{{route('products.show',$product->id)}}" class="btn btn-sm btn-primary">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </a>
+                            <a href="{{route('products.edit',$product->id)}}" class="btn btn-sm btn-warning">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <button class="btn btn-sm btn-danger delete"
+                                    data-id="{{$product->id}}"
+                                    data-url="{{ route('products.index') }}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
             {{ $products->links() }}
         </div>
+    </div>
     </div>
 @endsection
 
 @section('scripts')
     <script data-url="{{ route('products.index') }}"></script>
     @vite('resources/js/delete.js')
+    @vite('resources/css/product.css')
 @endsection
 
 

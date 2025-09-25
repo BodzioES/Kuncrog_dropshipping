@@ -63,47 +63,32 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- wyswietlenie z tabeli $order oraz tabel powiazanych z ta tabela informacji o zamowieniach -->
                 @forelse($orders as $order)
                     <tr>
-                        <td colspan="1" class="text-center text-muted py-4">
-                            {{$order->created_at}}
-                        </td>
-                        <td colspan="1" class="text-center text-muted py-4">
-                            #{{$order->id}}
-                        </td>
-                        <td colspan="1" class="text-center text-muted py-4">
-                            {{$order->address->first_name}} {{$order->address->last_name}}
-                        </td>
-                        <td colspan="1" class="text-center text-muted py-4">
-                            {{$order->paymentMethod->name}}
-                        </td>
-                        <td colspan="1" class="text-center text-muted py-4">
-                            {{$order->total_price}} zł
-                        </td>
-                        <td colspan="1" class="text-center text-muted py-4">
-                            {{$order->status}}
-                        </td>
-                        <td colspan="1" class="text-center text-muted py-4">
-
-                            <a href="{{route('admin.orders.show',$order)}}">
-                                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <td data-label="Data zamówienia">{{$order->created_at}}</td>
+                        <td data-label="Numer zamówienia">#{{$order->id}}</td>
+                        <td data-label="Osoba kupująca">{{$order->address->first_name}} {{$order->address->last_name}}</td>
+                        <td data-label="Metoda płatności">{{$order->paymentMethod->name}}</td>
+                        <td data-label="Łączna kwota">{{$order->total_price}} zł</td>
+                        <td data-label="Status">{{$order->status}}</td>
+                        <td data-label="Akcje">
+                            <a href="{{route('admin.orders.show',$order)}}" class="btn btn-sm btn-outline-primary me-1">
+                                <i class="fa-solid fa-magnifying-glass"></i>
                             </a>
-
-                            <a href="{{route('admin.orders.edit',$order->id)}}">
-                                <button><i class="fa-solid fa-pen-to-square"></i></button>
+                            <a href="{{route('admin.orders.edit',$order->id)}}" class="btn btn-sm btn-outline-warning me-1">
+                                <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-
-                            <a href="{{route('admin.orders.invoice',$order)}}">
-                                <button><i class="fa-solid fa-file-pdf"></i></button>
+                            <a href="{{route('admin.orders.invoice',$order)}}" class="btn btn-sm btn-outline-danger">
+                                <i class="fa-solid fa-file-pdf"></i>
                             </a>
-
                         </td>
                     </tr>
                 @empty
-                    <td colspan="7" class="text-center text-muted py-4">
-                        Brak zamówień do wyświetlenia
-                    </td>
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">
+                            Brak zamówień do wyświetlenia
+                        </td>
+                    </tr>
                 @endforelse
                 </tbody>
                 <!-- generuje HTML z linkami do kolejnych stron wyników (np. „Poprzednia”, „1”, „2”, „Następna”)

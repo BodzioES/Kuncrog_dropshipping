@@ -8,7 +8,9 @@
                 <h1><i class="fa-solid fa-users"></i> {{__('shop.user.index_title')}}</h1>
             </div>
         </div>
-        <table class="table table-hover">
+
+        {{--  Desktop  --}}
+        <table class="table table-hover table-desktop d-none d-md-table">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -36,6 +38,28 @@
             @endforeach
             </tbody>
         </table>
+
+        {{-- Mobile --}}
+        <div class="table-mobile d-block d-md-none">
+            @foreach($users as $user)
+                <div class="user-card mb-3 p-3 border rounded shadow-sm bg-light">
+                    <p><strong>ID:</strong> {{$user->id}}</p>
+                    <p><strong>Email:</strong> {{$user->email}}</p>
+                    <p><strong>Imię:</strong> {{$user->name}}</p>
+                    <p><strong>Nazwisko:</strong> {{$user->surname}}</p>
+                    <p><strong>Telefon:</strong> {{$user->phone_number}}</p>
+
+                    <div class="d-flex justify-content-end mt-2">
+                        <button class="btn btn-danger btn-sm delete"
+                                data-id="{{$user->id}}"
+                                data-url="{{ route('admin.users.index') }}">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
         {{ $users->links() }}
     </div>
 @endsection
