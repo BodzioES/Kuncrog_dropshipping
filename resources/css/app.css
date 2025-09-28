@@ -32,6 +32,10 @@
 }
 
 @media (max-width: 767.98px) {
+    .navbar-nav{
+        display: none;
+    }
+
     /* Licznik odwiedzin */
     .nav-mobile .visitor-counter {
         font-size: 1rem;

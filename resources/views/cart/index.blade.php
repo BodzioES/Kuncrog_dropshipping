@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container cart-container">
-        <h2 class="text-center mb-4">Twój koszyk</h2>
+        <h2 class="text-center mb-4">Your cart</h2>
 
         @if(count($cartItems) > 0)
             {{--  Desktop: koszyk  --}}
@@ -10,11 +10,11 @@
                 <table class="table cart-table align-middle">
                     <thead class="thead-light">
                     <tr>
-                        <th>Zdjęcie</th>
-                        <th>Produkt</th>
-                        <th>Cena</th>
-                        <th>Ilość</th>
-                        <th>Akcje</th>
+                        <th>Photo</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,7 +34,7 @@
                             <td>x{{ $isGuest ? $item['quantity'] : $item->quantity }}</td>
                             <td>
                                 <button class="btn btn-danger delete" data-id="{{ $isGuest ? $item['id'] : $item->id }}">
-                                    USUŃ
+                                    Delete
                                 </button>
                             </td>
                         </tr>
@@ -73,13 +73,13 @@
             <div class="button-wrapper mt-4">
                 <a class="checkout-button" href="{{ route('checkout.index') }}">
                     <button type="button" class="btn btn-outline-success">
-                        Przejdź do podsumowania
+                        Go to summary
                     </button>
                 </a>
             </div>
 
         @else
-            <p class="text-center mt-5 fs-4">Twój koszyk jest pusty 🛒</p>
+            <p class="text-center mt-5 fs-4">Your cart is empty 🛒</p>
         @endif
     </div>
 @endsection

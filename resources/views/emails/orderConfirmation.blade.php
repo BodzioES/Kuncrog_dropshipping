@@ -4,32 +4,32 @@
            <h1>Kuncrog</h1>
         </div>
 
-        <h2 style="margin-bottom: 10px;">Twoje zamówienie zostało potwierdzone!</h2>
-        <p style="margin-bottom: 20px;">Witaj, {{ $order->address->first_name }}!<br>
-            Twoje zamówienie zostało przyjęte i zostanie wysłane w ciągu najbliższych dwóch dni.</p>
+        <h2 style="margin-bottom: 10px;">Your order has been confirmed!</h2>
+        <p style="margin-bottom: 20px;">Hello there, {{ $order->address->first_name }}!<br>
+            Your order has been accepted and will be shipped within the next two days.</p>
 
         <hr style="margin: 20px 0;">
 
         <table style="width: 100%; margin-bottom: 20px;">
             <tr>
-                <td style="padding: 5px 0;"><strong>Data zamówienia:</strong></td>
+                <td style="padding: 5px 0;"><strong>Order date:</strong></td>
                 <td>{{ $order->created_at->format('d M, Y') }}</td>
             </tr>
             <tr>
-                <td style="padding: 5px 0;"><strong>Numer zamówienia:</strong></td>
+                <td style="padding: 5px 0;"><strong>Order number:</strong></td>
                 <td>{{ $order->id }}</td>
             </tr>
             <tr>
-                <td style="padding: 5px 0;"><strong>Metoda płatności:</strong></td>
+                <td style="padding: 5px 0;"><strong>Payment method:</strong></td>
                 <td>{{ $order->paymentMethod->name }}</td>
             </tr>
             <tr>
-                <td style="padding: 5px 0;"><strong>Adres dostawy:</strong></td>
+                <td style="padding: 5px 0;"><strong>Delivery address:</strong></td>
                 <td>{{ $order->address->street_and_house_number }}, {{ $order->address->postal_code }} {{ $order->address->city }}</td>
             </tr>
         </table>
 
-        <h4 style="margin-top: 30px;">Zamówione produkty</h4>
+        <h4 style="margin-top: 30px;">Ordered products</h4>
         <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
             @foreach($order->items as $item)
                 <tr style="border-bottom: 1px solid #ddd;">
@@ -59,27 +59,27 @@
 
         <table style="width: 100%; margin-bottom: 20px;">
             <tr>
-                <td><strong>Łączna kwota produktów:</strong></td>
+                <td><strong>Total amount of products:</strong></td>
                 <td style="text-align: right;">{{ number_format($totalPrice, 2) }} zł</td>
             </tr>
             <tr>
-                <td><strong>Dostawa ({{ $order->shippingMethod->name }}):</strong></td>
+                <td><strong>Delivery ({{ $order->shippingMethod->name }}):</strong></td>
                 <td style="text-align: right;">{{ number_format($order->shippingMethod->price, 2) }} zł</td>
             </tr>
             <tr style="border-top: 2px solid #000;">
-                <td style="padding-top: 10px;"><strong>Suma całkowita:</strong></td>
+                <td style="padding-top: 10px;"><strong>Grand total:</strong></td>
                 <td style="text-align: right; padding-top: 10px;">
                     {{ number_format($totalPrice + $order->shippingMethod->price, 2) }} zł
                 </td>
             </tr>
         </table>
 
-        <p style="margin-top: 30px;">Dziękujemy za zakupy w naszym sklepie!<br>
-            Powiadomienie o wysyłce otrzymasz, gdy przesyłka zostanie nadana.</p>
+        <p style="margin-top: 30px;">Thank you for shopping in our store!<br>
+            You will receive a shipping notification when your package has shipped.</p>
 
         <p style="margin-top: 30px;"><strong>Zespół Kuncrog</strong></p>
 
         <hr style="margin-top: 40px;">
-        <p style="font-size: 12px; color: #888;">Potrzebujesz pomocy? Odwiedź nasze <a href="#" style="color: #444;">centrum pomocy</a></p>
+        <p style="font-size: 12px; color: #888;">Need help? Visit our <a href="#" style="color: #444;">help center</a></p>
     </div>
 </div>

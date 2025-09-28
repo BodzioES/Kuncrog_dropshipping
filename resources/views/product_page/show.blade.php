@@ -58,7 +58,7 @@
             <button class="btn btn-dark btn-lg mb-3 me-2 add-cart-button shadow-sm"
                     data-id="{{ $product->id }}"
                     data-quantity-input="#quantity">
-                <i class="bi bi-cart-plus"></i> Dodaj do koszyka
+                <i class="bi bi-cart-plus"></i> Add to cart
             </button>
         </div>
     </div>
@@ -73,11 +73,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
             </div>
             <div class="modal-body" id="cartModalBody">
-                <p>Ładowanie koszyka...</p>
+                <p>Loading cart...</p>
             </div>
             <div class="modal-footer">
-                <a href="{{ route('cart.index') }}" class="btn btn-primary">Przejdź do koszyka</a>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kontynuuj zakupy</button>
+                <a href="{{ route('cart.index') }}" class="btn btn-primary">Go to cart</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue shopping</button>
             </div>
         </div>
     </div>

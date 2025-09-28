@@ -88,7 +88,7 @@
         </nav>
 
         <!-- Mobile burger -->
-        <div class="d-md-none p-2 bg-light border-bottom mobile-navbar">
+        <div class="d-md-none p-2 bg-light border-bottom mobile-navbar ">
             <button class="btn btn-outline-primary d-flex align-items-center" type="button"
                     data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
                 <i data-feather="menu"></i> <span class="ms-2">Menu</span>

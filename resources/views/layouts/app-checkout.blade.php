@@ -47,7 +47,7 @@
 
                 {{-- Licznik odwiedzin (desktop) --}}
                 <div class="mx-auto text-center fw-bold d-none d-md-block">
-                    👥 Odwiedziło nas już <span class="text-primary">{{ $visitorsCount }}</span> osób 👥
+                    👥 Have already visited us <span class="text-primary">{{ $visitorsCount }}</span> people 👥
                 </div>
 
                 {{-- Prawa strona --}}
@@ -69,7 +69,7 @@
                         </li>
                     @else
                         <span class="navbar-brand welcome-user d-none d-md-inline">
-                            Witaj {{ Auth::user()->name }}
+                            Hello there {{ Auth::user()->name }}
                         </span>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -80,7 +80,7 @@
                                 @can(['isAdmin'])
                                     <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
                                 @endcan
-                                <a class="dropdown-item" href="{{ route('myOrders.index') }}">Moje zamówienia</a>
+                                <a class="dropdown-item" href="{{ route('myOrders.index') }}">My orders</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -106,7 +106,7 @@
                 {{-- Mobile: licznik + ikonki --}}
                 <div class="nav-mobile d-md-none">
                     <div class="visitor-counter fw-bold text-center mb-3">
-                        👥 Odwiedziło nas już <span class="text-primary">{{ $visitorsCount }}</span> osób 👥
+                        👥 Have already visited us <span class="text-primary">{{ $visitorsCount }}</span> people 👥
                     </div>
 
                     <div class="nav-icons">

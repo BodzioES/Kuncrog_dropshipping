@@ -7,19 +7,19 @@
             <div class="container checkout-container">
                 <!-- Lewy kontener -->
                 <div class="checkout-left">
-                    <h2>Zamówienie</h2>
+                    <h2>Order</h2>
                     <br>
 
                     <!-- adres rozliczeniowy -->
                     <div id="billing-adress">
-                        <h4>Adres rozliczeniowy</h4>
+                        <h4>Billing address</h4>
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
-                                <label>Imię *</label>
+                                <label>Name *</label>
                                 <input type="text" name="address[first_name]" class="form-control" placeholder="Imię">
                             </div>
                             <div class="form-group w-50">
-                                <label>Nazwisko *</label>
+                                <label>Surname *</label>
                                 <input type="text" name="address[last_name]" class="form-control" placeholder="Nazwisko">
                             </div>
                         </div>
@@ -31,12 +31,12 @@
 
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
-                                <label>Ulica (ulica i numer) *</label>
+                                <label>Street (street and number) *</label>
                                 <input type="text" name="address[street_and_house_number]" class="form-control" placeholder="Ulica">
                             </div>
 
                             <div class="form-group w-50">
-                                <label>Numer Mieszkania (opcjonalnie)</label>
+                                <label>Apartment number (optional)</label>
                                 <input type="text" name="address[apartment_number]" class="form-control" placeholder="Numer mieszkania">
                             </div>
                         </div>
@@ -44,18 +44,18 @@
 
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
-                                <label>Miasto *</label>
+                                <label>City *</label>
                                 <input type="text" name="address[city]" class="form-control" placeholder="Miasto">
                             </div>
 
                             <div class="form-group w-50">
-                                <label>Kod pocztowy *</label>
+                                <label>Postal code *</label>
                                 <input type="text" name="address[postal_code]" class="form-control" placeholder="Kod pocztowy">
                             </div>
                         </div>
 
                         <div class="form-group mt-3">
-                            <label>Numer telefonu *</label>
+                            <label>Phone number *</label>
                             <input type="text" name="address[phone_number]" class="form-control" placeholder="Numer telefonu">
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                         <br>
                             <input class="form-check-input" type="checkbox" id="sameAddressCheckbox" checked>
                             <label class="form-check-label" for="sameAddressCheckbox">
-                                Wysyłka na ten sam adres co rozliczeniowy
+                                Shipping to the same address as billing
                             </label>
                         <br>
                     </div>
@@ -74,48 +74,51 @@
 
                     <!-- adres wysylkowy -->
                     <div id="shipping-adress">
-                        <h4>Adres wysyłkowy</h4>
+                        <h4>Shipping address</h4>
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
-                                <label>Imię *</label>
-                                <input type="text" name="first_name" class="form-control" placeholder="Imię">
+                                <label>Name *</label>
+                                <input type="text" name="address[first_name]" class="form-control" placeholder="Imię">
                             </div>
                             <div class="form-group w-50">
-                                <label>Nazwisko *</label>
-                                <input type="text" name="last_name" class="form-control" placeholder="Nazwisko">
+                                <label>Surname *</label>
+                                <input type="text" name="address[last_name]" class="form-control" placeholder="Nazwisko">
                             </div>
                         </div>
 
                         <div class="form-group mt-3">
                             <label>E-mail *</label>
-                            <input type="email" name="email" class="form-control" placeholder="email@example.com">
+                            <input type="email" name="address[email]" class="form-control" placeholder="email@example.com">
                         </div>
 
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
-                                <label>Ulica (pełna nazwa) *</label>
-                                <input type="text" name="street_and_house_number" class="form-control" placeholder="Ulica">
+                                <label>Street (street and number) *</label>
+                                <input type="text" name="address[street_and_house_number]" class="form-control" placeholder="Ulica">
                             </div>
 
                             <div class="form-group w-50">
-                                <label>Numer Mieszkania (opcjonalnie)</label>
-                                <input type="text" name="apartment_number" class="form-control" placeholder="Numer mieszkania">
+                                <label>Apartment number (optional)</label>
+                                <input type="text" name="address[apartment_number]" class="form-control" placeholder="Numer mieszkania">
+                            </div>
+                        </div>
+
+
+                        <div class="form-row d-flex gap-3 mt-3">
+                            <div class="form-group w-50">
+                                <label>City *</label>
+                                <input type="text" name="address[city]" class="form-control" placeholder="Miasto">
+                            </div>
+
+                            <div class="form-group w-50">
+                                <label>Postal code *</label>
+                                <input type="text" name="address[postal_code]" class="form-control" placeholder="Kod pocztowy">
                             </div>
                         </div>
 
                         <div class="form-group mt-3">
-                            <label>Miasto *</label>
-                            <input type="text" name="city" class="form-control" placeholder="Miasto">
-                        </div>
-
-                        <div class="form-group mt-3">
-                            <label>Kod pocztowy *</label>
-                            <input type="text" name="postal_code" class="form-control" placeholder="Kod pocztowy">
-                        </div>
-
-                        <div class="form-group mt-3">
-                            <label>Numer telefonu *</label>
-                            <input type="text" name="phone_number" class="form-control" placeholder="Numer telefonu">
+                            <label>Phone number *</label>
+                            <input type="text" name="address[phone_number]" class="form-control" placeholder="Numer telefonu">
                         </div>
                     </div>
                 </div>
@@ -124,7 +127,7 @@
 
                 <!-- Prawy kontener: Podsumowanie koszyka -->
                 <div class="checkout-right">
-                    <h2>Podsumowanie koszyka</h2>
+                    <h2>Basket summary</h2>
 
                     <div class="cart-item p-3">
 
@@ -158,7 +161,7 @@
 
                     <hr>
 
-                    <h4>Metoda dostawy</h4>
+                    <h4>Delivery method</h4>
 
                     <div id="checkout-section" class="d-flex justify-content-between">
                         <div class="option-group">
@@ -174,7 +177,7 @@
 
                     <hr>
 
-                    <h4>Metoda płatności</h4>
+                    <h4>Payment method</h4>
 
                     <div id="checkout-section" class="d-flex justify-content-between">
 
@@ -192,25 +195,25 @@
                     <hr>
 
                     <div class="d-flex justify-content-between">
-                        <span>Podsumowanie</span>
+                        <span>Summary</span>
                         <span id="productsTotal">{{number_format($totalProductPrice,2)}} zł</span>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <span>Opłata za dostawę</span>
+                        <span>Delivery fee</span>
                         <span id="shippingCost">0.00 zł</span>
                     </div>
 
                     <hr>
 
                     <div class="d-flex justify-content-between fw-bold">
-                        <span>Łącznie do zapłaty</span>
+                        <span>Total to be paid</span>
                         <span id="totalPrice" name="total_price">{{number_format($totalProductPrice,2)}} zł</span>
                         <input type="hidden" name="total_price" value="{{$totalProductPrice}}">
                     </div>
                 </div>
             </div>
                 <div class="button-wrapper">
-                    <button type="submit" class="checkout-button">Zapłać</button>
+                    <button type="submit" class="checkout-button">Pay</button>
                 </div>
         </form>
     </div>

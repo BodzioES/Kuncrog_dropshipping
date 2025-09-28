@@ -6,23 +6,23 @@
     <div id="hero">
         <div class="slide active" style="background-image:url('https://rueparis.pl/wp-content/uploads/sites/54/2022/02/wiosenna-kolekcja-ubran-rue-paris.jpg');">
             <div class="overlay">
-                <h1>Nowa wiosenna kolekcja</h1>
-                <p>Pastelowe sukienki i lekkie tkaniny</p>
-                <a href="">Zobacz teraz</a>
+                <h1>New spring collection</h1>
+                <p>Pastel dresses and light fabrics</p>
+                <a href="">Watch now</a>
             </div>
         </div>
         <div class="slide" style="background-image:url('https://cdn.shopify.com/s/files/1/0605/4995/5814/files/sport_luxe_banner_mockd_1024x1024.jpg?v=1636070459');">
             <div class="overlay">
-                <h1>Sport-luxe w stylu 2025</h1>
-                <p>Sportowe kurtki i retro trampki</p>
-                <a href="">Sprawdź</a>
+                <h1>Sport-luxe in style 2025</h1>
+                <p>Sports jackets and retro sneakers</p>
+                <a href="">Check</a>
             </div>
         </div>
         <div class="slide" style="background-image:url('https://fioza.pl/wp-content/uploads/2025/04/elegancka-przezroczysta-bluzka.jpg');">
             <div class="overlay">
-                <h1>Przezroczyste topy i organza</h1>
-                <p>Delikatne, eteryczne fasony</p>
-                <a href="">Kup teraz</a>
+                <h1>Sheer tops and organza</h1>
+                <p>Delicate,ethereal designs</p>
+                <a href="">Buy now</a>
             </div>
         </div>
     </div>
@@ -30,10 +30,10 @@
     <!-- Sekcja z opisem marki -->
     <section class="text-center py-5 bg-light">
         <div class="container">
-            <h2 class="mb-4">Kuncrog – produkty na czasie!</h2>
+            <h2 class="mb-4">Kuncrog – trendy products!</h2>
             <p class="lead">
-                Nasz sklep jest stale aktualizowany oraz odświeżany o najróżniejsze nowości,
-                które stale wchodzą na rynek. Dbamy o to, aby w naszym sklepie były ciekawe oraz funkcjonalne produkty!
+                Our store is constantly updated and refreshed with a variety of new products that are constantly entering the market.
+                We strive to provide interesting and functional products!
             </p>
         </div>
     </section>
@@ -41,7 +41,7 @@
     <!-- Sekcja z popularnymi kategoriami -->
     <section class="py-5">
         <div class="container">
-            <h3 class="text-center mb-4">Popularne kategorie</h3>
+            <h3 class="text-center mb-4">Popular categories</h3>
             <div class="row justify-content-center text-center">
                 @foreach($products_categories as $category)
                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
@@ -106,7 +106,7 @@
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseFilters" aria-expanded="true"
                                         aria-controls="collapseFilters">
-                                    🔍 Filtry produktów
+                                    🔍 Product filters
                                 </button>
                             </h2>
                             <div id="collapseFilters" class="accordion-collapse collapse show"
@@ -163,7 +163,7 @@
                                     {{$product->quantity}}
                                 </div>
                                 <button class="btn btn-success btn-sm add-cart-button m-2" data-id="{{ $product->id }}">
-                                    <i class="fas fa-cart-plus"></i> Dodaj do koszyka
+                                    <i class="fas fa-cart-plus"></i> Add to cart
                                 </button>
                             </div>
                         </div>
@@ -177,15 +177,15 @@
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="cartModalLabel">Koszyk</h5>
+                        <h5 class="modal-title" id="cartModalLabel">Cart</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
                     </div>
                     <div class="modal-body" id="cartModalBody">
-                        <p>Ładowanie koszyka...</p>
+                        <p>Loading cart...</p>
                     </div>
                     <div class="modal-footer">
-                        <a href="{{ route('cart.index') }}" class="btn btn-primary">Przejdź do koszyka</a>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kontynuuj zakupy</button>
+                        <a href="{{ route('cart.index') }}" class="btn btn-primary">Go to cart</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue shopping</button>
                     </div>
                 </div>
             </div>

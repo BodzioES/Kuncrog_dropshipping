@@ -10,12 +10,9 @@
 
             <!-- prawa strona -->
             <div class="custom-actions d-flex align-items-center gap-2">
-                <form class="custom-search-form" role="search">
-                    <input class="custom-search-input"
-                           type="text"
-                           placeholder="Search"
-                           aria-label="Search">
-                </form>
+                <a class="custom-button-welcome" href="{{route('welcome')}}">
+                    <button class="btn btn-secondary custom-button">Home page</button>
+                </a>
 
                 <a class="custom-logout-btn"
                    href="{{ route('logout') }}"
