@@ -4,7 +4,7 @@ window.bootstrap = { Modal };
 
     //wykonuje sie po wcisnieciu przycisku z welcome.blade.php
     //dodaje on produkt do koszyka
-    $('button.add-cart-button').click(function(event) {
+    $(document).on('click','button.add-cart-button', function (event) {
         event.preventDefault();
 
         //pobiera odpowiednie id produktu dzieki data-id="{{ $product->id }}" ktory jest w przycisku

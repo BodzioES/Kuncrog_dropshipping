@@ -20,7 +20,6 @@
             'resources/css/app.css'
             ])
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -46,7 +45,7 @@
                 <ul class="navbar-nav me-auto"></ul>
 
                 {{-- Licznik odwiedzin (desktop) --}}
-                <div class="mx-auto text-center fw-bold d-none d-md-block">
+                <div class="visitor-counter fw-bold">
                     👥 Have already visited us <span class="text-primary">{{ $visitorsCount }}</span> people 👥
                 </div>
 
