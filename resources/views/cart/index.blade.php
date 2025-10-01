@@ -54,10 +54,10 @@
                             <div class="flex-grow-1">
                                 <h6 class="mb-1">{{ $isGuest ? $item['name'] : $item->name }}</h6>
                                 <div class="small text-muted mb-1">
-                                    Cena: {{ $isGuest ? $item['price'] : $item->price }} zł
+                                    Price: {{ $isGuest ? $item['price'] : $item->price }} zł
                                 </div>
                                 <div class="small text-muted mb-1">
-                                    Ilość: x{{ $isGuest ? $item['quantity'] : $item->quantity }}
+                                    Quanity: x{{ $isGuest ? $item['quantity'] : $item->quantity }}
                                 </div>
                             </div>
                             <button class="btn btn-sm btn-danger delete ms-2"

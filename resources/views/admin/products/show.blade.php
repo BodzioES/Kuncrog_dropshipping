@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="mb-3 text-center">
-                        <label>Aktualne zdjęcia</label> <br>
+                        <label>Current photos</label> <br>
                         @foreach($product->images as $img)
                             <img src="{{asset('storage/products/' . $img->image_url)}}"
                                  alt="phtoto"
@@ -67,7 +67,7 @@
                         <div class="col-md-6 offset-md-4">
                             <a href="{{route('products.index')}}">
                                 <button type="button" class="btn btn-primary">
-                                    Powrót
+                                    Back
                                 </button>
                             </a>
                         </div>

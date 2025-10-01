@@ -5,9 +5,9 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Adres IP</th>
-                <th scope="col">Kraj</th>
-                <th scope="col">Miasto</th>
+                <th scope="col">Ip address</th>
+                <th scope="col">Country</th>
+                <th scope="col">City</th>
             </tr>
             </thead>
             <tbody class="table-group-divider">

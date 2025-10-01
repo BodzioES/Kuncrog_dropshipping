@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Faktura</title>
+    <title>Invoice</title>
     <style>
         body {
             font-family: DejaVu Sans, sans-serif;
@@ -70,8 +70,8 @@
     <div class="header">
         <div class="logo">Kuncrog</div>
         <div class="invoice-meta">
-            <div><strong>Numer zamówienia:</strong> {{$order->id}}#</div>
-            <div><strong>Data:</strong> {{$order->created_at}} </div>
+            <div><strong>Order number:</strong> {{$order->id}}#</div>
+            <div><strong>Date:</strong> {{$order->created_at}} </div>
         </div>
     </div>
 
@@ -79,16 +79,16 @@
         <table class="details">
             <tr>
                 <td style="vertical-align: top; width: 50%;">
-                    <strong>Do:</strong><br>
+                    <strong>To:</strong><br>
                     {{$order->address->first_name}} {{$order->address->last_name}}<br>
                     {{$order->address->street_and_house_number}}<br>
                     {{$order->address->email}}<br>
                     {{$order->address->phone_number}}
                 </td>
                 <td style="vertical-align: top; width: 50%;">
-                    <strong>Płatność:</strong><br>
+                    <strong>Paymwnt:</strong><br>
                     {{$order->paymentMethod->name}}<br><br>
-                    <strong>Dostawa:</strong><br>
+                    <strong>Delivery:</strong><br>
                     {{$order->shippingMethod->name}}
                 </td>
             </tr>
@@ -96,14 +96,14 @@
     </div>
 
     <div class="section">
-        <h3>Produkty</h3>
+        <h3>Products</h3>
         <table class="items">
             <thead>
             <tr>
-                <th>Nazwa</th>
-                <th>Ilość</th>
-                <th>Cena jednostkowa</th>
-                <th>Wartość</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Unit price</th>
+                <th>Value</th>
             </tr>
             </thead>
             <tbody>
@@ -127,7 +127,7 @@
     <div class="section">
         <table class="totals">
             <tr>
-                <td colspan="3" class="text-right"><strong>Razem za produkty:</strong></td>
+                <td colspan="3" class="text-right"><strong>Total for products:</strong></td>
                 <td>
                     <strong>
                         <!-- tworzona jest funkcja ktora zlicza i sumuje osobno kazdy produkt ktory jest w danym zamowieniu
@@ -139,11 +139,11 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3" class="text-right"><strong>Dostawa:</strong></td>
+                <td colspan="3" class="text-right"><strong>Delivery:</strong></td>
                 <td class="text-right">{{ number_format($order->shippingMethod->price, 2, ',', ' ') }} zł</td>
             </tr>
             <tr style="font-size: 14px;">
-                <td colspan="3" class="text-right"><strong>Łącznie:</strong></td>
+                <td colspan="3" class="text-right"><strong>Total:</strong></td>
                 <td class="text-right"><strong>{{ number_format($order->total_price + $order->shippingMethod->price, 2, ',',' ') }} zł</strong></td>
             </tr>
         </table>
@@ -151,7 +151,7 @@
 
     <div class="footer">
         Kuncrog • ul. Przykładowa 1 • 00-001 Warszawa • email: kontakt@kuncrog.pl • NIP: 123-456-78-90<br>
-        Dziękujemy za zakupy! Jeśli masz pytania, skontaktuj się z obsługą klienta.
+        Thank you for shopping! If you have any questions, please contact customer service.
     </div>
 </div>
 </body>

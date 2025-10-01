@@ -59,11 +59,11 @@
                 @foreach($products as $product)
                     <div class="product-card mb-3 p-3 border rounded shadow-sm bg-light">
                         <p><strong>ID:</strong> {{$product->id}}</p>
-                        <p><strong>Nazwa:</strong> {{$product->name}}</p>
-                        <p><strong>Opis:</strong> {{$product->description}}</p>
-                        <p><strong>Ilość:</strong> {{$product->stock_quantity}}</p>
-                        <p><strong>Cena:</strong> {{$product->price}} zł</p>
-                        <p><strong>Kategoria:</strong> @if($product->hasCategory()){{$product->category->name}}@endif</p>
+                        <p><strong>Name:</strong> {{$product->name}}</p>
+                        <p><strong>Description:</strong> {{$product->description}}</p>
+                        <p><strong>Quantity:</strong> {{$product->stock_quantity}}</p>
+                        <p><strong>Price:</strong> {{$product->price}} zł</p>
+                        <p><strong>Category:</strong> @if($product->hasCategory()){{$product->category->name}}@endif</p>
 
                         <div class="d-flex justify-content-around mt-2">
                             <a href="{{route('products.show',$product->id)}}" class="btn btn-sm btn-primary">

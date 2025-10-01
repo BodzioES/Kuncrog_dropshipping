@@ -73,7 +73,7 @@
 
                             <div class="col-md-6">
                                 <select id="category" class="form-control @error('id_products_categories') is-invalid @enderror" name="id_products_categories">
-                                    <option value="">Brak</option>
+                                    <option value="">Lack</option>
                                     @foreach($categories as $category)
                                         <option value="{{$category->id}}" @if($product->isSelectedCategory($category->id)) selected @endif>{{$category->name}}</option>
                                     @endforeach
@@ -102,7 +102,7 @@
                         </div>
 
                         <div class="mb-3 text-center">
-                            <label>Aktualne zdjęcia</label> <br>
+                            <label>Current photos</label> <br>
                             @foreach($product->images as $img)
                                 <img src="{{asset('storage/products/' . $img->image_url)}}"
                                      alt="phtoto"

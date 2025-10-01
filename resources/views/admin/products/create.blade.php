@@ -72,7 +72,7 @@
 
                                 <div class="col-md-6">
                                     <select id="category" class="form-control @error('id_products_categories') is-invalid @enderror" name="id_products_categories">
-                                        <option value="">Brak</option>
+                                        <option value="">Lack</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
@@ -118,7 +118,7 @@
         document.getElementById('image').addEventListener('change',function (){
             if(this.files.length > 5){
              Swal.fire({
-                 title: "Mozesz dodac maksymalnie 5 zdjec",
+                 title: "You can add max 5 photos!",
                  icon: "warning",
                  confirmButtonText: "Ok"
              }).then((result) => {

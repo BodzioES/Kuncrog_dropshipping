@@ -9,16 +9,16 @@
             <form method="POST" action="{{ route('admin.orders.update', $order->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <h2 class="mb-4">Podgląd zamówienia</h2>
+                <h2 class="mb-4">Order preview</h2>
                 <!-- Sekcja podstawowych informacji -->
                 <div class="card mb-4">
                     <div class="card-header">
-                        <strong>Informacje o zamówieniu</strong>
+                        <strong>Order Information</strong>
                     </div>
         <!------------------------------------------------------------------------------------------------------------------------------->
                     <div class="card-body row">
                         <div class="col-md-3">
-                            <strong>Numer zamówienia:</strong>
+                            <strong>Order number:</strong>
                             <input type="number" min="1" class="form-control @error('order.id') is-invalid @enderror" name="order[id]" value="{{$order->id}}" required autocomplete="id">
                         </div>
         <!------------------------------------------------------------------------------------------------------------------------------->
@@ -35,17 +35,17 @@
                         </div>
         <!------------------------------------------------------------------------------------------------------------------------------->
                         <div class="col-md-3">
-                            <strong>Łączna kwota:</strong>
+                            <strong>Total amount:</strong>
                             <input type="number" min="1" class="form-control @error('order.total_price') is-invalid @enderror" name="order[total_price]" value="{{$order->total_price}}" required autocomplete="total_price">
                         </div>
         <!------------------------------------------------------------------------------------------------------------------------------->
                         <div class="col-md-3">
-                            <strong>Data złożenia:</strong>                                                                                             {{-- ZMIENIA TO FORMAT DATY --}}
+                            <strong>Date of submission:</strong>                                                                                             {{-- ZMIENIA TO FORMAT DATY --}}
                             <input type="date"  class="form-control @error('order.created_at') is-invalid @enderror" name="order[created_at]" value="{{ \Carbon\Carbon::parse($order->created_at)->format('Y-m-d') }}" required autocomplete="created_at">
                         </div>
         <!------------------------------------------------------------------------------------------------------------------------------->
                         <div class="col-md-3">
-                            <strong>Metoda płatności:</strong>
+                            <strong>Payment method:</strong>
                             <select id="id_payment_method" class="form-control @error('order.id_payment_method') is-invalid @enderror" name="order[id_payment_method]">
                                 {{-- ZMIENNA KTORA PRZYPISANA MA TABELE PAYMENTMETHOD Z RELACJI "paymentMethod Z TABELI ORDERS --}}
                                 @foreach($paymentMethods as $paymentMethod){{-- SPRADZANE JEST CZY ZMIENNA ZOSTALA WYBRANA JESLI NIE TO ZASTEPUJA TA STARA --}}
@@ -60,7 +60,7 @@
                         </div>
         <!------------------------------------------------------------------------------------------------------------------------------->
                         <div class="col-md-3">
-                            <strong>Metoda dostawy:</strong>
+                            <strong>Delivery methof:</strong>
                             <select id="id_shipping_method" class="form-control @error('order.id_shipping_method') is-invalid @enderror" name="order[id_shipping_method]">
                                 {{-- ZMIENNA KTORA PRZYPISANA MA TABELE SHIPPINGMETHOD Z RELACJI "shippingtMethod Z TABELI ORDERS --}}
                             @foreach($shippingMethods as $shippingMethod){{-- ANALOGICZNIE JAK POWYZEJ --}}
@@ -79,19 +79,19 @@
                 <!-- Sekcja adresowa -->
                 <div class="card mb-4">
                     <div class="card-header">
-                        <strong>Dane adresowe</strong>
+                        <strong>Address details</strong>
                     </div>
                     <div class="card-body row">
 
                         {{-- name="" jest uzywany w kontrolerze do validated, value wyswietla biezaca wartosc w okienku edytacyjnym --}}
 
                         <div class="col-md-4">
-                            <strong>Imię:</strong>
+                            <strong>Name:</strong>
                             <input type="text" id="first_name" class="form-control @error('address.first_name') is-invalid @enderror" name="address[first_name]" value="{{$order->address->first_name}}">
                         </div>
                         <!------------------------------------------------------------------------------------------------------------------------------->
                         <div class="col-md-4">
-                            <strong>Nazwisko:</strong>
+                            <strong>Surname:</strong>
                             <input type="text" id="last_name" class="form-control @error('address.last_name') is-invalid @enderror" name="address[last_name]" value="{{$order->address->last_name}}">
                         </div>
                         <!------------------------------------------------------------------------------------------------------------------------------->
@@ -101,27 +101,27 @@
                         </div>
                         <!------------------------------------------------------------------------------------------------------------------------------->
                         <div class="col-md-4">
-                            <strong>Telefon:</strong>
+                            <strong>Phone:</strong>
                             <input type="text" id="phone_number" class="form-control @error('address.phone_number') is-invalid @enderror" name="address[phone_number]" value="{{$order->address->phone_number}}">
                         </div>
                         <!------------------------------------------------------------------------------------------------------------------------------->
                         <div class="col-md-4">
-                            <strong>Ulica i nr domu:</strong>
+                            <strong>Street and number:</strong>
                             <input type="text" id="street_and_house_number" class="form-control @error('address.street_and_house_number') is-invalid @enderror" name="address[street_and_house_number]" value="{{$order->address->street_and_house_number}}">
                         </div>
                         <!------------------------------------------------------------------------------------------------------------------------------->
                         <div class="col-md-4">
-                            <strong>Numer mieszkania (opcjonalnie):</strong>
+                            <strong>Apartment number (optional):</strong>
                             <input type="text" id="apartment_number" class="form-control @error('address.apartment_number') is-invalid @enderror" name="address[apartment_number]" value="{{$order->address->apartment_number}}">
                         </div>
                         <!------------------------------------------------------------------------------------------------------------------------------->
                         <div class="col-md-4">
-                            <strong>Kod pocztowy:</strong>
+                            <strong>Postal code:</strong>
                             <input type="text" id="postal_code" class="form-control @error('address.postal_code') is-invalid @enderror" name="address[postal_code]" value="{{$order->address->postal_code}}">
                         </div>
                         <!------------------------------------------------------------------------------------------------------------------------------->
                         <div class="col-md-4">
-                            <strong>Miasto:</strong>
+                            <strong>City:</strong>
                             <input type="text" id="city" class="form-control @error('address.city') is-invalid @enderror" name="address[city]" value="{{$order->address->city}}">
                         </div>
                         <!------------------------------------------------------------------------------------------------------------------------------->
@@ -131,16 +131,16 @@
                 <!-- Sekcja produktów -->
                 <div class="card">
                     <div class="card-header">
-                        <strong>Produkty</strong>
+                        <strong>Products</strong>
                     </div>
                     <div class="card-body p-0">
                         <table class="table table-bordered m-0 d-none d-md-table">
                             <thead class="table-light">
                             <tr>
-                                <th>Nazwa produktu</th>
-                                <th>Ilość</th>
-                                <th>Cena jednostkowa</th>
-                                <th>Łącznie</th>
+                                <th>Product name</th>
+                                <th>quantity</th>
+                                <th>Unit price</th>
+                                <th>Total</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -174,9 +174,9 @@
                                 <div class="product-card mb-3 p-3 border rounded shadow-sm bg-light">
                                     <p class="product-name mb-2">{{$products->product->name}}</p>
                                     <div class="product-info d-flex justify-content-between text-muted small">
-                                        <span><strong>Ilość:</strong> x{{$quantity}}</span>
-                                        <span><strong>Cena:</strong> {{$price}} zł</span>
-                                        <span><strong>Łącznie:</strong> {{number_format($totalPrice,2,',','')}} zł</span>
+                                        <span><strong>Quantity:</strong> x{{$quantity}}</span>
+                                        <span><strong>Price:</strong> {{$price}} zł</span>
+                                        <span><strong>Total:</strong> {{number_format($totalPrice,2,',','')}} zł</span>
                                     </div>
                                 </div>
                             @endforeach
@@ -186,10 +186,10 @@
                 <div class="row mb-0">
                     <div class="col-md-6 offset-md-4">
                         <a href="{{route('admin.orders.index')}}">
-                            <button class="btn btn-secondary">Powrót</button>
+                            <button class="btn btn-secondary">Back</button>
                         </a>
                         <a href="{{route('admin.orders.invoice',$order)}}">
-                            <button class="btn btn-warning">Pobierz</button>
+                            <button class="btn btn-warning">Download</button>
                         </a>
                         <button type="submit" class="btn btn-primary">
                             {{__('shop.button.save')}}

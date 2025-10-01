@@ -73,8 +73,8 @@
                             <button class="btn btn-outline-secondary btn-sm update-cart"
                                     data-id="{{ $item->id ?? $item['id'] }}" data-action="increase">+</button>
                         </div>
-                        <div class="small">Cena: {{ number_format($price, 2) }} PLN</div>
-                        <div class="small">Suma: {{ number_format($subtotal, 2) }} PLN</div>
+                        <div class="small">Price: {{ number_format($price, 2) }} PLN</div>
+                        <div class="small">Total: {{ number_format($subtotal, 2) }} PLN</div>
                     </div>
                     <button class="btn btn-sm btn-danger delete-cart-item ms-2"
                             data-id="{{ $item->id ?? $item['id'] }}">
@@ -88,7 +88,7 @@
     <hr>
 
     <div class="d-flex justify-content-between align-items-center px-3">
-        <h5 class="mb-0">Łączna kwota:</h5>
+        <h5 class="mb-0">Total amount:</h5>
         <h4 class="mb-0">{{ number_format($total, 2) }} PLN</h4>
     </div>
 @endif

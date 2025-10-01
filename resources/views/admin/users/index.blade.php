@@ -15,10 +15,10 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Email</th>
-                <th scope="col">Imie</th>
-                <th scope="col">Nazwisko</th>
-                <th scope="col">Numer telefonu</th>
-                <th scope="col">Akcje</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Phone number</th>
+                <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -45,9 +45,9 @@
                 <div class="user-card mb-3 p-3 border rounded shadow-sm bg-light">
                     <p><strong>ID:</strong> {{$user->id}}</p>
                     <p><strong>Email:</strong> {{$user->email}}</p>
-                    <p><strong>Imię:</strong> {{$user->name}}</p>
-                    <p><strong>Nazwisko:</strong> {{$user->surname}}</p>
-                    <p><strong>Telefon:</strong> {{$user->phone_number}}</p>
+                    <p><strong>Name:</strong> {{$user->name}}</p>
+                    <p><strong>Surname:</strong> {{$user->surname}}</p>
+                    <p><strong>Phone:</strong> {{$user->phone_number}}</p>
 
                     <div class="d-flex justify-content-end mt-2">
                         <button class="btn btn-danger btn-sm delete"
