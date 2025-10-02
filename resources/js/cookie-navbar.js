@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+
     const banner = document.getElementById('cookieBanner');
     const acceptBtn = document.getElementById('acceptCookiesBtn');
     const declineBtn = document.getElementById('declineCookiesBtn');
@@ -38,5 +39,5 @@ document.addEventListener('DOMContentLoaded', function() {
     declineBtn.addEventListener('click', function() {
         banner.classList.remove('show');
         setTimeout(() => banner.style.display = 'none', 500);
-    });
+    })
 });

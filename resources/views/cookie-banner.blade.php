@@ -11,6 +11,4 @@
         </div>
     </div>
 </div>
-@section('js-files')
-    @vite(['resources/js/cookie-navbar.js'])
-@endsection
+
