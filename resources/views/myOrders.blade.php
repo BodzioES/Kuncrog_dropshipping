@@ -7,7 +7,7 @@
 
         @forelse($orders as $order)
             <div class="order card shadow-sm p-3 mb-4">
-                <a class="btn" data-bs-toggle="collapse" href="#collapseOrder" role="button" aria-expanded="false" aria-controls="collapseOrder">
+                <a class="btn" data-bs-toggle="collapse" href="#collapseOrder{{$order->id}}" role="button" aria-expanded="false" aria-controls="collapseOrder{{$order->id}}">
                     <div class="d-flex justify-content-center align-items-center flex-wrap mb-3">
                         @foreach($order->items as $item)
                             <div class="me-3 mb-2 text-center">
@@ -23,9 +23,10 @@
                     <div class="text-center">
                         <p><strong>Order #{{ $order->id }}</strong></p>
                         <p>Status: <span class="badge bg-info text-dark">{{ $order->status }}</span></p>
+                        <p>Orde date: {{$order->created_at->format('Y-m-d')}} </p>
                         <p><span style="color: #0dcaf0; font-weight: 700;">expand</span></p>
 
-                        <div class="collapse" id="collapseOrder">
+                        <div class="collapse" id="collapseOrder{{$order->id}}">
                                 @foreach($order->items as $item)
                                     <p>{{$item->product->name}}: {{$item->quantity}} * {{$item->current_price}} zł</p>
                                 @endforeach

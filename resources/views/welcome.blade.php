@@ -73,10 +73,10 @@
                 {{-- Desktop: sidebar po lewej --}}
                 <div class="d-none d-md-block">
                     <h3 class="mt-0 mb-5">
-                        {{__('shop.welcome.products')}} <span class="text-primary">{{ count($products) }}</span>
+                        Products <span class="text-primary">{{ count($products) }}</span>
                     </h3>
 
-                    <h6 class="text-uppercase font-weight-bold mb-3">{{__('shop.welcome.categories')}}</h6>
+                    <h6 class="text-uppercase font-weight-bold mb-3">Categories</h6>
                     @foreach($products_categories as $category)
                         <div class="mt-2 mb-2 pl-2">
                             <div class="custom-control custom-checkbox">
@@ -88,14 +88,14 @@
 
                     <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
 
-                    <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">{{__('shop.welcome.price')}}</h6>
+                    <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">Price</h6>
                     <div class="price-filter-control">
                         <input type="number" class="form-control w-50 mb-2" placeholder="50"
                                name="filter[price_min]" min="0">
                         <input type="number" class="form-control w-50" placeholder="150"
                                name="filter[price_max]" min="0">
                     </div>
-                    <a href="#products-wrapper" class="btn btn-lg btn-block btn-primary mt-5" id="filter-button">{{__('shop.welcome.filter')}}</a>
+                    <a href="#products-wrapper" class="btn btn-lg btn-block btn-primary mt-5" id="filter-button">Filter</a>
                 </div>
 
                 {{-- Mobile: filtry nad produktami --}}
