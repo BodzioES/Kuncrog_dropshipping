@@ -87,7 +87,11 @@
 <script type="text/javascript" data-url="{{ url('/cart') }}">
     @yield('javascript')
 </script>
-@vite('resources/js/delete.js')
-@vite('resources/css/cart.css')
+@section('js-files')
+    @vite('resources/js/delete.js')
+    @vite('resources/css/cart.css')
+    @vite('resources/js/cookie-navbar.js')
+@endsection
+
 
 

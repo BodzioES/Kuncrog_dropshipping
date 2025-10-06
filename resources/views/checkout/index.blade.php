@@ -11,7 +11,7 @@
                     <br>
 
                     <!-- adres rozliczeniowy -->
-                    <div id="billing-adress">
+                    <div id="billing-address">
                         <h4>Billing address</h4>
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
@@ -73,7 +73,7 @@
 
 
                     <!-- adres wysylkowy -->
-                    <div id="shipping-adress">
+                    <div id="shipping-address">
                         <h4>Shipping address</h4>
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
@@ -223,6 +223,9 @@
 <script type="text/javascript" data-url="{{ url('/cart') }}">
     @yield('javascript')
 </script>
-@vite('resources/js/delete.js')
-@vite(['resources/js/checkout.js'])
-@vite('resources/css/checkout.css')
+@section('js-files')
+    @vite('resources/js/delete.js')
+    @vite(['resources/js/checkout.js'])
+    @vite('resources/css/checkout.css')
+    @vite(['resources/js/cookie-navbar.js'])
+@endsection

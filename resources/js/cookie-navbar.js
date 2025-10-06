@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const acceptBtn = document.getElementById('acceptCookiesBtn');
     const declineBtn = document.getElementById('declineCookiesBtn');
 
+    if (!banner || !acceptBtn || !declineBtn) return; //zabezpieczenie
+
     function setCookie(name, value, days){
         let expires = "";
         if(days){

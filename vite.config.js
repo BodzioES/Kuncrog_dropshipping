@@ -6,13 +6,13 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/sass/app.scss',
-                'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/delete.js',
+                'resources/css/app.css',
                 'resources/js/welcome.js',
                 'resources/js/modal_delete.js',
-                'resources/js/modal_quantity.js',
+                'resources/js/delete.js',
                 'resources/js/checkout.js',
+                'resources/js/modal_quantity.js',
                 'resources/js/bootstrap.js',
                 'resources/js/cookie-navbar.js',
                 'resources/css/checkout.css',
@@ -38,6 +38,7 @@ export default defineConfig({
     resolve: {
         alias: {
             $: "jQuery",
+            'jQuery': 'jquery',
             fontawesome: '@fortawesome/fontawesome-free'
         }
     }

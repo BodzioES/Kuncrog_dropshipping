@@ -14,10 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Nette\Schema\ValidationException;
-use function Laravel\Prompts\alert;
 
 class CheckoutController extends Controller
 {
@@ -114,7 +111,7 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $request->validate([
             'address.first_name' => 'required|string|max:255',

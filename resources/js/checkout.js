@@ -2,9 +2,9 @@ import '../css/checkout.css';
 
 $(function (){
     const checkbox = $('#sameAddressCheckbox');
-    const shippingDiv = $('#shipping-adress');
+    const shippingDiv = $('#shipping-address');
 
-    const toggleShippingAdress = () => {
+    const toggleShippingAddress = () => {
         if (checkbox.prop('checked')){
             shippingDiv.hide();
         }else{
@@ -12,8 +12,8 @@ $(function (){
         }
     };
 
-    toggleShippingAdress();
-    checkbox.on('change',toggleShippingAdress);
+    toggleShippingAddress();
+    checkbox.on('change',toggleShippingAddress);
 
     //w podsumowaniu uzywane jest to gdy wybieramy metode dostawy aby aktualizowac na biezaco cene
     //ktora jest w podsumowaniu (kurierzy maja rozne ceny)

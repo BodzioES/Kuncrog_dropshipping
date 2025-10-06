@@ -7,28 +7,74 @@
     "file": "assets/index-Dq7h7Pqt.js",
     "name": "index"
   },
+  "resources/css/admin.css": {
+    "file": "assets/admin-BJKxDJ50.css",
+    "src": "resources/css/admin.css",
+    "isEntry": true
+  },
   "resources/css/app.css": {
-    "file": "assets/app-Rk_5-SXn.css",
+    "file": "assets/app-CyCToLXP.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/css/appCheckout.css": {
+    "file": "assets/appCheckout-DIzMd9sv.css",
+    "src": "resources/css/appCheckout.css",
+    "isEntry": true
+  },
   "resources/css/cart.css": {
-    "file": "assets/cart-CqpfoU46.css",
+    "file": "assets/cart-Bh33ZJhz.css",
     "src": "resources/css/cart.css",
     "isEntry": true
   },
+  "resources/css/cartModal.css": {
+    "file": "assets/cartModal-l0sNRNKZ.js",
+    "name": "cartModal",
+    "src": "resources/css/cartModal.css",
+    "isEntry": true
+  },
   "resources/css/checkout.css": {
-    "file": "assets/checkout-B2oSY_rT.css",
+    "file": "assets/checkout-Q-lXrZzY.css",
     "src": "resources/js/checkout.js",
     "isEntry": true
   },
+  "resources/css/order.css": {
+    "file": "assets/order-CRKLcoVo.css",
+    "src": "resources/css/order.css",
+    "isEntry": true
+  },
+  "resources/css/orderEdit.css": {
+    "file": "assets/orderShow-DAFBN5zr.css",
+    "src": "resources/css/orderShow.css",
+    "isEntry": true
+  },
+  "resources/css/orderShow.css": {
+    "file": "assets/orderShow-DAFBN5zr.css",
+    "src": "resources/css/orderShow.css",
+    "isEntry": true
+  },
+  "resources/css/product.css": {
+    "file": "assets/product-C3NL0cOZ.css",
+    "src": "resources/css/product.css",
+    "isEntry": true
+  },
+  "resources/css/productPage.css": {
+    "file": "assets/productPage-DS_s8pjV.css",
+    "src": "resources/css/productPage.css",
+    "isEntry": true
+  },
+  "resources/css/user.css": {
+    "file": "assets/user-CC9C_ppF.css",
+    "src": "resources/css/user.css",
+    "isEntry": true
+  },
   "resources/css/welcome.css": {
-    "file": "assets/welcome-BupjSj2B.css",
+    "file": "assets/welcome-DhRAeYqe.css",
     "src": "resources/css/welcome.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-pgkZuY8i.js",
+    "file": "assets/app-bIoNeZRM.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -48,16 +94,22 @@
     ]
   },
   "resources/js/checkout.js": {
-    "file": "assets/checkout-BxoLJqps.js",
+    "file": "assets/checkout-BSFWPjua.js",
     "name": "checkout",
     "src": "resources/js/checkout.js",
     "isEntry": true,
     "css": [
-      "assets/checkout-B2oSY_rT.css"
+      "assets/checkout-Q-lXrZzY.css"
     ]
   },
+  "resources/js/cookie-navbar.js": {
+    "file": "assets/cookie-navbar-CejBJ8m5.js",
+    "name": "cookie-navbar",
+    "src": "resources/js/cookie-navbar.js",
+    "isEntry": true
+  },
   "resources/js/delete.js": {
-    "file": "assets/delete-DKNQ2Fqg.js",
+    "file": "assets/delete-Ccff0akG.js",
     "name": "delete",
     "src": "resources/js/delete.js",
     "isEntry": true
@@ -75,7 +127,7 @@
     "isEntry": true
   },
   "resources/js/welcome.js": {
-    "file": "assets/welcome-BnPdf5zY.js",
+    "file": "assets/welcome-CFRa7j2h.js",
     "name": "welcome",
     "src": "resources/js/welcome.js",
     "isEntry": true,
