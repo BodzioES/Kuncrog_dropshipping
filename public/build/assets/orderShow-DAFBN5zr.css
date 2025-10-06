@@ -1,0 +1,1 @@
+.table-desktop{display:table;width:100%}@media (max-width: 768px){.table-desktop{display:none!important}.table-mobile{display:block!important}.product-card{background:#fff;border-radius:12px;box-shadow:0 2px 6px #0000001a}.product-name{font-weight:700;font-size:1rem;color:#333}.product-info{font-size:.9rem}.product-info span{flex:1;text-align:center}}
