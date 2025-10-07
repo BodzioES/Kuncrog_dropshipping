@@ -23,6 +23,7 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
+
     {{--  Wyswietlenie navbaru o informacji o cookie  --}}
     @include('cookie-banner')
 
@@ -134,6 +135,8 @@
         @yield('javascript')
     </script>
     @yield('js-files')
+    @vite('resources/js/cookie-navbar.js')
+
     </body>
 </html>
 

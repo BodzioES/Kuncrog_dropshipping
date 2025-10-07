@@ -31,10 +31,12 @@
     border-radius: 50%;
 }
 
+.navbar-nav { display: flex; }
+.nav-mobile { display: none; }
+
 @media (max-width: 767.98px) {
-    .navbar-nav{
-        display: none;
-    }
+    .navbar-nav { display: none !important; }
+    .nav-mobile { display: flex !important; }
 
     /* Licznik odwiedzin */
     .nav-mobile .visitor-counter {

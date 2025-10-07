@@ -14,11 +14,11 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss',
+    @vite([
+            'resources/sass/app.scss',
             'resources/js/app.js',
-            'resources/js/delete.js',
             'resources/css/app.css',
-            ])
+        ])
 
 </head>
 
@@ -49,38 +49,38 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    {{-- Menu --}}
+                    {{-- Desktop Navbar --}}
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        {{-- Lewa strona --}}
-                        <ul class="navbar-nav me-auto"></ul>
+                        <ul class="navbar-nav me-auto d-none d-md-flex">
+                            {{-- miejsce na inne linki po lewej --}}
+                        </ul>
 
-                        {{-- Licznik odwiedzin (desktop) --}}
-                        <div class="visitor-counter fw-bold">
-                            👥 Have already visited us <span class="text-primary">{{ $visitorsCount }}</span> people 👥
-                        </div>
+                        {{-- Desktop: licznik + user + koszyk --}}
+                        <div class="d-none d-md-flex align-items-center ms-auto">
+                            {{-- Licznik odwiedzin --}}
+                            <div class="visitor-counter me-3">
+                                <strong>👥 Have already visited us <span class="text-primary">{{ $visitorsCount }}</span> people 👥</strong>
+                            </div>
 
-                        {{-- Prawa strona --}}
-                        <ul class="navbar-nav ms-auto align-items-center">
-                            @guest
-                                <li class="nav-item dropdown">
+                            {{-- User dropdown --}}
+                            <div class="nav-item dropdown me-3">
+                                @guest
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa-solid fa-user"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         @if (Route::has('login'))
-                                            <a class="dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                            <a class="dropdown-item" href="{{ route('login') }}">Login</a>
                                         @endif
                                         @if (Route::has('register'))
-                                            <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                            <a class="dropdown-item" href="{{ route('register') }}">Register</a>
                                         @endif
                                     </div>
-                                </li>
-                            @else
-                                <span class="navbar-brand welcome-user d-none d-md-inline">
-                                    Hello there {{ Auth::user()->name }}
-                                </span>
-                                <li class="nav-item dropdown">
+                                @else
+                                    <span class="navbar-brand welcome-user me-2">
+                                Hello {{ Auth::user()->name }}
+                            </span>
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa-solid fa-user"></i>
@@ -92,43 +92,72 @@
                                         <a class="dropdown-item" href="{{ route('myOrders.index') }}">My orders</a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                                            Logout
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
                                         </form>
                                     </div>
-                                </li>
-                            @endguest
+                                @endguest
+                            </div>
 
                             {{-- Koszyk --}}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('cart.index') }}">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <span id="cart-count-badge" class="{{ $cartCount > 0 ? '' : 'd-none' }}">
-                                        {{ $cartCount }}
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
+                            <a class="nav-link position-relative" href="{{ route('cart.index') }}">
+                                <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                                <span id="cart-count-badge" class="{{ $cartCount > 0 ? '' : 'd-none' }}">
+                            {{ $cartCount }}
+                        </span>
+                            </a>
+                        </div>
 
-                        {{-- Mobile: licznik + ikonki --}}
-                        <div class="nav-mobile d-md-none">
-                            <div class="visitor-counter fw-bold text-center mb-3">
-                                👥 Have already visited us <span class="text-primary">{{ $visitorsCount }}</span> people 👥
+                        {{-- Mobile Navbar --}}
+                        <div class="d-flex d-md-none align-items-center ms-auto">
+                            {{-- Licznik --}}
+                            <div class="visitor-counter me-3 text-center">
+                                <span class="visitor-text">
+                                    👥 <span class="d-none d-sm-inline">Have already visited us</span>
+                                    <span class="text-primary fw-bold">{{ $visitorsCount }}</span>
+                                    <span class="d-none d-sm-inline">people</span> 👥
+                                </span>
                             </div>
 
-                            <div class="nav-icons">
-                                <a id="mobileUser" class="nav-link" href="#">
+                            {{-- Mobile user dropdown --}}
+                            <div class="dropdown me-3">
+                                <a id="mobileUser" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-user fa-lg"></i>
                                 </a>
-                                <a class="nav-link" href="{{ route('cart.index') }}">
-                                    <i class="fa-solid fa-cart-shopping fa-lg"></i>
-                                    <span id="cart-count-badge-mobile" class="{{ $cartCount > 0 ? '' : 'd-none' }}">
-                                        {{ $cartCount }}
-                                    </span>
-                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="mobileUser">
+                                    @guest
+                                        @if (Route::has('login'))
+                                            <a class="dropdown-item" href="{{ route('login') }}">Login</a>
+                                        @endif
+                                        @if (Route::has('register'))
+                                            <a class="dropdown-item" href="{{ route('register') }}">Register</a>
+                                        @endif
+                                    @else
+                                        @can(['isAdmin'])
+                                            <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                        @endcan
+                                        <a class="dropdown-item" href="{{ route('myOrders.index') }}">My orders</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">
+                                            Logout
+                                        </a>
+                                        <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    @endguest
+                                </div>
                             </div>
+
+                            {{-- Koszyk --}}
+                            <a class="nav-link position-relative" href="{{ route('cart.index') }}">
+                                <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                                <span id="cart-count-badge-mobile" class="{{ $cartCount > 0 ? '' : 'd-none' }}">
+                            {{ $cartCount }}
+                        </span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -137,6 +166,7 @@
             <main class="py-4 flex-grow-1">
                 @yield('content')
             </main>
+
         </div>
 
         <footer class="bg-body-tertiary text-center mt-auto">
@@ -158,6 +188,7 @@
             @yield('javascript')
         </script>
         @yield('js-files')
+        @vite('resources/js/cookie-navbar.js')
     </body>
 </html>
 

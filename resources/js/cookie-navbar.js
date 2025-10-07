@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-
     const banner = document.getElementById('cookieBanner');
     const acceptBtn = document.getElementById('acceptCookiesBtn');
     const declineBtn = document.getElementById('declineCookiesBtn');
@@ -10,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let expires = "";
         if(days){
             const date = new Date();
-            date.setTime(date.getTime() + (days * 24*60*60*1000));
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
             expires = "; expires=" + date.toUTCString();
         }
         document.cookie = name + "=" + (value || "") + expires + "; path=/";
@@ -27,9 +26,20 @@ document.addEventListener('DOMContentLoaded', function() {
         return null;
     }
 
-    if(!getCookie('cookiesAccepted')){
-        setTimeout(() => banner.classList.add('show'),300);
+    const cookieAccepted = getCookie('cookiesAccepted') === 'true';
+
+    //wymuszanie ukrycia bannera
+    if (cookieAccepted){
+        banner.classList.remove('show');
+        banner.style.display = 'none';
+        return;
     }
+
+    setTimeout(() => {
+        banner.style.display = 'block';
+        banner.classList.add('show');
+    },300);
+
 
     acceptBtn.addEventListener('click', function() {
         setCookie('cookiesAccepted', 'true', 365);

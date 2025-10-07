@@ -213,6 +213,7 @@
     @vite('resources/js/modal_delete.js')
     @vite('resources/js/modal_quantity.js')
     @vite(['resources/js/cookie-navbar.js'])
+    @vite(['resources/js/delete.js'])
 @endsection
 
 @vite(['resources/css/welcome.css'])

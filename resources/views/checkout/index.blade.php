@@ -227,5 +227,4 @@
     @vite('resources/js/delete.js')
     @vite(['resources/js/checkout.js'])
     @vite('resources/css/checkout.css')
-    @vite(['resources/js/cookie-navbar.js'])
 @endsection
