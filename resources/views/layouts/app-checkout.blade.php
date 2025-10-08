@@ -44,18 +44,14 @@
 
                 {{-- Menu --}}
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    {{-- Lewa strona --}}
-                    <ul class="navbar-nav me-auto"></ul>
+                    <div class="nav-desktop d-flex align-items-center justify-content-end w-100">
+                        {{-- Licznik odwiedzin (desktop) --}}
+                        <div class="visitor-counter fw-bold me-3">
+                            👥 Have already visited us <span class="text-primary">{{ $visitorsCount }}</span> people 👥
+                        </div>
 
-                    {{-- Licznik odwiedzin (desktop) --}}
-                    <div class="visitor-counter fw-bold">
-                        👥 Have already visited us <span class="text-primary">{{ $visitorsCount }}</span> people 👥
-                    </div>
-
-                    {{-- Prawa strona --}}
-                    <ul class="navbar-nav ms-auto align-items-center">
                         @guest
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown list-unstyled me-3">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-user"></i>
@@ -70,10 +66,10 @@
                                 </div>
                             </li>
                         @else
-                            <span class="navbar-brand welcome-user d-none d-md-inline">
-                                Hello there {{ Auth::user()->name }}
-                            </span>
-                            <li class="nav-item dropdown">
+                            <span class="navbar-brand welcome-user me-3">
+                                    Hello there {{ Auth::user()->name }}
+                                </span>
+                            <li class="nav-item dropdown list-unstyled me-3">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-user"></i>
@@ -95,33 +91,74 @@
                         @endguest
 
                         {{-- Koszyk --}}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cart.index') }}">
+                        <li class="nav-item list-unstyled">
+                            <a class="nav-link position-relative" href="{{ route('cart.index') }}">
                                 <i class="fa-solid fa-cart-shopping"></i>
                                 <span id="cart-count-badge" class="{{ $cartCount > 0 ? '' : 'd-none' }}">
-                                    {{ $cartCount }}
-                                </span>
+                                        {{ $cartCount }}
+                                    </span>
                             </a>
                         </li>
-                    </ul>
+                    </div>
+
+
 
                     {{-- Mobile: licznik + ikonki --}}
-                    <div class="nav-mobile d-md-none">
-                        <div class="visitor-counter fw-bold text-center mb-3">
-                            👥 Have already visited us <span class="text-primary">{{ $visitorsCount }}</span> people 👥
+                    <div class="nav-mobile d-md-none d-flex align-items-center justify-content-end gap-3 pe-3">
+                        {{-- Licznik odwiedzin uproszczony --}}
+                        <div class="visitor-counter fw-bold">
+                            👥 {{ $visitorsCount }} 👥
                         </div>
 
-                        <div class="nav-icons">
-                            <a id="mobileUser" class="nav-link" href="#">
-                                <i class="fa-solid fa-user fa-lg"></i>
-                            </a>
-                            <a class="nav-link" href="{{ route('cart.index') }}">
+                        @guest
+                            <li class="nav-item dropdown list-unstyled">
+                                <a id="navbarDropdownMobile" class="nav-link dropdown-toggle p-0" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-solid fa-user fa-lg"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMobile">
+                                    @if (Route::has('login'))
+                                        <a class="dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    @endif
+                                    @if (Route::has('register'))
+                                        <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    @endif
+                                </div>
+                            </li>
+                        @else
+                            <span class="navbar-brand welcome-user d-none">
+                                    Hello there {{ Auth::user()->name }}
+                                </span>
+                            <li class="nav-item dropdown list-unstyled">
+                                <a id="navbarDropdownMobile" class="nav-link dropdown-toggle p-0" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-solid fa-user fa-lg"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMobile">
+                                    @can(['isAdmin'])
+                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                    @endcan
+                                    <a class="dropdown-item" href="{{ route('myOrders.index') }}">My orders</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+
+                        {{-- Koszyk --}}
+                        <li class="nav-item list-unstyled">
+                            <a class="nav-link position-relative p-0" href="{{ route('cart.index') }}">
                                 <i class="fa-solid fa-cart-shopping fa-lg"></i>
                                 <span id="cart-count-badge-mobile" class="{{ $cartCount > 0 ? '' : 'd-none' }}">
-                                    {{ $cartCount }}
-                                </span>
+                                        {{ $cartCount }}
+                                    </span>
                             </a>
-                        </div>
+                        </li>
                     </div>
                 </div>
             </div>

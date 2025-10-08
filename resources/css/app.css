@@ -1,4 +1,4 @@
-.navbar-light{
+.navbar-light {
     position: sticky;
     top: 0;
     z-index: 10;
@@ -31,23 +31,83 @@
     border-radius: 50%;
 }
 
-.navbar-nav { display: flex; }
-.nav-mobile { display: none; }
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 
+.welcome-user {
+    font-size: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Dopasowanie ikonki koszyka */
+.nav-link.position-relative {
+    margin-left: 1rem;
+}
+
+.visitor-counter {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.navbar-nav {
+    display: flex;
+}
+
+.nav-mobile {
+    display: none;
+}
+
+/* ===== MOBILE STYLES ===== */
 @media (max-width: 767.98px) {
-    .navbar-nav { display: none !important; }
-    .nav-mobile { display: flex !important; }
+
+    .nav-mobile {
+        display: block;
+        padding: 0.5rem 0;
+    }
+
+    .nav-desktop{
+        display: none !important;
+    }
 
     /* Licznik odwiedzin */
     .nav-mobile .visitor-counter {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        line-height: 1.3;
+        text-align: center;
+        margin-bottom: 0.5rem;
     }
 
     /* Ikonki user + koszyk */
     .nav-mobile .nav-icons {
         display: flex;
         justify-content: center;
-        gap: 2rem;
+        gap: 2.5rem;
+    }
+
+    .nav-mobile .nav-icons a {
+        position: relative;
+        font-size: 1.5rem;
+    }
+
+    .nav-mobile .nav-icons span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        width: 18px;
+        height: 18px;
+        background-color: red;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 50%;
     }
 
     /* Ukryj powitanie użytkownika na mobile */
@@ -56,8 +116,3 @@
     }
 }
 
-.visitor-counter {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
