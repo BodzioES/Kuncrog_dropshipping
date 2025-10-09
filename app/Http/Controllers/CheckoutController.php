@@ -125,6 +125,7 @@ class CheckoutController extends Controller
 
             'id_payment_method' => 'required|integer',
             'id_shipping_method' => 'required|integer',
+            'inpost_locker' => 'required_if:id_shipping_method,InPost',
 
             'items' => 'required|array|min:1',
             'items.*.quantity' => 'required|integer|min:1',
