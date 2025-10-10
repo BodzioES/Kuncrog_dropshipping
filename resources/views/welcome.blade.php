@@ -67,7 +67,7 @@
 
     <div class="container pt-5">
         <div class="row">
-            {{-- Jeden wspólny formularz --}}
+            {{-- Jeden wspolny formularz --}}
             <form class="col-12 col-md-4 col-lg-3 sidebar-filter">
 
                 {{-- Desktop: sidebar po lewej --}}
@@ -172,7 +172,7 @@
             </div>
         </div>
 
-        {{-- TO JEST TEN KOSZYK KTORY SIE WYSWIETLA PO DODANIU PRODUKTU DO KOSZYKA --}}
+        {{-- KOSZYK KTORY SIE WYSWIETLA PO DODANIU PRODUKTU DO KOSZYKA --}}
         <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
@@ -191,7 +191,7 @@
             </div>
         </div>
 
-        {{-- POKAZ SLAJDOW Z TYMI ZDJECIAMI ALE TO JEST NA RAZIE CHWILOWE --}}
+        {{-- POKAZ SLAJDOW Z TYMI ZDJECIAMI  --}}
         <script>
             const slides = document.querySelectorAll('#hero .slide');
             let current = 0;

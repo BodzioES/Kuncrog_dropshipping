@@ -7,8 +7,16 @@ $(function (){
     const toggleShippingAddress = () => {
         if (checkbox.prop('checked')){
             shippingDiv.hide();
+
+            shippingDiv.find('input').each(function (){
+               $(this).prop('disabled',true).removeAttr('required');
+            });
         }else{
             shippingDiv.show();
+
+            shippingDiv.find('input').each(function (){
+                $(this).prop('disabled',false).attr('required','required');
+            });
         }
     };
 

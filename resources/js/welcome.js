@@ -74,7 +74,8 @@ window.bootstrap = { Modal };
         getProducts();
     });
     function getProducts(){
-        const form = $('form.sidebar-filter').serialize();
+        //.find('input:visible') sluzy do wymuszenia by serialize lapal tylko widoczne pola ktore sa w form na stronie welcome.blade
+        const form = $('form.sidebar-filter').find('input:visible').serialize();
         $.ajax({
             method: "GET",
             url: "/",
