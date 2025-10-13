@@ -110,6 +110,12 @@ body.modal-open{
     border-radius: 0.5rem;
 }
 
+#lockerInfo {
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+    color: #198754;
+}
+
 .inpost-modal {
     display: none;
     position: fixed;

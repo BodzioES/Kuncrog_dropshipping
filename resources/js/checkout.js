@@ -88,3 +88,81 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+document.addEventListener("DOMContentLoaded", function() {
+    const shippingRadios = document.querySelectorAll('input[name="id_shipping_method"]');
+    const inpostSection = document.getElementById('inpost-section');
+    const lockerInput = document.getElementById('inpostLocker');
+    const lockerInfo = document.getElementById('lockerInfo');
+    const modal = document.getElementById('inpostModal');
+    const openModalBtn = document.getElementById('openInpostModal');
+    const closeModalBtn = document.querySelector(".inpost-close");
+    const geo = document.getElementById('inpost-geowidget');
+
+    if (!openModalBtn || !modal) return;
+
+    // otwieranie modala
+    openModalBtn.addEventListener("click", () => {
+        modal.style.display = "flex";
+        document.body.classList.add("modal-open"); // 🔒 blokada scrolla
+    });
+
+    // zamykanie modala (krzyżyk)
+    closeModalBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+        document.body.classList.remove("modal-open"); // 🔓 przywrócenie scrolla
+    });
+
+    // zamykanie po kliknięciu poza mapą
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+            document.body.classList.remove("modal-open");
+        }
+    });
+
+    //  Gdy uzytkownik wybierze paczkoamt
+    document.addEventListener("onpointselect", function(event) {
+        const point = event.detail;
+        if (!point) return;
+
+        //   Zapisanie kodu paczkomatu do ukrytego inputa
+        lockerInput.value = point.name;
+
+        //  Pokazanie informacji pod przyciskiem
+        lockerInfo.textContent = `📦 Selected: ${point.name}`;
+
+        //  Zamkniecie modala
+        modal.style.display = "none";
+        document.body.classList.remove("modal-open");
+    });
+
+    // Pokaż sekcję tylko przy metodzie InPost
+    shippingRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            const labelText = this.closest('label').innerText.toLowerCase();
+
+            if (labelText.includes('inpost')) {
+                inpostSection.style.display = 'block';
+            } else {
+                inpostSection.style.display = 'none';
+                lockerInfo.textContent = '';
+                lockerInput.value = '';
+            }
+        });
+    });
+
+    // Otwieranie i zamykanie modala
+    openModalBtn.addEventListener('click', () => modal.style.display = 'flex');
+    closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+    });
+
+    // Po wybraniu paczkomatu
+    geo.addEventListener('onpointselect', (event) => {
+        const point = event.detail;
+        lockerInput.value = point.name;
+        lockerInfo.textContent = 'Wybrano paczkomat: ' + point.name;
+        modal.style.display = 'none';
+    });
+});

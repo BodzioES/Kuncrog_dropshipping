@@ -168,19 +168,24 @@
                             @foreach($shippingMethods as $method)
                                 <label class="option">
                                     <input type="radio" name="id_shipping_method" value="{{ $method->id }}">
-                                    <span class="option-title">{{ $method->name }} ({{ number_format($method->price, 2) }} zł)</span>
-                                    <span class="option-description">{{ $method->description }}</span>
+                                    <div class="option-content">
+                                        <span class="option-title">{{ $method->name }} ({{ number_format($method->price, 2) }} zł)</span>
+                                        <span class="option-description">{{ $method->description }}</span>
+
+                                        @if(str_contains(strtolower($method->name), 'inpost'))
+                                            <div id="inpost-section" class="inpost-section" style="display: none;">
+                                                <button type="button" id="openInpostModal" class="btn btn-outline-primary btn-sm mt-2">
+                                                    Wybierz paczkomat
+                                                </button>
+
+                                                <!-- tutaj trzymamy wybrany paczkomat -->
+                                                <input type="hidden" name="inpost_locker" id="inpostLocker">
+                                                <p id="lockerInfo" class="mt-2 text-success fw-bold"></p>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </label>
                             @endforeach
-                        </div>
-                        <!-- Sekcja wyboru paczkomatu InPost -->
-                        <div id="inpost-section" class="mt-3" style="display: none;">
-                            <button type="button" id="openInpostModal" class="btn btn-outline-primary">
-                                Wybierz paczkomat
-                            </button>
-
-                            <input type="hidden" name="inpost_locker" id="inpostLocker">
-                            <p id="lockerInfo" class="mt-2 text-success fw-bold"></p>
                         </div>
                     </div>
 
@@ -233,6 +238,21 @@
 
                 <inpost-geowidget
                     id="inpost-geowidget"
+                    onpoint="onpointselect"
+                    language="en"
+                    token="eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzQlpXVzFNZzVlQnpDYU1XU3JvTlBjRWFveFpXcW9Ua2FuZVB3X291LWxvIn0.eyJleHAiOjIwNzUzOTIyOTIsImlhdCI6MTc2MDAzMjI5MiwianRpIjoiNzNhYzFiNzQtYzlkZC00OWY5LTgxOTItODRiMTI1NjNhYmQ2IiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5pbnBvc3QucGwvYXV0aC9yZWFsbXMvZXh0ZXJuYWwiLCJzdWIiOiJmOjEyNDc1MDUxLTFjMDMtNGU1OS1iYTBjLTJiNDU2OTVlZjUzNTpScF9kUmR4M0psTmVvZjU3V01hTTJOTkFaVkxVeFVCdEhZRzJOZ1BzVkJ3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoic2hpcHgiLCJzZXNzaW9uX3N0YXRlIjoiZDc5OGM3MzEtN2ZmNi00YTU0LWI0ZWItMmUwNjkwOWFlNTdkIiwic2NvcGUiOiJvcGVuaWQgYXBpOmFwaXBvaW50cyIsInNpZCI6ImQ3OThjNzMxLTdmZjYtNGE1NC1iNGViLTJlMDY5MDlhZTU3ZCIsImFsbG93ZWRfcmVmZXJyZXJzIjoia3VuY3JvZy50ZXN0IiwidXVpZCI6IjQ3Yzg0YTE5LWI0MTMtNDk5ZC04ZWUxLWFiOTE1MDQ1YzZiMiJ9.ZAXfMv-qOG81mgJ6WxMZGKgn_dVsASp8RI49VAYsJIAZWmQmQxr7WJ3H5_BNn8KCxOwj-HL2UMN1yEWTWZzCul8EtNawPwkB6SKiyx8Z63IRymLuYJn2JCx0_GZCjzQjxW3WVwIebMm3yMqhFQfDdyEW5AOQkfZk-X7y-fjZJLZNDKVX9aIVi9LV8Zdd3B0PlKHsBGtRsBiuJX_4FPsPYLdRQoNLDElesQF2Q_73SSdAXbSZElCsTwFtdNiJ9jQcC-3VvFesHV0ob9LIr8WEFuWrIh192TzdzmOOk2ZzAUihm-5Fuzpm9Dep3PmLUN-akEjON6chmfEzRkkRRM4mAg"
+                    config="parcelCollect">
+                </inpost-geowidget>
+            </div>
+        </div>
+
+        <!-- Modal z mapa InPost Mobile -->
+        <div id="inpostModal-mobile" class="inpost-modal-mobile d-md-none">
+            <div class="inpost-modal-content">
+                <span class="inpost-close">&times;</span>
+
+                <inpost-geowidget
+                    id="inpost-geowidget"
                     {{--  Token geowidget  --}}
                     token="eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzQlpXVzFNZzVlQnpDYU1XU3JvTlBjRWFveFpXcW9Ua2FuZVB3X291LWxvIn0.eyJleHAiOjIwNzUzOTIyOTIsImlhdCI6MTc2MDAzMjI5MiwianRpIjoiNzNhYzFiNzQtYzlkZC00OWY5LTgxOTItODRiMTI1NjNhYmQ2IiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5pbnBvc3QucGwvYXV0aC9yZWFsbXMvZXh0ZXJuYWwiLCJzdWIiOiJmOjEyNDc1MDUxLTFjMDMtNGU1OS1iYTBjLTJiNDU2OTVlZjUzNTpScF9kUmR4M0psTmVvZjU3V01hTTJOTkFaVkxVeFVCdEhZRzJOZ1BzVkJ3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoic2hpcHgiLCJzZXNzaW9uX3N0YXRlIjoiZDc5OGM3MzEtN2ZmNi00YTU0LWI0ZWItMmUwNjkwOWFlNTdkIiwic2NvcGUiOiJvcGVuaWQgYXBpOmFwaXBvaW50cyIsInNpZCI6ImQ3OThjNzMxLTdmZjYtNGE1NC1iNGViLTJlMDY5MDlhZTU3ZCIsImFsbG93ZWRfcmVmZXJyZXJzIjoia3VuY3JvZy50ZXN0IiwidXVpZCI6IjQ3Yzg0YTE5LWI0MTMtNDk5ZC04ZWUxLWFiOTE1MDQ1YzZiMiJ9.ZAXfMv-qOG81mgJ6WxMZGKgn_dVsASp8RI49VAYsJIAZWmQmQxr7WJ3H5_BNn8KCxOwj-HL2UMN1yEWTWZzCul8EtNawPwkB6SKiyx8Z63IRymLuYJn2JCx0_GZCjzQjxW3WVwIebMm3yMqhFQfDdyEW5AOQkfZk-X7y-fjZJLZNDKVX9aIVi9LV8Zdd3B0PlKHsBGtRsBiuJX_4FPsPYLdRQoNLDElesQF2Q_73SSdAXbSZElCsTwFtdNiJ9jQcC-3VvFesHV0ob9LIr8WEFuWrIh192TzdzmOOk2ZzAUihm-5Fuzpm9Dep3PmLUN-akEjON6chmfEzRkkRRM4mAg"
                     config="parcelCollect">
@@ -251,70 +271,4 @@
     @vite('resources/js/delete.js')
     @vite(['resources/js/checkout.js'])
     @vite('resources/css/checkout.css')
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const shippingRadios = document.querySelectorAll('input[name="id_shipping_method"]');
-            const inpostSection = document.getElementById('inpost-section');
-            const lockerInput = document.getElementById('inpostLocker');
-            const lockerInfo = document.getElementById('lockerInfo');
-            const modal = document.getElementById('inpostModal');
-            const openModalBtn = document.getElementById('openInpostModal');
-            const closeModalBtn = document.querySelector(".inpost-close");
-            const geo = document.getElementById('inpost-geowidget');
-
-            if (!openModalBtn || !modal) return;
-
-            // otwieranie modala
-            openModalBtn.addEventListener("click", () => {
-                modal.style.display = "flex";
-                document.body.classList.add("modal-open"); // 🔒 blokada scrolla
-            });
-
-            // zamykanie modala (krzyżyk)
-            closeModalBtn.addEventListener("click", () => {
-                modal.style.display = "none";
-                document.body.classList.remove("modal-open"); // 🔓 przywrócenie scrolla
-            });
-
-            // zamykanie po kliknięciu poza mapą
-            window.addEventListener("click", (e) => {
-                if (e.target === modal) {
-                    modal.style.display = "none";
-                    document.body.classList.remove("modal-open");
-                }
-            });
-
-            // Pokaż sekcję tylko przy metodzie InPost
-            shippingRadios.forEach(radio => {
-                radio.addEventListener('change', function() {
-                    const labelText = this.closest('label').innerText.toLowerCase();
-
-                    if (labelText.includes('inpost')) {
-                        inpostSection.style.display = 'block';
-                    } else {
-                        inpostSection.style.display = 'none';
-                        lockerInfo.textContent = '';
-                        lockerInput.value = '';
-                    }
-                });
-            });
-
-            // Otwieranie i zamykanie modala
-            openModalBtn.addEventListener('click', () => modal.style.display = 'block');
-            closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
-            window.addEventListener('click', (e) => {
-                if (e.target === modal) modal.style.display = 'none';
-            });
-
-            // Po wybraniu paczkomatu
-            geo.addEventListener('onpointselect', (event) => {
-                const point = event.detail;
-                lockerInput.value = point.name;
-                lockerInfo.textContent = 'Wybrano paczkomat: ' + point.name;
-                modal.style.display = 'none';
-            });
-        });
-    </script>
-
 @endsection
