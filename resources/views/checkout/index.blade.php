@@ -175,7 +175,7 @@
                                         @if(str_contains(strtolower($method->name), 'inpost'))
                                             <div id="inpost-section" class="inpost-section" style="display: none;">
                                                 <button type="button" id="openInpostModal" class="btn btn-outline-primary btn-sm mt-2">
-                                                    Wybierz paczkomat
+                                                    Select parcel locker
                                                 </button>
 
                                                 <!-- tutaj trzymamy wybrany paczkomat -->

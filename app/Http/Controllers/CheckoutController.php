@@ -125,7 +125,13 @@ class CheckoutController extends Controller
 
             'id_payment_method' => 'required|integer',
             'id_shipping_method' => 'required|integer',
-            'inpost_locker' => 'required_if:id_shipping_method,InPost',
+            'inpost_locker' => [
+                function($attribute, $value, $fail) use ($request) {
+                    if ((int)$request->id_shipping_method == 2 && empty($value)) {
+                        $fail('Shipping method is required!');
+                    }
+                }
+            ],
 
             'items' => 'required|array|min:1',
             'items.*.quantity' => 'required|integer|min:1',
@@ -170,6 +176,11 @@ class CheckoutController extends Controller
                 $order->id_user = $userId;
                 $order->id_shipping_method = $request->input('id_shipping_method');
                 $order->id_payment_method = $request->input('id_payment_method');
+
+                if ($order->id_shipping_method == 2 && $request->filled('inpost_locker')){
+                    $order->parcel_locker = $request->input('inpost_locker');
+                }
+
                 $order->total_price = $totalPrice;
                 $order->status = 'pending';
                 $order->id_address = $address->id_address;
@@ -197,6 +208,11 @@ class CheckoutController extends Controller
                 $order = new Order();
                 $order->id_shipping_method = $request->input('id_shipping_method');
                 $order->id_payment_method = $request->input('id_payment_method');
+
+                if ($order->id_shipping_method == 2 && $request->filled('inpost_locker')){
+                    $order->parcel_locker = $request->input('inpost_locker');
+                }
+
                 $order->total_price = $totalPrice;
                 $order->status = 'pending';
                 $order->id_address = $address->id_address;

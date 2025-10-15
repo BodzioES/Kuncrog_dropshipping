@@ -13,6 +13,7 @@ class Order extends Model
         'id_user',
         'id_shipping_method',
         'id_payment_method',
+        'parcel_locker',
         'total_price',
         'status',
         'id_address',

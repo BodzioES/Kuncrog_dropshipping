@@ -1,6 +1,9 @@
 import '../css/checkout.css';
 
 $(function (){
+
+    //  KOD DO OBSLUGI ROZWIJANEJ LISTY ADRESU WYSYLKOWEGO
+
     const checkbox = $('#sameAddressCheckbox');
     const shippingDiv = $('#shipping-address');
 
@@ -88,6 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+//  FUNKCJE ZWIAZANE Z PACZKOMATEM INPOST
 document.addEventListener("DOMContentLoaded", function() {
     const shippingRadios = document.querySelectorAll('input[name="id_shipping_method"]');
     const inpostSection = document.getElementById('inpost-section');
