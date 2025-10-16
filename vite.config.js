@@ -28,6 +28,7 @@ export default defineConfig({
                 'resources/css/cartModal.css',
                 'resources/css/appCheckout.css',
                 'resources/css/user.css',
+                'resources/css/dashboard.css',
             ],
             refresh: true,
         }),
