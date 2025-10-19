@@ -128,7 +128,7 @@ class CheckoutController extends Controller
             'inpost_locker' => [
                 function($attribute, $value, $fail) use ($request) {
                     if ((int)$request->id_shipping_method == 2 && empty($value)) {
-                        $fail('Shipping method is required!');
+                        $fail('You must to choose a parcel locker!');
                     }
                 }
             ],

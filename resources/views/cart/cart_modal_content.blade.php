@@ -31,11 +31,11 @@
                         </div>
                     </td>
                     <td>
-                        <div class="small text-muted">Cena</div>
+                        <div class="small text-muted">Price</div>
                         {{ number_format($price, 2) }} PLN
                     </td>
                     <td>
-                        <div class="small text-muted">Suma</div>
+                        <div class="small text-muted">Sum</div>
                         {{ number_format($subtotal, 2) }} PLN
                     </td>
                     <td>

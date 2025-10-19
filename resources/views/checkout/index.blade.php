@@ -16,11 +16,11 @@
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
                                 <label>Name *</label>
-                                <input type="text" name="address[first_name]" class="form-control" placeholder="Imię">
+                                <input type="text" name="address[first_name]" class="form-control" placeholder="Name">
                             </div>
                             <div class="form-group w-50">
                                 <label>Surname *</label>
-                                <input type="text" name="address[last_name]" class="form-control" placeholder="Nazwisko">
+                                <input type="text" name="address[last_name]" class="form-control" placeholder="Surname">
                             </div>
                         </div>
 
@@ -32,12 +32,12 @@
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
                                 <label>Street (street and number) *</label>
-                                <input type="text" name="address[street_and_house_number]" class="form-control" placeholder="Ulica">
+                                <input type="text" name="address[street_and_house_number]" class="form-control" placeholder="Street">
                             </div>
 
                             <div class="form-group w-50">
                                 <label>Apartment number (optional)</label>
-                                <input type="text" name="address[apartment_number]" class="form-control" placeholder="Numer mieszkania">
+                                <input type="text" name="address[apartment_number]" class="form-control" placeholder="Apartment number">
                             </div>
                         </div>
 
@@ -45,18 +45,18 @@
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
                                 <label>City *</label>
-                                <input type="text" name="address[city]" class="form-control" placeholder="Miasto">
+                                <input type="text" name="address[city]" class="form-control" placeholder="City">
                             </div>
 
                             <div class="form-group w-50">
                                 <label>Postal code *</label>
-                                <input type="text" name="address[postal_code]" class="form-control" placeholder="Kod pocztowy">
+                                <input type="text" name="address[postal_code]" class="form-control" placeholder="Postal code">
                             </div>
                         </div>
 
                         <div class="form-group mt-3">
                             <label>Phone number *</label>
-                            <input type="text" name="address[phone_number]" class="form-control" placeholder="Numer telefonu">
+                            <input type="text" name="address[phone_number]" class="form-control" placeholder="Phone Number">
                         </div>
                     </div>
 
@@ -78,11 +78,11 @@
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
                                 <label>Name *</label>
-                                <input type="text" name="address[first_name]" class="form-control" placeholder="Imię">
+                                <input type="text" name="address[first_name]" class="form-control" placeholder="Name">
                             </div>
                             <div class="form-group w-50">
                                 <label>Surname *</label>
-                                <input type="text" name="address[last_name]" class="form-control" placeholder="Nazwisko">
+                                <input type="text" name="address[last_name]" class="form-control" placeholder="Surname">
                             </div>
                         </div>
 
@@ -94,12 +94,12 @@
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
                                 <label>Street (street and number) *</label>
-                                <input type="text" name="address[street_and_house_number]" class="form-control" placeholder="Ulica">
+                                <input type="text" name="address[street_and_house_number]" class="form-control" placeholder="Street">
                             </div>
 
                             <div class="form-group w-50">
                                 <label>Apartment number (optional)</label>
-                                <input type="text" name="address[apartment_number]" class="form-control" placeholder="Numer mieszkania">
+                                <input type="text" name="address[apartment_number]" class="form-control" placeholder="Apartment number">
                             </div>
                         </div>
 
@@ -107,18 +107,18 @@
                         <div class="form-row d-flex gap-3 mt-3">
                             <div class="form-group w-50">
                                 <label>City *</label>
-                                <input type="text" name="address[city]" class="form-control" placeholder="Miasto">
+                                <input type="text" name="address[city]" class="form-control" placeholder="City">
                             </div>
 
                             <div class="form-group w-50">
                                 <label>Postal code *</label>
-                                <input type="text" name="address[postal_code]" class="form-control" placeholder="Kod pocztowy">
+                                <input type="text" name="address[postal_code]" class="form-control" placeholder="Postal code">
                             </div>
                         </div>
 
                         <div class="form-group mt-3">
                             <label>Phone number *</label>
-                            <input type="text" name="address[phone_number]" class="form-control" placeholder="Numer telefonu">
+                            <input type="text" name="address[phone_number]" class="form-control" placeholder="Phone number">
                         </div>
                     </div>
                 </div>
@@ -246,20 +246,20 @@
             </div>
         </div>
 
-        <!-- Modal z mapa InPost Mobile -->
-        <div id="inpostModal-mobile" class="inpost-modal-mobile d-md-none">
-            <div class="inpost-modal-content">
-                <span class="inpost-close">&times;</span>
+{{--        <!-- Modal z mapa InPost Mobile -->--}}
+{{--        <div id="inpostModal" class="inpost-modal-mobile d-md-none">--}}
+{{--            <div class="inpost-modal-content">--}}
+{{--                <span class="inpost-close">&times;</span>--}}
 
-                <inpost-geowidget
-                    id="inpost-geowidget"
-                    onpoint="onpointselect"
-                    language="en"
-                    token="eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzQlpXVzFNZzVlQnpDYU1XU3JvTlBjRWFveFpXcW9Ua2FuZVB3X291LWxvIn0.eyJleHAiOjIwNzUzOTIyOTIsImlhdCI6MTc2MDAzMjI5MiwianRpIjoiNzNhYzFiNzQtYzlkZC00OWY5LTgxOTItODRiMTI1NjNhYmQ2IiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5pbnBvc3QucGwvYXV0aC9yZWFsbXMvZXh0ZXJuYWwiLCJzdWIiOiJmOjEyNDc1MDUxLTFjMDMtNGU1OS1iYTBjLTJiNDU2OTVlZjUzNTpScF9kUmR4M0psTmVvZjU3V01hTTJOTkFaVkxVeFVCdEhZRzJOZ1BzVkJ3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoic2hpcHgiLCJzZXNzaW9uX3N0YXRlIjoiZDc5OGM3MzEtN2ZmNi00YTU0LWI0ZWItMmUwNjkwOWFlNTdkIiwic2NvcGUiOiJvcGVuaWQgYXBpOmFwaXBvaW50cyIsInNpZCI6ImQ3OThjNzMxLTdmZjYtNGE1NC1iNGViLTJlMDY5MDlhZTU3ZCIsImFsbG93ZWRfcmVmZXJyZXJzIjoia3VuY3JvZy50ZXN0IiwidXVpZCI6IjQ3Yzg0YTE5LWI0MTMtNDk5ZC04ZWUxLWFiOTE1MDQ1YzZiMiJ9.ZAXfMv-qOG81mgJ6WxMZGKgn_dVsASp8RI49VAYsJIAZWmQmQxr7WJ3H5_BNn8KCxOwj-HL2UMN1yEWTWZzCul8EtNawPwkB6SKiyx8Z63IRymLuYJn2JCx0_GZCjzQjxW3WVwIebMm3yMqhFQfDdyEW5AOQkfZk-X7y-fjZJLZNDKVX9aIVi9LV8Zdd3B0PlKHsBGtRsBiuJX_4FPsPYLdRQoNLDElesQF2Q_73SSdAXbSZElCsTwFtdNiJ9jQcC-3VvFesHV0ob9LIr8WEFuWrIh192TzdzmOOk2ZzAUihm-5Fuzpm9Dep3PmLUN-akEjON6chmfEzRkkRRM4mAg"
-                    config="parcelCollect">
-                </inpost-geowidget>
-            </div>
-        </div>
+{{--                <inpost-geowidget--}}
+{{--                    id="inpost-geowidget"--}}
+{{--                    onpoint="onpointselect"--}}
+{{--                    language="en"--}}
+{{--                    token="eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJzQlpXVzFNZzVlQnpDYU1XU3JvTlBjRWFveFpXcW9Ua2FuZVB3X291LWxvIn0.eyJleHAiOjIwNzUzOTIyOTIsImlhdCI6MTc2MDAzMjI5MiwianRpIjoiNzNhYzFiNzQtYzlkZC00OWY5LTgxOTItODRiMTI1NjNhYmQ2IiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5pbnBvc3QucGwvYXV0aC9yZWFsbXMvZXh0ZXJuYWwiLCJzdWIiOiJmOjEyNDc1MDUxLTFjMDMtNGU1OS1iYTBjLTJiNDU2OTVlZjUzNTpScF9kUmR4M0psTmVvZjU3V01hTTJOTkFaVkxVeFVCdEhZRzJOZ1BzVkJ3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoic2hpcHgiLCJzZXNzaW9uX3N0YXRlIjoiZDc5OGM3MzEtN2ZmNi00YTU0LWI0ZWItMmUwNjkwOWFlNTdkIiwic2NvcGUiOiJvcGVuaWQgYXBpOmFwaXBvaW50cyIsInNpZCI6ImQ3OThjNzMxLTdmZjYtNGE1NC1iNGViLTJlMDY5MDlhZTU3ZCIsImFsbG93ZWRfcmVmZXJyZXJzIjoia3VuY3JvZy50ZXN0IiwidXVpZCI6IjQ3Yzg0YTE5LWI0MTMtNDk5ZC04ZWUxLWFiOTE1MDQ1YzZiMiJ9.ZAXfMv-qOG81mgJ6WxMZGKgn_dVsASp8RI49VAYsJIAZWmQmQxr7WJ3H5_BNn8KCxOwj-HL2UMN1yEWTWZzCul8EtNawPwkB6SKiyx8Z63IRymLuYJn2JCx0_GZCjzQjxW3WVwIebMm3yMqhFQfDdyEW5AOQkfZk-X7y-fjZJLZNDKVX9aIVi9LV8Zdd3B0PlKHsBGtRsBiuJX_4FPsPYLdRQoNLDElesQF2Q_73SSdAXbSZElCsTwFtdNiJ9jQcC-3VvFesHV0ob9LIr8WEFuWrIh192TzdzmOOk2ZzAUihm-5Fuzpm9Dep3PmLUN-akEjON6chmfEzRkkRRM4mAg"--}}
+{{--                    config="parcelCollect">--}}
+{{--                </inpost-geowidget>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
     </div>
 

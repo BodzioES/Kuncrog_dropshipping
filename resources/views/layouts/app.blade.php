@@ -32,7 +32,7 @@
 
         <div class="alert alert-info alert-dismissible fade show" role="alert">
             <div class="row justify-content-center text-center">
-                INFO: the webstore is in progress so a few things might be not working or bad working
+                INFO: Clicking the pay button on the summary page will not complete the payment
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>
