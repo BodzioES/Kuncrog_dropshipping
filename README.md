@@ -1,13 +1,13 @@
 
 # 👋 Welcome to GitHub Kuncrog.com!
 
-📌 **Visit my website:** [www.kuncrog.pl](http://www.kuncrog.com)
+📌 **Visit my website:** [www.kuncrog.com](http://www.kuncrog.com)
 
 ---
 
 ## 🌐 About WebStore
 
-**Kuncrog.pl** is a project of a simple online store created in Laravel, a PHP framework.
+**Kuncrog.com** is a project of a simple online store created in Laravel, a PHP framework.
 
 ---
 
