@@ -1,7 +1,7 @@
 
-# 👋 Welcome to GitHub Kuncrog.pl!
+# 👋 Welcome to GitHub Kuncrog.com!
 
-📌 **Visit my website:** [www.kuncrog.pl](https://www.kuncrog.pl)
+📌 **Visit my website:** [www.kuncrog.pl](http://www.kuncrog.com)
 
 ---
 
@@ -14,7 +14,7 @@
 ## 🔗 Visit now
 
 👉 Click and see what I have prepared:  
-➡️ [**www.kuncrog.pl**](https://www.kuncrog.pl)
+➡️ [**www.kuncrog.com**](http://www.kuncrog.com)
 
 ---
 
