@@ -39,7 +39,7 @@
         {{ $users->links() }}
     </div>
 @endsection
-<script type="text/javascript" data-url="{{ url('users') }}">
+<script type="text/javascript" data-url="{{ secure_url('users') }}">
     @yield('javascript')
 </script>
 @vite('resources/js/delete.js')

@@ -50,7 +50,7 @@
         </div>
     </div>
 @endsection
-<script type="text/javascript" data-url="{{ url('products') }}">
+<script type="text/javascript" data-url="{{ secure_url('products') }}">
     @yield('javascript')
 </script>
 @vite('resources/js/delete.js')

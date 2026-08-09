@@ -3,6 +3,10 @@
     "file": "assets/bootstrap.esm-CY1Kz5oP.js",
     "name": "bootstrap.esm"
   },
+  "_index-B8_nURbH.js": {
+    "file": "assets/index-B8_nURbH.js",
+    "name": "index"
+  },
   "resources/css/admin.css": {
     "file": "assets/admin-BJKxDJ50.css",
     "src": "resources/css/admin.css",
@@ -31,7 +35,7 @@
   },
   "resources/css/checkout.css": {
     "file": "assets/checkout-CtsNCbYt.css",
-    "src": "resources/css/checkout.css",
+    "src": "resources/js/checkout.js",
     "isEntry": true
   },
   "resources/css/dashboard.css": {
@@ -75,26 +79,27 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-BrUn5l9F.js",
+    "file": "assets/app-CU1F-471.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "resources/js/bootstrap.js",
-      "_bootstrap.esm-CY1Kz5oP.js"
+      "_bootstrap.esm-CY1Kz5oP.js",
+      "_index-B8_nURbH.js"
     ]
   },
   "resources/js/bootstrap.js": {
-    "file": "assets/bootstrap-_s3qMUDE.js",
+    "file": "assets/bootstrap-Dwn55QKT.js",
     "name": "bootstrap",
     "src": "resources/js/bootstrap.js",
     "isEntry": true,
     "imports": [
-      "_bootstrap.esm-CY1Kz5oP.js"
+      "_bootstrap.esm-CY1Kz5oP.js",
+      "_index-B8_nURbH.js"
     ]
   },
   "resources/js/checkout.js": {
-    "file": "assets/checkout-JyP5Pp2x.js",
+    "file": "assets/checkout-BvghMruS.js",
     "name": "checkout",
     "src": "resources/js/checkout.js",
     "isEntry": true,
@@ -109,7 +114,7 @@
     "isEntry": true
   },
   "resources/js/delete.js": {
-    "file": "assets/delete-Ccff0akG.js",
+    "file": "assets/delete-COQlJalG.js",
     "name": "delete",
     "src": "resources/js/delete.js",
     "isEntry": true

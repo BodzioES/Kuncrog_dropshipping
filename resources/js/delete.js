@@ -9,7 +9,6 @@ $(function () {
             showCancelButton: true,
             confirmButtonText: 'Tak, usuń',
             cancelButtonText: 'Anuluj',
-            dangerMode: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({

@@ -34,7 +34,7 @@
             @foreach($order->items as $item)
                 <tr style="border-bottom: 1px solid #ddd;">
                     <td>
-                        <img src="{{ url('storage/products/' . $item->product->images->first()->image_url) }}"
+                        <img src="{{ secure_url('storage/products/' . $item->product->images->first()->image_url) }}"
                              alt="photo"
                              width="50"
                         >

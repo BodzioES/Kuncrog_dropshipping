@@ -84,7 +84,7 @@
     </div>
 @endsection
 
-<script type="text/javascript" data-url="{{ url('/cart') }}">
+<script type="text/javascript" data-url="{{ secure_url('/cart') }}">
     @yield('javascript')
 </script>
 @section('js-files')

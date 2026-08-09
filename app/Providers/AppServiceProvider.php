@@ -31,9 +31,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //to jest po to aby serwer uzywal adresu www.kuncrog.pl zamiast adresu ip raspberry
-        //dzieki temu route dziala poprawnie i przekieruje na http://www.kuncrog.pl/cart/list zamiast http://192.168.1.115/cart/list
+        // Wymuszenie HTTPS dla wszystkich generowanych URL-ów (formularze, AJAX, emaile)
+        // dzieki temu route dziala poprawnie i generates https://ecommerce-shop.kuncrog.com/... 
+        // zamiast http:// lub adresu IP (mixed content)
         if (config('app.env') === 'production') {
+            URL::forceScheme('https');
             URL::forceRootUrl(config('app.url'));
         }
 
