@@ -3,17 +3,13 @@
     "file": "assets/bootstrap.esm-CY1Kz5oP.js",
     "name": "bootstrap.esm"
   },
-  "_index-Dq7h7Pqt.js": {
-    "file": "assets/index-Dq7h7Pqt.js",
-    "name": "index"
-  },
   "resources/css/admin.css": {
     "file": "assets/admin-BJKxDJ50.css",
     "src": "resources/css/admin.css",
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app-CyCToLXP.css",
+    "file": "assets/app-d7EyRxiY.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -34,8 +30,13 @@
     "isEntry": true
   },
   "resources/css/checkout.css": {
-    "file": "assets/checkout-Q-lXrZzY.css",
-    "src": "resources/js/checkout.js",
+    "file": "assets/checkout-CtsNCbYt.css",
+    "src": "resources/css/checkout.css",
+    "isEntry": true
+  },
+  "resources/css/dashboard.css": {
+    "file": "assets/dashboard-CkgmnJFV.css",
+    "src": "resources/css/dashboard.css",
     "isEntry": true
   },
   "resources/css/order.css": {
@@ -74,36 +75,35 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-bIoNeZRM.js",
+    "file": "assets/app-BrUn5l9F.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_bootstrap.esm-CY1Kz5oP.js",
-      "_index-Dq7h7Pqt.js"
+      "resources/js/bootstrap.js",
+      "_bootstrap.esm-CY1Kz5oP.js"
     ]
   },
   "resources/js/bootstrap.js": {
-    "file": "assets/bootstrap-D4GczymL.js",
+    "file": "assets/bootstrap-_s3qMUDE.js",
     "name": "bootstrap",
     "src": "resources/js/bootstrap.js",
     "isEntry": true,
     "imports": [
-      "_bootstrap.esm-CY1Kz5oP.js",
-      "_index-Dq7h7Pqt.js"
+      "_bootstrap.esm-CY1Kz5oP.js"
     ]
   },
   "resources/js/checkout.js": {
-    "file": "assets/checkout-BSFWPjua.js",
+    "file": "assets/checkout-JyP5Pp2x.js",
     "name": "checkout",
     "src": "resources/js/checkout.js",
     "isEntry": true,
     "css": [
-      "assets/checkout-Q-lXrZzY.css"
+      "assets/checkout-CtsNCbYt.css"
     ]
   },
   "resources/js/cookie-navbar.js": {
-    "file": "assets/cookie-navbar-CejBJ8m5.js",
+    "file": "assets/cookie-navbar-DPzsSDKt.js",
     "name": "cookie-navbar",
     "src": "resources/js/cookie-navbar.js",
     "isEntry": true
@@ -127,7 +127,7 @@
     "isEntry": true
   },
   "resources/js/welcome.js": {
-    "file": "assets/welcome-CFRa7j2h.js",
+    "file": "assets/welcome-EAD3K2M-.js",
     "name": "welcome",
     "src": "resources/js/welcome.js",
     "isEntry": true,

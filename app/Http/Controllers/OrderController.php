@@ -37,8 +37,10 @@ class OrderController extends Controller
             $query->whereHas('address',function($q) use ($fullName){
             // tworzy zlaczenie imienia i nazwiska albo nazwiska i imienia
             // szuka dopasowania do wpisanego imienia i nazwisko w dowolnej kolejnosci
-                $q->whereRaw("CONCAT(first_name, ' ', last_name) like '%{$fullName}%'")
-                ->orWhereRaw("CONCAT(last_name, ' ', first_name) like '%{$fullName}%'");
+            // zapytanie jest sparametryzowane (placeholdery ?) wiec nie ma ryzyka SQL Injection
+                $like = '%' . $fullName . '%';
+                $q->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", [$like])
+                ->orWhereRaw("CONCAT(last_name, ' ', first_name) LIKE ?", [$like]);
             });
         }
 

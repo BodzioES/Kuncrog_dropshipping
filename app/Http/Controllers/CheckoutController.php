@@ -154,79 +154,61 @@ class CheckoutController extends Controller
         DB::beginTransaction();
 
         try {
-            $userId = Auth::check() ? Auth::id() : null;
-
             $shippingMethod = ShippingMethod::findOrFail($request->input('id_shipping_method'));
 
+            // 1. Wezryfikuj ceny i ilosci z BAZA (nie wierzymy danym z formularza)
+            //    dzieki temu nie da sie podmienic ceny na wartosc nizsza
             $totalProductPrice = 0;
-            foreach ($request->input('items') as $item) {
-                $totalProductPrice += $item['current_price'] * $item['quantity'];
+            $validatedItems = [];
+            foreach ($request->input('items') as $itemData) {
+                $product = Product::find($itemData['id_product']);
+                if (!$product) {
+                    throw new \Exception('Produkt nie istnieje. Odśwież koszyk.');
+                }
+                if ((float) $itemData['current_price'] !== (float) $product->price) {
+                    throw new \Exception('Cena produktu uległa zmianie. Odśwież koszyk.');
+                }
+                if ($itemData['quantity'] > $product->stock_quantity) {
+                    throw new \Exception("Brak wystarczającej ilości towaru: {$product->name}.");
+                }
+
+                $totalProductPrice += $product->price * $itemData['quantity'];
+                $validatedItems[] = [
+                    'id_product' => $product->id,
+                    'current_price' => $product->price,
+                    'quantity' => (int) $itemData['quantity'],
+                ];
             }
 
-            $totalPrice = $totalProductPrice + $shippingMethod->price;
+            $totalPrice = $totalProductPrice + (float) $shippingMethod->price;
 
+            // Zapis adresu z requestu
+            $address = new Address($request->input('address'));
+            $address->save();
+
+            // Wspolne zapisywanie zamowienia (jeden kod dla goscia i zalogowanego)
+            $order = new Order();
+            $order->id_user = Auth::check() ? Auth::id() : null;
+            $order->id_shipping_method = $request->input('id_shipping_method');
+            $order->id_payment_method = $request->input('id_payment_method');
+            $order->parcel_locker = ((int) $request->input('id_shipping_method') === 2 && $request->filled('inpost_locker'))
+                ? $request->input('inpost_locker')
+                : null;
+            $order->total_price = $totalPrice;
+            $order->status = 'pending';
+            $order->id_address = $address->id_address;
+            $order->save();
+
+            // Zapis pozycji zamowienia + dekrementacja stanu magazynu
+            foreach ($validatedItems as $itemData) {
+                OrderItem::create($itemData + ['id_order' => $order->id]);
+                Product::where('id', $itemData['id_product'])->decrement('stock_quantity', $itemData['quantity']);
+            }
+
+            // Wyczyszczenie koszyka (zalogowany -> z bazy, gosc -> z sesji)
             if (Auth::check()) {
-                // ZALOGOWANY UŻYTKOWNIK
-                // Zapis adresu z requestu
-                $address = new Address($request->input('address'));
-                $address->save();
-
-
-                $order = new Order();
-                $order->id_user = $userId;
-                $order->id_shipping_method = $request->input('id_shipping_method');
-                $order->id_payment_method = $request->input('id_payment_method');
-
-                if ($order->id_shipping_method == 2 && $request->filled('inpost_locker')){
-                    $order->parcel_locker = $request->input('inpost_locker');
-                }
-
-                $order->total_price = $totalPrice;
-                $order->status = 'pending';
-                $order->id_address = $address->id_address;
-                $order->save();
-
-                foreach ($request->input('items') as $itemData) {
-                        OrderItem::create([
-                            'id_order' => $order->id,
-                            'id_product' => $itemData['id_product'],
-                            'current_price' => $itemData['current_price'],
-                            'quantity' => $itemData['quantity'],
-                        ]);
-                }
-
-                DB::table('cart')->where('id_user', $userId)->delete();
-
+                Cart::where('id_user', Auth::id())->delete();
             } else {
-
-                $cart = session()->get('cart', []);
-
-                // Zapis adresu z requestu
-                $address = new Address($request->input('address'));
-                $address->save();
-
-                $order = new Order();
-                $order->id_shipping_method = $request->input('id_shipping_method');
-                $order->id_payment_method = $request->input('id_payment_method');
-
-                if ($order->id_shipping_method == 2 && $request->filled('inpost_locker')){
-                    $order->parcel_locker = $request->input('inpost_locker');
-                }
-
-                $order->total_price = $totalPrice;
-                $order->status = 'pending';
-                $order->id_address = $address->id_address;
-                $order->save();
-
-
-                foreach ($request->input('items') as $itemData) {
-                    OrderItem::create([
-                        'id_order' => $order->id,
-                        'id_product' => $itemData['id_product'],
-                        'current_price' => $itemData['current_price'],
-                        'quantity' => $itemData['quantity'],
-                    ]);
-                }
                 session()->forget('cart');
             }
 

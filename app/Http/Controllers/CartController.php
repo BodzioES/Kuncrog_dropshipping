@@ -77,15 +77,12 @@ class CartController extends Controller
             $cartItem = Cart::firstOrCreate(
                 ['id_user' => Auth::id(), 'id_product' => $product->id],
                 [
-                    'name' => $product->name,
-                    'price' => $product->price,
                     'quantity' => 0,
                 ]
             );
             $cartItem->quantity += $quantity;
             $cartItem->save();
 
-            //to narazie nie jest uzywane ale moze kiedys byc wiec to zostawiam
             return response()->json(['message' => 'Dodano do koszyka (konto).']);
         }
         //dodawanie produktu do koszyka jako gosc

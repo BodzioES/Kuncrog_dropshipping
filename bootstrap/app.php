@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\SecurityHeaders;
 use App\Http\Middleware\TrackVisitors;
 use App\Http\Middleware\TrustProxies;
 use Illuminate\Foundation\Application;
@@ -13,6 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // naglowki bezpieczenstwa nakladane na wszystkie odpowiedzi
+        $middleware->append(SecurityHeaders::class);
+
         $middleware->web([
             TrustProxies::class,
             TrackVisitors::class,

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class OrderItem extends Model
 {
@@ -24,9 +23,8 @@ class OrderItem extends Model
         return $this->belongsTo(Product::class, 'id_product', 'id');
     }
 
-    public function order(): HasMany
+    public function order(): BelongsTo
     {
-        # tutaj tak samo, laravel szuka z automatu "order_id" a nie odwrotnie
-        return $this->hasMany(Order::class,  'id_order');
+        return $this->belongsTo(Order::class, 'id_order');
     }
 }
