@@ -1,47 +1,45 @@
 # 🛒 Kuncrog Shop
 
-**Witaj!** To jest projekt sklepu internetowego (web-store) opartego o model dropshipping, zbudowany w **Laravel 11** (PHP 8.2+).
+**Hello!** This is an online store project (web-store) based on the dropshipping model, built in **Laravel 11** (PHP 8.2+).
 
-📌 **Sklep działa na żywo:** ➡️ [**ecommerce-shop.kuncrog.com**](https://ecommerce-shop.kuncrog.com)
+📌 **Live store:** ➡️ [**ecommerce-shop.kuncrog.com**](https://ecommerce-shop.kuncrog.com)
 
 ---
 
-## ⚙️ Technologie
+## ⚙️ Tech Stack
 
-| Warstwa | Technologia |
-|--------|-------------|
+| Layer | Technology |
+|-------|------------|
 | **Backend** | Laravel 11 (PHP 8.2+) |
-| **Baza danych** | MariaDB 11.4 (SQL do wgrania) |
+| **Database** | MariaDB 11.4 (SQL dump to import) |
 | **Frontend** | Blade + Bootstrap (laravel/ui) |
-| **Wdrożenie** | Docker Compose: `app` (PHP-FPM) + `web` (nginx) + `db` (MariaDB) |
-| **Serwer** | VPS (OVHcloud), Ubuntu, HTTPS (Let's Encrypt) |
+| **Deployment** | Docker Compose: `app` (PHP-FPM) + `web` (nginx) + `db` (MariaDB) |
+| **Server** | VPS (OVHcloud), Ubuntu, HTTPS (Let's Encrypt) |
 
 ---
 
-## 🧩 Funkcje sklepu (istniejące)
+## 🧩 Store Features (current)
 
-- 🏠 **Strona główna i kategorie** produktów
-- 🛍️ **Lista produktów** z wyszukiwaniem
-- 🛒 **Koszyk** (dodawanie, aktualizacja ilości, usuwanie)
-- 💳 **Checkout / zamówienia** — obsługa gościa i zalogowanego klienta, wybór metody płatności i dostawy, podgląd koszyka
-- 👤 **Logowanie i rejestracja klientów** (wraz z adresami w książce adresowej)
-- 🧾 **Historia zamówień** użytkownika z podglądem szczegółów i fakturą PDF
-- 🔐 **Panel administratora** — zarządzanie produktami, kategoriami, zamówieniami, metodami
-- 👁️ **Śledzenie wizyt i geolokalizacja** (z cache'owaniem 7 dni)
-- 🖼️ Zdjęcia produktów przechowywane w `storage/app/public`
+- 🏠 **Homepage and categories** of products
+- 🛍️ **Product listing** with search
+- 🛒 **Cart** (add, update quantity, remove)
+- 💳 **Checkout / Orders** — guest and logged-in customer support, payment & shipping method selection, cart preview
+- 👤 **Customer login and registration** (with addresses in the address book)
+- 🧾 **Order history** for the user, with details view and PDF invoice
+- 🔐 **Admin panel** — manage products, categories, orders, methods
+- 🖼️ Product images stored in `storage/app/public`
 
 ---
 
-## 🚀 Uruchomienie lokalne
+## 🚀 Local Setup
 
 ```bash
 cd kuncrog_app
 composer install
-cp .env.example .env        # ustaw APP_URL, dane bazy
+cp .env.example .env        # set APP_URL, database credentials
 php artisan key:generate
-# stwórz bazę kuncrog_database i zaimportuj kuncrog_database.sql
+# create the kuncrog_database and import kuncrog_database.sql
 php artisan serve
-```
 
 ---
 
@@ -53,33 +51,13 @@ Struktura wdrożenia:
 Dockerfile                          # multi-stage: Node build → Composer → PHP-FPM
 docker-compose.yml                  # db (MariaDB) + app (PHP-FPM) + web (nginx)
 deploy/
-  docker/                           # entrypoint, pliki php.ini, opcache
-  nginx/                            # konfiguracja witryny (HTTP→HTTPS redirect)
+  docker/                           # entrypoint, php.ini files, opcache
+  nginx/                            # site config (HTTP→HTTPS redirect)
   scripts/                          # setup-server.sh, setup-ssl.sh, deploy.sh
-kuncrog_database.sql                # dump bazy importowany przy pierwszym starcie
+kuncrog_database.sql                # DB dump imported on first start
 ```
 
 ```bash
 docker compose up -d --build
 ```
 
-> Szczegółowa instrukcja krok po kroku znajduje się w `DEPLOY.md`.
-
----
-
-## 🧭 Plan rozwoju
-
-Prace nad kolejnymi funkcjami są śledzone jako **issue na GitHubie**:
-- automatyczne odnawianie połączenia po zerwaniu sieci,
-- konta i panel pracownika (logowanie, grafik, dostępność),
-- bezpieczne logowanie administratora,
-- wyłączanie dania/ produktu z menu oraz zniżki,
-- rejestracja klienta z punktami lojalnościowymi i potwierdzeniem e-mail,
-- prywatne endpointy (admin / pracownik / kuchnia) za VPN,
-- link współdzielenia (QR) z trudnym hashem.
-
----
-
-## 📄 Licencja
-
-Projekt prywatny — `proprietary`.
