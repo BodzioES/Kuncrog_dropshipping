@@ -1,0 +1,67 @@
+name: Deploy do VPS
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Wdrozenie na ecommerce-shop.kuncrog.com
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobranie kodu
+        uses: actions/checkout@v4
+
+      - name: Instalacja rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync
+
+      - name: Konfiguracja klucza SSH do VPS
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          umask 077
+          echo "$VPS_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$VPS_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Synchronizacja kodu aplikacji (rsync)
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PATH: ${{ secrets.VPS_PATH }}
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new -o LogLevel=ERROR" \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '.env' \
+            --exclude '.env.*' \
+            --exclude 'vendor/' \
+            --exclude 'node_modules/' \
+            --exclude 'storage/' \
+            --exclude 'public/storage/' \
+            --exclude 'tests/' \
+            --exclude '*.sqlite' \
+            --exclude '.idea/' \
+            --exclude '.vscode/' \
+            ./ \
+            "$VPS_USER@$VPS_HOST:$VPS_PATH/kuncrog_app/"
+
+      - name: Przebudowa obrazu, restart i czyszczenie cache
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PATH: ${{ secrets.VPS_PATH }}
+        run: |
+          ssh -i ~/.ssh/deploy_key \
+            -o StrictHostKeyChecking=accept-new \
+            -o LogLevel=ERROR \
+            "$VPS_USER@$VPS_HOST" \
+            "cd '$VPS_PATH' && bash deploy/scripts/ci-deploy.sh"
