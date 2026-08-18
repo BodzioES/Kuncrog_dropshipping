@@ -33,7 +33,7 @@ class CartController extends Controller
                         'name' => $item->product->name,
                         'price' => $item->product->price,
                         'quantity' => $item->quantity,
-                        'image' => $item->product->images->first()->image_url,
+                        'image' => $item->product->images->first()?->image_url ?? 'no-image.png',
                     ];
                 });
             $isGuest = false;
@@ -51,7 +51,7 @@ class CartController extends Controller
                         'name' => $product->name,
                         'price' => $product->price,
                         'quantity' => $details['quantity'] ?? 1,
-                        'image' => $product->images->first()->image_url,
+                        'image' => $product->images->first()?->image_url ?? 'no-image.png',
                     ];
                 }
             }
@@ -103,7 +103,7 @@ class CartController extends Controller
                     'id' => $product->id,
                     'name' => $product->name,
                     'price' => $product->price,
-                    'image' => $product->image,
+                    'image' => $product->images->first()?->image_url ?? 'no-image.png',
                     'quantity' => $quantity,
                 ];
             }
@@ -116,11 +116,11 @@ class CartController extends Controller
 
     public function updateQuantity(Request $request, $id): JsonResponse
     {
-        //sluzy do zwiekszania badz zmniejszania ilosci produktow ktore sa w modal cart (czyli te
-        // okienko ktore sie wyswietla jak sie doda produkt do koszyka)
+        $action = $request->input('action');
 
-        //pobieramy z data-action ktora jest w cart_modal_conent.blade.php akcje aby sprawdzic ktora kliknelismy
-        $action = request()->input('action');
+        if (!in_array($action, ['increase', 'decrease'])) {
+            return response()->json(['message' => 'Nieprawidlowa akcja.'], 400);
+        }
 
         if (Auth::check()) {
             $cartItems = Cart::where('id',$id)->where('id_user', Auth::id())->first();

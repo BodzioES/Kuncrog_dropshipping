@@ -97,9 +97,10 @@ class AdminController extends Controller
                 ->pluck('items_total', 'day');
 
             $daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            $labelsPrevious = [];
             $previousTotals = [];
             foreach ($daysOfWeek as $day) {
-                $labelsPrevious = __(ucfirst(\Carbon\Carbon::parse($day)->locale('en')->isoFormat('dddd')));
+                $labelsPrevious[] = __(ucfirst(\Carbon\Carbon::parse($day)->locale('en')->isoFormat('dddd')));
                 $previousTotals[] = $earningsPrevious[$day] ?? 0;
             }
 
@@ -124,9 +125,9 @@ class AdminController extends Controller
 
         }
 
-        $totalUsers = count(User::all());
-        $totalOrders = count(Order::all());
-        $totalProducts = count(Product::all());
+        $totalUsers = User::count();
+        $totalOrders = Order::count();
+        $totalProducts = Product::count();
         $totalEarnings = DB::table('orders')->sum('total_price');
         $totalSumCurrentDay = DB::table('orders')->whereDay('created_at', now()->day)->sum('total_price');
 

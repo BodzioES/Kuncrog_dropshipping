@@ -30,7 +30,7 @@ class CheckoutController extends Controller
                         'name' => $item->product->name,
                         'price' => $item->product->price,
                         'quantity' => $item->quantity,
-                        'image' => $item->product->images->first()->image_url,
+                        'image' => $item->product->images->first()?->image_url ?? 'no-image.png',
                     ];
                 });
             $isGuest = false;
@@ -47,7 +47,7 @@ class CheckoutController extends Controller
                         'name' => $product->name,
                         'price' => $product->price,
                         'quantity' => $details['quantity'] ?? 1,
-                        'image' => $product->images->first()->image_url,
+                        'image' => $product->images->first()?->image_url ?? 'no-image.png',
                     ];
                 }
             }
@@ -216,7 +216,11 @@ class CheckoutController extends Controller
 
             //wysylanie informacji z tabeli order i order_item do OrderConfirmationMail.php
             $order->load('items.product', 'paymentMethod', 'shippingMethod','address');
-            Mail::to($address->email)->send(new OrderConfirmationMail($order));
+            try {
+                Mail::to($address->email)->send(new OrderConfirmationMail($order));
+            } catch (\Exception $e) {
+                \Log::error('Nie udalo sie wyslac maila potwierdzajacego: ' . $e->getMessage());
+            }
 
             return response()->json([
                 'success' => true,

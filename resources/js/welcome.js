@@ -4,7 +4,13 @@ window.bootstrap = { Modal };
 
     //wykonuje sie po wcisnieciu przycisku z welcome.blade.php
     //dodaje on produkt do koszyka
-    $(document).on('click','button.add-cart-button', function (event) {
+    function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}
+
+$(document).on('click','button.add-cart-button', function (event) {
         event.preventDefault();
 
         //pobiera odpowiednie id produktu dzieki data-id="{{ $product->id }}" ktory jest w przycisku
@@ -100,8 +106,8 @@ window.bootstrap = { Modal };
                                             style="height: auto; object-fit: cover; width: 100%;">
                                     </div>
                                     <div class="card-body text-center">
-                                        <h4 class="card-title">${product.name}</h4>
-                                        <h5 class="card-price small"><i>${product.price} PLN </i></h5>
+                                        <h4 class="card-title">${escapeHtml(product.name)}</h4>
+                                        <h5 class="card-price small"><i>${escapeHtml(String(product.price))} PLN </i></h5>
                                     </div>
                                 </a>
                                 <div style="display: none" id="product-quantity-{{$product->id}}">${product.quantity}</div>
@@ -138,7 +144,7 @@ window.bootstrap = { Modal };
                     : '/storage/no-image.png';
 
                 const productUrl = '/product_page/' + product.id;
-                const html = `
+            const html = `
                     <div class="col-12 col-sm-6 col-md-4">
                         <div id="pole" class="card h-100 border-0">
                             <a href="${productUrl}" style="text-decoration: none">
@@ -148,8 +154,8 @@ window.bootstrap = { Modal };
                                         style="height: auto; object-fit: cover; width: 100%;">
                                 </div>
                                 <div class="card-body text-center">
-                                    <h4 class="card-title">${product.name}</h4>
-                                    <h5 class="card-price small"><i>${product.price} PLN </i></h5>
+                                    <h4 class="card-title">${escapeHtml(product.name)}</h4>
+                                    <h5 class="card-price small"><i>${escapeHtml(String(product.price))} PLN </i></h5>
                                 </div>
                             </a>
                             <div style="display: none" id="product-quantity-{{$product->id}}">${product.quantity}</div>
@@ -158,15 +164,15 @@ window.bootstrap = { Modal };
                             </button>
                         </div>
                     </div>`;
-                $('div#products-wrapper').append(html);
-            });
-        })
-            .fail(function() {
-                alert("Błąd filtrowania produktów");
-            });
-    });
+            $('div#products-wrapper').append(html);
+        });
+    })
+        .fail(function() {
+            alert("Błąd filtrowania produktów");
+        });
+});
 
-    $(document).on('click','.sort-link',function (e){
+$(document).on('click','.sort-link',function (e){
         e.preventDefault();
         let sortValue = $(this).data('sort');
 
@@ -195,8 +201,8 @@ window.bootstrap = { Modal };
                                         style="height: auto; object-fit: cover; width: 100%;">
                                 </div>
                                 <div class="card-body text-center">
-                                    <h4 class="card-title">${product.name}</h4>
-                                    <h5 class="card-price small"><i>${product.price} PLN </i></h5>
+                                    <h4 class="card-title">${escapeHtml(product.name)}</h4>
+                                    <h5 class="card-price small"><i>${escapeHtml(String(product.price))} PLN </i></h5>
                                 </div>
                             </a>
                             <div style="display: none" id="product-quantity-{{$product->id}}">${product.quantity}</div>

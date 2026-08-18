@@ -70,24 +70,24 @@ class OrderController extends Controller
     {
         # z naszego blade pobieramy od name="" nasze nazwy walidacyjne i wsadamy je do naszej tablicy
         $validated = $request->validate([
-            'order.id' => 'required|integer',
             'order.status' => 'required|in:pending,shipped,delivered,cancelled',
             'order.id_payment_method' => 'required|integer',
             'order.id_shipping_method' => 'required|integer',
-            'order.total_price' => 'required|numeric',
+            'order.total_price' => 'required|numeric|min:0',
             'order.created_at' => 'required|date',
 
-            'address.first_name' => 'required|string',
-            'address.last_name' => 'required|string',
-            'address.street_and_house_number' => 'required|string',
+            'address.first_name' => 'required|string|max:255',
+            'address.last_name' => 'required|string|max:255',
+            'address.email' => 'required|email|max:255',
+            'address.street_and_house_number' => 'required|string|max:255',
             'address.apartment_number' => 'nullable|string|max:255',
-            'address.postal_code' => 'required|string|max:255',
+            'address.postal_code' => 'required|string|max:20',
             'address.city' => 'required|string|max:255',
+            'address.phone_number' => 'required|string|max:20',
         ]);
 
-        // 1. Nadpis danych zamówienia
-        $order->fill($validated['order']);
-        $order->save();
+        // 1. Nadpis danych zamówienia (bez PK)
+        $order->update($validated['order']);
 
         // 2. Nadpis danych adresowywch
         # sprawdzane jest czy dane adresowe zostaly przeslane jesli tak

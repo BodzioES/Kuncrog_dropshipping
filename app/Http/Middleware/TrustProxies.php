@@ -13,7 +13,7 @@ class TrustProxies extends Middleware
      *
      * @var array|string|null
      */
-    protected $proxies = ['192.168.1.79']; // ufamy proxy o tym ip
+    protected $proxies = '*'; // ufamy proxy (nginx w Dockerze)
 
     /**
      * The headers that should be used to detect proxies.

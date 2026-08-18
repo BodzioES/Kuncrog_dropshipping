@@ -48,6 +48,6 @@ class Product extends Model
 
     public function mainImage(): HasOne
     {
-        return $this->hasOne(ProductImage::class,'id_product')->where('main',true);
+        return $this->hasOne(ProductImage::class,'id_product')->where('is_main',true);
     }
 }

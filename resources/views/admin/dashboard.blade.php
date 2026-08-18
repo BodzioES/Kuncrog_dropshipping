@@ -97,11 +97,15 @@
                     <div class="col-md-3">
                         <div class="bestProduct h-100 d-flex flex-column align-items-center justify-content-center text-center">
                             <h5 class="mb-2 text-secondary">Best Product</h5>
+                            @if($bestProduct)
                             <h3 class="mb-1" style="font-weight: bold; color: #333;">{{$bestProduct->name}}</h3>
                             <p class="mb-2" style="font-weight: 500; color: #666;">Sold: {{$bestProduct->sumProduct}} pcs</p>
                             <img src="{{ asset('storage/products/' . $bestProduct->image_url) }}"
                                  alt="Photo"
                                  style="height: 150px; width: auto; object-fit: cover; border-radius: 15px; box-shadow: 2px 2px 6px rgba(0,0,0,0.1);">
+                            @else
+                            <p class="text-muted">No sales data yet</p>
+                            @endif
                         </div>
                     </div>
 

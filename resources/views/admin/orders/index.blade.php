@@ -67,8 +67,8 @@
                     <tr>
                         <td data-label="Order date">{{$order->created_at}}</td>
                         <td data-label="Order number">#{{$order->id}}</td>
-                        <td data-label="The person buying">{{$order->address->first_name}} {{$order->address->last_name}}</td>
-                        <td data-label="Payment method">{{$order->paymentMethod->name}}</td>
+                        <td data-label="The person buying">{{$order->address?->first_name}} {{$order->address?->last_name}}</td>
+                        <td data-label="Payment method">{{$order->paymentMethod?->name}}</td>
                         <td data-label="Total amount">{{$order->total_price}} zł</td>
                         <td data-label="Status">{{$order->status}}</td>
                         <td data-label="Action">
